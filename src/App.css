@@ -1,0 +1,258 @@
+/*
+App Colors
+*/
+
+:root {
+  --primary-bg-color-light: #f2e7dc;
+  --primary-bg-color-dark: #404040;
+  --primary-red: #f25c5c;
+  --secondary-red: #f2636f;
+  --secondary-bg-color-dark: #2d2d2d;
+}
+
+*,
+*:before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+/*****
+App.js
+******/
+
+.App {
+  font-family: 'Roboto', sans-serif;
+  text-align: center;
+  background-color: var(--primary-bg-color-light);
+  height: 100vh;
+  margin: 0;
+}
+
+.h1-title {
+  padding: 20px 0;
+  font-weight: normal;
+  font-size: 2em;
+}
+
+.main-wrapper {
+  background-color: var(--primary-bg-color-dark);
+  border-radius: 80px 80px 0 0;
+  padding-bottom: 65px;
+}
+
+/*****
+Nav.js & ClockTImer.js
+******/
+
+/*Nav*/
+.wrapper-clock-timer {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+}
+
+.wrapper-clock-timer nav ul {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+  list-style-type: none;
+}
+
+.wrapper-clock-timer nav li {
+  padding: 1em;
+}
+
+.wrapper-clock-timer button {
+  background: none;
+  border: none;
+  color: var(--primary-bg-color-light);
+  font-size: 1.45rem;
+  cursor: pointer;
+}
+
+.wrapper-clock-timer button:hover {
+  color: var(--primary-red);
+}
+
+/*In Nav.js
+.btn-pos {
+  transform: translateY(15px);
+}*/
+
+/*ClockTimer*/
+.div-clock-timer {
+  height: 320px;
+  display: flex;
+  justify-content: center;
+  margin: 25px 0 50px 0;
+}
+
+.circle {
+  width: 320px;
+  height: 320px;
+  background: transparent;
+  border-color: var(--secondary-red);
+  border-style: solid;
+  border-width: 4px;
+  border-radius: 100%;
+}
+
+.circle-content {
+  margin: 80px auto;
+}
+
+.timer-session {
+  font-size: 4rem;
+  color: var(--primary-bg-color-light);
+}
+
+.circle-buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 60px;
+}
+
+/*If I want hover effect, I think it will have to be in JSX ClockTimer.js*/
+
+/*****
+Todos.js
+******/
+
+/*These next 4 styles are the main ones.
+They position and style the rounder background and overlayed boxes-divs
+*/
+.wrapper-project-todo {
+  height: 100vh;
+  max-width: 550px;
+  position: relative;
+  margin: auto;
+}
+
+.div-project-name {
+  background-color: var(--primary-red);
+  border-radius: 80px 80px 0 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.div-project-separator {
+  background-color: var(--primary-bg-color-light);
+  height: 100%;
+  width: 100%;
+  border-radius: 80px 80px 0 0;
+  position: absolute;
+  transform: translateY(35px);
+  z-index: 2;
+}
+
+.div-project-todos {
+  background-color: var(--secondary-bg-color-dark);
+  border-radius: 80px 80px 0 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  transform: translateY(65px);
+  z-index: 3;
+}
+
+/*Styles of elements inside overlayed boxes*/
+
+.project-name-position {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0 70px 0 70px;
+  font-size: 1.4rem;
+}
+
+.project-name-position button {
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+.project-todos-title-position {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 60px 0 70px;
+  font-size: 1.4rem;
+  color: var(--primary-bg-color-light);
+}
+
+.project-todos-title-position button {
+  background: none;
+  border: none;
+  font-size: 1.125rem;
+  cursor: pointer;
+}
+
+.todos-addTask {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 60px 0 70px;
+}
+
+.todos-addTask input {
+  border: none;
+  border-radius: 10px;
+  background-color: var(--primary-bg-color-dark);
+  color: var(--primary-bg-color-light);
+  padding: 10px;
+  font-size: 1.115rem;
+}
+
+.todos-addTask button {
+  background: none;
+  border: none;
+  font-size: 1.125rem;
+  cursor: pointer;
+  color: var(--primary-bg-color-light);
+}
+
+.todos-list {
+  margin-top: 10px;
+  display: flex;
+  flex-flow: column;
+  align-items: space-between;
+  padding: 15px 60px 0 70px;
+}
+
+.todos-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.4rem;
+  color: var(--primary-bg-color-light);
+}
+
+.todos-list button {
+  background: none;
+  border: none;
+  font-size: 1.125rem;
+  cursor: pointer;
+  color: var(--primary-bg-color-light);
+}
+
+/*
+media queries
+*/
+
+@media only screen and (min-width: 550px) {
+  .btn-pos {
+    transform: translateY(20px);
+  }
+}
