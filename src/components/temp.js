@@ -11,8 +11,7 @@ export default function Todos() {
     const [todos, setTodos] = useState([])
     const [input, setInput] = useState('')
     const [projectName, setProjectName] = useState('1+Pomodoro Project')
-    const [activeProjectName, setActiveProjectName] = useState('1+Pomodoro Project')
-    const [toggleProjectName, setToggleProjectName] = useState(false)
+    const [popProjectName, setPopProjectName] = useState(false)
 
     function generateId() {
         return '-' + Math.random().toString(36).substr(2,9)
@@ -30,23 +29,13 @@ export default function Todos() {
     const removeTodo = (id) => setTodos((todos) => todos.filter((t) => t.id !== id))
 
     function togglePopProjectName() {
-        toggleProjectName ? setToggleProjectName(false) : setToggleProjectName(true)
+        popProjectName ? setPopProjectName(false) : setPopProjectName(true)
     }
 
     function addProjectTodo () {
-        console.log('All todos', todos)
-        const allProjNames = todos.map((todo) => todo.project)
-        console.log(allProjNames)
-        //const b = allProjNames.some(proj === )
-        //const getProjName = document.getElementsByClassName('todo-project-name')
-        //const filteredTodos = todos.filter((todo) => todo.project === getProjName[0].innerText)
-        /*const filteredTodos = todos.filter((todo) => todo.project === activeProjectName)
-        console.log('Filtered todos', filteredTodos)
-        const a = filteredTodos.map((todo) => todo.text)
-        console.log('Mapped todos', a)
-        console.log('active proj', activeProjectName)
-        const together = todos.filter((todo) => todo.project === activeProjectName).map((t) => t.text)
-        console.log('all together', together)*/
+        console.log(todos)
+        const a = document.getElementsByClassName('todo-project-name')
+        console.log(a[0].innerText)
     }
 
     return(
@@ -55,10 +44,9 @@ export default function Todos() {
                 <div className='project-name-position'>
                     <h2 className='todo-project-name'>{projectName}</h2>
                     <div>
-                        {toggleProjectName ? <PopEditProjectName
+                        {popProjectName ? <PopEditProjectName
                         valueSetProjectName={setProjectName}
-                        valueSetPopProjectName={setToggleProjectName}
-                        valueSetActiveProjectName ={setActiveProjectName} 
+                        valueSetPopProjectName={setPopProjectName}
                         /> : null}
                         <button><Hovertip text='Add New Project'><IoAdd onClick={togglePopProjectName} /></Hovertip></button>
                         <button><Hovertip text='Switch Project'><IoSwapHorizontal onClick={addProjectTodo} /></Hovertip></button>
@@ -77,7 +65,7 @@ export default function Todos() {
                     </div>
                 </div>
                 <ul className='todos-list'>
-                    {todos.filter((todo) => todo.project === activeProjectName).map(({ text, id }) => (
+                    {todos.map(({ text, id }) => (
                         <li key={id}>
                             <div>
                                 <button> <IoSquareOutline /></button>

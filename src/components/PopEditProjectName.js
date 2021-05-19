@@ -50,6 +50,7 @@ export default function PopEditProjectName(props) {
 
     function handleOkClick () {
         props.valueSetProjectName(newProjectName)
+        props.valueSetActiveProjectName(newProjectName)
         props.valueSetPopProjectName(false)
     }
 
