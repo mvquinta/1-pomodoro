@@ -9,38 +9,45 @@ import PopSwitchProj from './PopSwitchProj'
 
 export default function Todos() {
 
-    const [todos, setTodos] = useState([])
-    const [input, setInput] = useState('')
-    const [projectName, setProjectName] = useState('1+Pomodoro Project')
-    const [activeProjectName, setActiveProjectName] = useState('1+Pomodoro Project')
-    const [mergedProjectNames, setMergedProjectNames] = useState(['1+Pomodoro Project'])
-    const [toggleProjectName, setToggleProjectName] = useState(false)
-    const [toggleSwitchProj, setToggleSwitchProj] = useState(false)
+    const [todos, setTodos] = useState([]) //state of todos
+    const [input, setInput] = useState('') //state of input in the form-input to add new todo. Input will then become text in the todo object created    
+    const [activeProjectName, setActiveProjectName] = useState('1+Pomodoro Project') //state used to tell the UI to only render the todos that belong to the active project
+    const [mergedProjectNames, setMergedProjectNames] = useState(['1+Pomodoro Project']) //state of merged projects. Since I put all my todos on the same list. Many of them belong to a repeated project name. This merges and a creates an array with only one element, one proj name
+    const [toggleProjectName, setToggleProjectName] = useState(false) //state of toggles to popwindow or close it
+    const [toggleSwitchProj, setToggleSwitchProj] = useState(false) //state of toggles to popwindow or close it
 
+    //generateId is a "wild" function to create a random id. Mainly used to add an id to every todo created.
     function generateId() {
         return '-' + Math.random().toString(36).substr(2,9)
     }
 
+    //handleSubmit is executed when Add Task is clicked. It creates a new todo adding it to the state.
+    //concat() method merges existing arrays into a new one.
+    //setInput('') resets/clears the form
     const handleSubmit = () => {
         setTodos((todos) => todos.concat({
-            project: projectName,
+            project: activeProjectName,
             text: input,
             id: generateId()
         }))
         setInput('')
     }
 
+    //removeTodo, filters all todos by id and creates a new array with all todos that DO NOT match the passed id
     const removeTodo = (id) => setTodos((todos) => todos.filter((t) => t.id !== id))
 
+    //useEffect on mergedProjectNames is used iterate trough all todos and check what project names exists.
+    //everytime it finds a repeated project he ignores it, when he finds a new one he adds it to the array mergedProjectNames
+    //this array mergedProjectNames will than be used by PopSwitchProjs as a list of options
     useEffect(() => {
         todos.map((item) => 
         mergedProjectNames.includes(item.project) ? null : setMergedProjectNames(mergedProjectNames.concat(item.project)))
     },[todos,mergedProjectNames])
 
+    //both these toggles are used to trigger popwindows
     function togglePopProjectName() {
         toggleProjectName ? setToggleProjectName(false) : setToggleProjectName(true)
     }
-
     function togglePopSwitchProj() {
         toggleSwitchProj ? setToggleSwitchProj(false) : setToggleSwitchProj(true)
     }
@@ -49,16 +56,14 @@ export default function Todos() {
         <div className='wrapper-project-todo'>
             <div className='div-project-name'>
                 <div className='project-name-position'>
-                    <h2 className='todo-project-name'>{projectName}</h2>
+                    <h2 className='todo-project-name'>{activeProjectName}</h2>
                     <div>
                         {toggleProjectName ? <PopEditProjectName
-                        valueSetProjectName={setProjectName}
                         valueSetPopProjectName={setToggleProjectName}
                         valueSetActiveProjectName ={setActiveProjectName} 
                         /> : null}
                         {toggleSwitchProj ? <PopSwitchProj
                         valueMergedProjs={mergedProjectNames}
-                        valueSetProjectName={setProjectName}
                         valueSetActiveProjectName={setActiveProjectName}
                         valueSetToggleSwitchProj={setToggleSwitchProj}
                          /> : null}

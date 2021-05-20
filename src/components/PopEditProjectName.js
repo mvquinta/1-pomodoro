@@ -48,12 +48,15 @@ export default function PopEditProjectName(props) {
 
     const [newProjectName, setNewProjectName] = React.useState('')
 
+    //reads onChange what is being written in the input field changing newProjectName state
+    //than is used as an argument to make it the new active project and, in consequence, creating a new project.
+    //then sets toggle to false closing the window
     function handleOkClick () {
-        props.valueSetProjectName(newProjectName)
         props.valueSetActiveProjectName(newProjectName)
         props.valueSetPopProjectName(false)
     }
 
+    //sets toggle to false closing the window
     function handleCancelClick() {
         props.valueSetPopProjectName(false)
     }

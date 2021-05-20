@@ -7,11 +7,13 @@ import { IconContext } from 'react-icons'
 export default function ClockTimer(props) {
 
     const [session, setSession] = useState(25 * 60) //converts session from minutes to seconds.
-    const [play, setPlay] = useState(false)
-    const [pause, setPause] = useState(true)
-    const [popEditTime, setPopEditTime] = useState(false)
+    const [play, setPlay] = useState(false) //state to toggle play timer
+    const [pause, setPause] = useState(true) //state to toggle pause timer
+    const [popEditTime, setPopEditTime] = useState(false) //state to toggle edit time popup window
     const id = useRef(null)
 
+    //depending on selected session, that is sent as a prop from App.js, different default session times are set
+    //they are all converted from minutes to seconds
     useEffect(() => {
         if (props.valueType === 'Pomodoro') {
             setSession(25 * 60)
@@ -23,6 +25,8 @@ export default function ClockTimer(props) {
     }, [props.valueType])
 
 
+    //setInterval for when play is active to count the timer down 1 second each second XD
+    //when pause is clicked, set to true, clearInterval method stops setInterval
     useEffect(() => {
         if (play) {
             id.current = window.setInterval(() => {
@@ -33,12 +37,15 @@ export default function ClockTimer(props) {
         }
     }, [play, pause])
 
+    //when session timer gets to 0 we stop timer by changing state of pause and play. If not it would go to negative values
+    //than we reset session to pomodoro defaul time (this might be changed...)
     if(session === 0) {
         setPause(true)
         setPlay(false)
         setSession(25 * 60)
     }
 
+    //math conversion of time to be rendered 
     function convertTime(updateSession) {
         const updateMinutes = Math.floor(updateSession / 60) //from total seconds gets all full minutes
         let updateSeconds = updateSession % 60 //from total seconds, gets the reminder that are the 'missing' seconds

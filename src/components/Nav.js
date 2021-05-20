@@ -2,6 +2,7 @@ import React from 'react'
 
 export default function Nav(props) {
 
+    //reads the button innerText that is used to change the state of sessionType in App.js
     function getSessionType(event) {
         props.valueSetType(event.target.innerText)
   }

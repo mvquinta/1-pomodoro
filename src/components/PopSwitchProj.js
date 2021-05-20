@@ -45,13 +45,14 @@ const styles = {
 
 export default function PopSwitchProj(props) {
 
-    const [selectedProj, setSelectedProj] = React.useState('')
-
+    //switches projects by reading the innertext of the clicked button and making it the active project
+    //then sets toggle to false closing the window
     function handleOkClick(event) {
         props.valueSetActiveProjectName(event.target.innerText)
-        props.valueSetProjectName(event.target.innerText)
         props.valueSetToggleSwitchProj(false)
     }
+
+    //sets toggle to false closing the window
     function handleCancelClick() {
         props.valueSetToggleSwitchProj(false)
     }

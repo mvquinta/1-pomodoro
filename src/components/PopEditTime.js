@@ -48,6 +48,7 @@ export default function PopEditTime(props) {
     const [editTime, setEditTime] = React.useState(0)
     const [secondsEditTime, setSecondsEdiTime] = React.useState(0)
 
+    //reads the input fields and converts it to seconds. This value is than used to update the setSession time back in ClockTimer.js
     function handleOkClick () {
         const convertedTime = parseInt(editTime) * 60 + parseInt(secondsEditTime)
         props.valueSetSession(convertedTime)
