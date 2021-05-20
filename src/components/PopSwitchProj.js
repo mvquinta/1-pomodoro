@@ -45,25 +45,13 @@ const styles = {
 
 export default function PopSwitchProj(props) {
 
-    /*const [mergedProjectNames, setMergedProjectNames] = React.useState([])
+    const [selectedProj, setSelectedProj] = React.useState('')
 
-    function handleOkClick() {
-        console.log(props.valueMergedProjectNames)
-        console.log(typeof props.valueMergedProjectNames)
-        //props.valueMergedProjectNames.map((item) => console.log(item))
+    function handleOkClick(event) {
+        props.valueSetActiveProjectName(event.target.innerText)
+        props.valueSetProjectName(event.target.innerText)
+        props.valueSetToggleSwitchProj(false)
     }
-
-    function handleMergeProjectNames() {
-        const allProjNames = props.valueTodos.map((todo) => todo.project)
-        allProjNames.map((item) => {
-            if(mergedProjectNames.includes(item) === false) {
-                setMergedProjectNames(mergedProjectNames.push(item))
-            }
-            return mergedProjectNames
-        })
-        console.log('handle merge',mergedProjectNames)
-    }*/
-
     function handleCancelClick() {
         props.valueSetToggleSwitchProj(false)
     }
@@ -71,12 +59,13 @@ export default function PopSwitchProj(props) {
         <div style={styles.container}>
             <div style={styles.popupedit}>
                 <label>Select Project</label>
-                {props.valueMergedProjs.map((item) => (
-                    <div key={item}> {/*need a better key here!*/}
-                        {item}
-                    </div>
-                ))}                
-                <button style={styles.popbuttons} >OK</button>
+                <ul>
+                    {props.valueMergedProjs.map((item) => (
+                    <li key={item}>
+                        <button onClick={handleOkClick}>{item}</button>
+                    </li>
+                    ))} 
+                </ul>
                 <button style={styles.popbuttons} onClick={handleCancelClick}>Cancel</button>
             </div>
     </div>

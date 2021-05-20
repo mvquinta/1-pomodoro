@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { IoPencil, IoTrash, IoSettings, IoMenu, IoSwapHorizontal,
     IoSquareOutline, IoCheckbox, IoAdd
 } from 'react-icons/io5' 
@@ -11,12 +11,9 @@ export default function Todos() {
 
     const [todos, setTodos] = useState([])
     const [input, setInput] = useState('')
-
     const [projectName, setProjectName] = useState('1+Pomodoro Project')
     const [activeProjectName, setActiveProjectName] = useState('1+Pomodoro Project')
     const [mergedProjectNames, setMergedProjectNames] = useState(['1+Pomodoro Project'])
-    
-
     const [toggleProjectName, setToggleProjectName] = useState(false)
     const [toggleSwitchProj, setToggleSwitchProj] = useState(false)
 
@@ -35,16 +32,10 @@ export default function Todos() {
 
     const removeTodo = (id) => setTodos((todos) => todos.filter((t) => t.id !== id))
 
-    React.useEffect(() => {
+    useEffect(() => {
         todos.map((item) => 
         mergedProjectNames.includes(item.project) ? null : setMergedProjectNames(mergedProjectNames.concat(item.project)))
     },[todos,mergedProjectNames])
-    
-    /*function listProjectNames() {
-        todos.map((item) => 
-            mergedProjectNames.includes(item.project) ? null : setMergedProjectNames(mergedProjectNames.concat(item.project)))
-            console.log(mergedProjectNames)
-    }*/
 
     function togglePopProjectName() {
         toggleProjectName ? setToggleProjectName(false) : setToggleProjectName(true)
@@ -67,6 +58,7 @@ export default function Todos() {
                         /> : null}
                         {toggleSwitchProj ? <PopSwitchProj
                         valueMergedProjs={mergedProjectNames}
+                        valueSetProjectName={setProjectName}
                         valueSetActiveProjectName={setActiveProjectName}
                         valueSetToggleSwitchProj={setToggleSwitchProj}
                          /> : null}
@@ -81,10 +73,6 @@ export default function Todos() {
             <div className='div-project-todos'>
                 <div className='project-todos-title-position'>
                     <h3>Todo List</h3>
-                    <div>
-                        <button><IoSettings /></button>                    
-                        <button><IoMenu /></button>
-                    </div>
                 </div>
                 <ul className='todos-list'>
                     {todos.filter((todo) => todo.project === activeProjectName).map(({ text, id }) => (
