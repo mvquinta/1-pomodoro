@@ -5,14 +5,20 @@ import { IoPencil, IoTrash, IoSettings, IoMenu, IoSwapHorizontal,
 import { IconContext } from 'react-icons'
 import Hovertip from './Hovertip'
 import PopEditProjectName from './PopEditProjectName'
+import PopSwitchProj from './PopSwitchProj'
 
 export default function Todos() {
 
     const [todos, setTodos] = useState([])
     const [input, setInput] = useState('')
+
     const [projectName, setProjectName] = useState('1+Pomodoro Project')
     const [activeProjectName, setActiveProjectName] = useState('1+Pomodoro Project')
+    const [mergedProjectNames, setMergedProjectNames] = useState(['1+Pomodoro Project'])
+    
+
     const [toggleProjectName, setToggleProjectName] = useState(false)
+    const [toggleSwitchProj, setToggleSwitchProj] = useState(false)
 
     function generateId() {
         return '-' + Math.random().toString(36).substr(2,9)
@@ -29,24 +35,23 @@ export default function Todos() {
 
     const removeTodo = (id) => setTodos((todos) => todos.filter((t) => t.id !== id))
 
+    React.useEffect(() => {
+        todos.map((item) => 
+        mergedProjectNames.includes(item.project) ? null : setMergedProjectNames(mergedProjectNames.concat(item.project)))
+    },[todos,mergedProjectNames])
+    
+    /*function listProjectNames() {
+        todos.map((item) => 
+            mergedProjectNames.includes(item.project) ? null : setMergedProjectNames(mergedProjectNames.concat(item.project)))
+            console.log(mergedProjectNames)
+    }*/
+
     function togglePopProjectName() {
         toggleProjectName ? setToggleProjectName(false) : setToggleProjectName(true)
     }
 
-    function addProjectTodo () {
-        console.log('All todos', todos)
-        const allProjNames = todos.map((todo) => todo.project)
-        console.log(allProjNames)
-        //const b = allProjNames.some(proj === )
-        //const getProjName = document.getElementsByClassName('todo-project-name')
-        //const filteredTodos = todos.filter((todo) => todo.project === getProjName[0].innerText)
-        /*const filteredTodos = todos.filter((todo) => todo.project === activeProjectName)
-        console.log('Filtered todos', filteredTodos)
-        const a = filteredTodos.map((todo) => todo.text)
-        console.log('Mapped todos', a)
-        console.log('active proj', activeProjectName)
-        const together = todos.filter((todo) => todo.project === activeProjectName).map((t) => t.text)
-        console.log('all together', together)*/
+    function togglePopSwitchProj() {
+        toggleSwitchProj ? setToggleSwitchProj(false) : setToggleSwitchProj(true)
     }
 
     return(
@@ -60,8 +65,13 @@ export default function Todos() {
                         valueSetPopProjectName={setToggleProjectName}
                         valueSetActiveProjectName ={setActiveProjectName} 
                         /> : null}
+                        {toggleSwitchProj ? <PopSwitchProj
+                        valueMergedProjs={mergedProjectNames}
+                        valueSetActiveProjectName={setActiveProjectName}
+                        valueSetToggleSwitchProj={setToggleSwitchProj}
+                         /> : null}
                         <button><Hovertip text='Add New Project'><IoAdd onClick={togglePopProjectName} /></Hovertip></button>
-                        <button><Hovertip text='Switch Project'><IoSwapHorizontal onClick={addProjectTodo} /></Hovertip></button>
+                        <button><Hovertip text='Switch Project'><IoSwapHorizontal onClick={togglePopSwitchProj} /></Hovertip></button>
                     </div>
 
                 </div>                
