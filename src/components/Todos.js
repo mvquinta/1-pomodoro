@@ -15,7 +15,7 @@ export default function Todos() {
     //const [updateTodoText, setUpdateTodoText] = useState('')
     const [activeProjectName, setActiveProjectName] = useState('1+Pomodoro Project') //state used to tell the UI to only render the todos that belong to the active project
     const [mergedProjectNames, setMergedProjectNames] = useState(['1+Pomodoro Project']) //state of merged projects. Since I put all my todos on the same list. Many of them belong to a repeated project name. This merges and a creates an array with only one element, one proj name
-
+    
     const [toggleProjectName, setToggleProjectName] = useState(false) //state of toggles to popwindow or close it
     const [toggleSwitchProj, setToggleSwitchProj] = useState(false) //state of toggles to popwindow or close it
     const [toggleEditTodo, setToggleEditTodo] = useState(false) //state of toggles to popwindow or close it
@@ -33,7 +33,8 @@ export default function Todos() {
         setTodos((todos) => todos.concat({
             project: activeProjectName,
             text: input,
-            id: generateId()
+            id: generateId(),
+            active: true,
         }))
         setInput('')
     }
@@ -41,20 +42,16 @@ export default function Todos() {
     //removeTodo, filters all todos by id and creates a new array with all todos that DO NOT match the passed id
     const removeTodo = (id) => setTodos((todos) => todos.filter((t) => t.id !== id))
 
-    /*function editTodo(id) {
+    function activeTodo(id) {
         const updateTodos = [...todos].map((todo) => {
             if(todo.id === id) {
-                todo.text = updateTodoText
+                todo.active ? todo.active = false : todo.active = true
             }
             return todo
         })
+        //then, setTodos state for this new create array of objects "todos"
         setTodos(updateTodos)
-        setUpdateTodoText('')
-        //add a setTodoEdit state to false?
     }
-
-    useEffect(() => {
-    },[updateTodoText])*/
 
     //useEffect on mergedProjectNames is used iterate trough all todos and check what project names exists.
     //everytime it finds a repeated project he ignores it, when he finds a new one he adds it to the array mergedProjectNames
@@ -103,21 +100,20 @@ export default function Todos() {
                 <div className='project-todos-title-position'>
                     <h3>Todo List</h3>
                 </div>
-                {toggleEditTodo ? <PopEditTodoText
+                <ul className='todos-list'>
+                    {todos.filter((todo) => todo.project === activeProjectName).map(({ text, id, active }) => (
+                        <li key={id}>
+                            <div>
+                                <button onClick={() => activeTodo(id)}> {active ? <IoSquareOutline /> : <IoCheckbox /> }</button>
+                                {active ? <span>{text}</span> : <span style={{textDecorationLine: 'line-through', opacity:'0.5'}}>{text}</span>}
+                            </div>
+                            <div>
+                                {toggleEditTodo ? <PopEditTodoText
                                 valueTodos={todos}
                                 valueSetTodos={setTodos}
                                 valueSetToggleEditTodo={setToggleEditTodo}
-                                
+                                valueId={id}
                                 /> : null}
-                <ul className='todos-list'>
-                    {todos.filter((todo) => todo.project === activeProjectName).map(({ text, id }) => (
-                        <li key={id}>
-                            <div>
-                                <button> <IoSquareOutline /></button>
-                                {/*<button><IoCheckbox /></button>*/}
-                                <span>{text}</span>
-                            </div>
-                            <div>         
                                 <button onClick={togglePopEditTodo}><IoPencil /> </button>
                                 <button onClick={() => removeTodo(id)}> <IoTrash /></button>                                
                             </div>

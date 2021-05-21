@@ -59,14 +59,16 @@ export default function PopEditTodoText(props) {
     }*/
 
     function handleOkClick (id) {
-        setNewTodoText(newTodoText)
+        //based on the passed id, spread all todos that exist abd to the one matching the id add the new input from current state        
         const updateTodos = [...props.valueTodos].map((todo) => {
             if(todo.id === id) {
                 todo.text = newTodoText
             }
             return todo
         })
+        //then, setTodos state for this new create array of objects "todos"
         props.valueSetTodos(updateTodos)
+        //sets toggle to false closing the window
         props.valueSetToggleEditTodo(false)
     }
 
