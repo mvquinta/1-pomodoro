@@ -20,6 +20,8 @@ export default function Todos() {
     const [toggleSwitchProj, setToggleSwitchProj] = useState(false) //state of toggles to popwindow or close it
     const [toggleEditTodo, setToggleEditTodo] = useState(false) //state of toggles to popwindow or close it
 
+    const [stateId, setStateId] = useState('')
+
 
     //generateId is a "wild" function to create a random id. Mainly used to add an id to every todo created.
     function generateId() {
@@ -40,8 +42,9 @@ export default function Todos() {
     }
 
     //removeTodo, filters all todos by id and creates a new array with all todos that DO NOT match the passed id
-    const removeTodo = (id) => setTodos((todos) => todos.filter((t) => t.id !== id))
+    const removeTodo = (id) => setTodos((todos) => todos.filter((t) => t.id !== id))    
 
+    //based on the passed id, spread all todos that exist and to the one matching the id toggle todo active property 
     function activeTodo(id) {
         const updateTodos = [...todos].map((todo) => {
             if(todo.id === id) {
@@ -73,6 +76,19 @@ export default function Todos() {
         toggleEditTodo ? setToggleEditTodo(false) : setToggleEditTodo(true)
     }
 
+    //Reads the id of the todo that I want to edit.
+    //I need to travell all those parentElements until I reach the <li> tag that holds the id I need
+    function getIdFromTodoToEdit(event) {
+        const id = event.target.parentElement.parentElement.parentElement.id
+        setStateId(id)
+    }
+
+    //Since both these functions are meant to be executed, instead of having them inline, I grouped them both in one function
+    function funsForEditTask(event) {
+        getIdFromTodoToEdit(event)
+        togglePopEditTodo()
+    }
+
     return(
         <div className='wrapper-project-todo'>
             <div className='div-project-name'>
@@ -100,21 +116,21 @@ export default function Todos() {
                 <div className='project-todos-title-position'>
                     <h3>Todo List</h3>
                 </div>
+                {toggleEditTodo ? <PopEditTodoText
+                                valueTodos={todos}
+                                valueSetTodos={setTodos}
+                                valueSetToggleEditTodo={setToggleEditTodo}
+                                valueId={stateId}
+                                /> : null}
                 <ul className='todos-list'>
                     {todos.filter((todo) => todo.project === activeProjectName).map(({ text, id, active }) => (
-                        <li key={id}>
+                        <li key={id} id={id}>
                             <div>
                                 <button onClick={() => activeTodo(id)}> {active ? <IoSquareOutline /> : <IoCheckbox /> }</button>
                                 {active ? <span>{text}</span> : <span style={{textDecorationLine: 'line-through', opacity:'0.5'}}>{text}</span>}
                             </div>
                             <div>
-                                {toggleEditTodo ? <PopEditTodoText
-                                valueTodos={todos}
-                                valueSetTodos={setTodos}
-                                valueSetToggleEditTodo={setToggleEditTodo}
-                                valueId={id}
-                                /> : null}
-                                <button onClick={togglePopEditTodo}><IoPencil /> </button>
+                                <button onClick={funsForEditTask}><IoPencil /> </button>
                                 <button onClick={() => removeTodo(id)}> <IoTrash /></button>                                
                             </div>
                         </li>
