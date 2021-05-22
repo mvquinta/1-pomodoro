@@ -80,6 +80,7 @@ export default function Todos() {
     //I need to travell all those parentElements until I reach the <li> tag that holds the id I need
     function getIdFromTodoToEdit(event) {
         const id = event.target.parentElement.parentElement.parentElement.id
+        console.log(id)
         setStateId(id)
     }
 

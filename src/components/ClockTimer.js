@@ -12,6 +12,16 @@ export default function ClockTimer(props) {
     const [popEditTime, setPopEditTime] = useState(false) //state to toggle edit time popup window
     const id = useRef(null)
 
+    //Audio const and functions to be used when time is up and play, stop and restart are clicked
+    const audioBell = new Audio('http://soundbible.com/grab.php?id=2218&type=mp3') //2044 - tick 2218 - service bell 
+    const audioTick = new Audio('http://soundbible.com/grab.php?id=2044&type=mp3') //2044 - tick 2218 - service bell 
+    const audioWaterDroplet = new Audio('http://soundbible.com/grab.php?id=378&type=mp3') //2044 - tick 2218 - service bell - 378 - waterr droplet
+
+    function playAudioBell() { audioBell.play() }
+    function playAudioTick() { audioTick.play() }
+    function playAudioWaterDroplet() {audioWaterDroplet.play()}
+    //function pauseAudioBell() { audioBell.pause() }
+
     //depending on selected session, that is sent as a prop from App.js, different default session times are set
     //they are all converted from minutes to seconds
     useEffect(() => {
@@ -40,6 +50,7 @@ export default function ClockTimer(props) {
     //when session timer gets to 0 we stop timer by changing state of pause and play. If not it would go to negative values
     //than we reset session to pomodoro defaul time (this might be changed...)
     if(session === 0) {
+        playAudioBell()
         setPause(true)
         setPlay(false)
         setSession(25 * 60)
@@ -56,16 +67,19 @@ export default function ClockTimer(props) {
     }
 
     function playTrue() { 
+        playAudioTick()
         setPlay(true)
         setPause(false)
         }
 
     function pauseTrue() {
+        playAudioTick()
         setPause(true)
         setPlay(false)
     }
 
     function restartTimer() {
+        playAudioWaterDroplet()
         setPlay(false)
         setSession(25 * 60)
     }
