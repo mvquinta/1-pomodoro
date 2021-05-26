@@ -11,40 +11,71 @@ App Colors
 }
 
 *,
-*:before,
-*::after {
-  box-sizing: border-box;
+html,
+body {
   margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  box-sizing: border-box;
 }
 
 body {
   height: 100vh;
-  margin: 0;
-  padding: 0;
+  width: 100vw;
+
+  background-color: var(--primary-bg-color-dark);
+  /*border: 3px solid yellow;*/
 }
 
-/*****
-App.js
-******/
+#root {
+  /*border: 3px solid green;*/
+
+  height: 100%;
+  width: 100%;
+}
 
 .App {
-  font-family: 'Roboto', sans-serif;
-  text-align: center;
-  background-color: var(--primary-bg-color-light);
-  height: 100vh;
-  margin: 0;
-}
+  /*border: 3px solid cyan;*/
 
-.h1-title {
-  padding: 20px 0;
-  font-weight: normal;
-  font-size: 2em;
+  height: 100%;
+  width: 100%;
+  font-family: 'Roboto', sans-serif;
+  background-color: var(--primary-bg-color-light);
 }
 
 .main-wrapper {
+  /*border: 3px solid purple;*/
+
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.h1-title {
+  /*border: 3px solid orange;*/
+
+  margin: 30px 0;
+  font-size: 2.5em;
+}
+
+.features-wrapper {
+  /*border: 3px solid saddlebrown;*/
+
+  height: 100%;
+  width: 100%;
   background-color: var(--primary-bg-color-dark);
   border-radius: 80px 80px 0 0;
-  padding-bottom: 65px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 /*****
@@ -52,7 +83,10 @@ Nav.js & ClockTImer.js
 ******/
 
 /*Nav*/
+
 .wrapper-clock-timer {
+  /*border: 3px solid lightgreen;*/
+
   display: flex;
   flex-flow: column;
   justify-content: center;
@@ -89,15 +123,14 @@ Nav.js & ClockTImer.js
 
 /*ClockTimer*/
 .div-clock-timer {
-  height: 320px;
   display: flex;
   justify-content: center;
-  margin: 25px 0 50px 0;
+  margin: 30px 0 30px 0;
 }
 
 .circle {
-  width: 320px;
-  height: 320px;
+  width: 250px;
+  height: 250px;
   background: transparent;
   border-color: var(--secondary-red);
   border-style: solid;
@@ -106,7 +139,7 @@ Nav.js & ClockTImer.js
 }
 
 .circle-content {
-  margin: 80px auto;
+  margin: 45px;
 }
 
 .timer-session {
@@ -120,49 +153,57 @@ Nav.js & ClockTImer.js
   margin-top: 60px;
 }
 
-/*If I want hover effect, I think it will have to be in JSX ClockTimer.js*/
-
 /*****
 Todos.js
 ******/
 
-/*These next 4 styles are the main ones.
-They position and style the rounder background and overlayed boxes-divs
-*/
+.wrapper-todos {
+  /*border: 3px solid mediumslateblue;*/
+
+  height: 100%;
+  width: 100%;
+}
+
 .wrapper-project-todo {
-  height: 100vh;
-  max-width: 550px;
-  position: relative;
+  /*border: 3px dashed blue;*/
+
+  height: 100%;
+
+  max-width: 700px;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
   margin: auto;
 }
 
 .div-project-name {
   background-color: var(--primary-red);
   border-radius: 80px 80px 0 0;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
+  grid-column: 1 / span 6;
+  grid-row: 1 / span 1;
+
+  /*border: 3px dashed red;*/
 }
 
 .div-project-separator {
   background-color: var(--primary-bg-color-light);
-  height: 100%;
-  width: 100%;
   border-radius: 80px 80px 0 0;
-  position: absolute;
-  transform: translateY(35px);
-  z-index: 2;
+  grid-column: 1 / span 6;
+  grid-row: 1 / span 1;
+
+  transform: translateY(30px);
+
+  /*border: 3px dashed yellowgreen;*/
 }
 
 .div-project-todos {
   background-color: var(--secondary-bg-color-dark);
   border-radius: 80px 80px 0 0;
-  width: 100%;
+  grid-column: 1 / span 6;
+  grid-row: 1 / span 1;
+
+  transform: translateY(40px);
   height: 100%;
-  position: absolute;
-  transform: translateY(65px);
-  z-index: 3;
+  /*border: 3px dashed yellowgreen;*/
 }
 
 /*Styles of elements inside overlayed boxes*/
@@ -173,14 +214,16 @@ They position and style the rounder background and overlayed boxes-divs
   align-items: center;
   width: 100%;
   padding: 0 70px 0 70px;
-  font-size: 1.4rem;
+  font-size: 1.25rem;
 }
 
 .project-name-position button {
   background: none;
   border: none;
-  font-size: 1.4rem;
+  font-size: 1.25rem;
   cursor: pointer;
+  margin-top: 5px;
+  padding-left: 10px;
 }
 
 .project-todos-title-position {
@@ -188,15 +231,8 @@ They position and style the rounder background and overlayed boxes-divs
   justify-content: space-between;
   align-items: center;
   padding: 15px 60px 0 70px;
-  font-size: 1.4rem;
+  font-size: 1.25rem;
   color: var(--primary-bg-color-light);
-}
-
-.project-todos-title-position button {
-  background: none;
-  border: none;
-  font-size: 1.125rem;
-  cursor: pointer;
 }
 
 .todos-addTask {
@@ -235,8 +271,10 @@ They position and style the rounder background and overlayed boxes-divs
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   color: var(--primary-bg-color-light);
+  padding: 8px 0;
+  border-bottom: 1px solid var(--primary-bg-color-dark);
 }
 
 .todos-list button {
@@ -244,7 +282,11 @@ They position and style the rounder background and overlayed boxes-divs
   border: none;
   font-size: 1.125rem;
   cursor: pointer;
-  color: var(--primary-bg-color-light);
+  margin: 0 5px;
+}
+
+.todos-list span {
+  margin: 0 5px;
 }
 
 /*
@@ -254,5 +296,11 @@ media queries
 @media only screen and (min-width: 550px) {
   .btn-pos {
     transform: translateY(20px);
+  }
+}
+
+@media only screen and (max-width: 420px) {
+  .todos-addTask {
+    flex-direction: column;
   }
 }
