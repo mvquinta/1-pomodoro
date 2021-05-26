@@ -81,6 +81,7 @@ export default function ClockTimer(props) {
     function restartTimer() {
         playAudioWaterDroplet()
         setPlay(false)
+        setPause(true)
         setSession(25 * 60)
     }
 
