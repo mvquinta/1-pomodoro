@@ -2,17 +2,17 @@ import React from "react";
 
 const styles = {
   container: {
-    position: "relative",
-    zIndex: "100"
+    position: "fixed",
+    zIndex: "100",
+    top: '50%',
+    left: "50%",
+    transform: "translate(-50%, -50%)",
   },
   popupedit: {
     color: "#F2E7DC",
     boxSizing: "border-box",
-    position: "absolute",
     width: "350px",
     height: "350px",
-    left: "-50%",
-    transform: "translateY(-80px)",
     borderRadius: "40px",
     backgroundColor: "#F25C5C",
     textAlign: "center",
@@ -129,5 +129,5 @@ export default function PopEditTime(props) {
         </div>
       </div>
     </>
-  );
+  )
 }

@@ -4,6 +4,7 @@ import Nav from "./components/Nav";
 import ClockTimer from "./components/ClockTimer";
 import Todos from "./components/Todos";
 
+
 function App() {
   //state of the session type. By default is pomodoro. This state can be change in Nav.js
   //value of state is passed to clocktimer component to adjust-set default times of each session.
