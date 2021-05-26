@@ -1,4 +1,5 @@
 import React from "react";
+import ReactDom from 'react-dom'
 
 const styles = {
   container: {
@@ -88,7 +89,7 @@ export default function PopEditTime(props) {
     props.valueSetPopEditTime(false);
   }
 
-  return (
+  return ReactDom.createPortal(
     <>
       <div style={overlayStyles} />
       <div style={styles.container}>
@@ -128,6 +129,7 @@ export default function PopEditTime(props) {
           </div>
         </div>
       </div>
-    </>
+    </>,
+    document.getElementById('portal')
   )
 }

@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactDom from 'react-dom'
 
 const styles = {
     container: {
@@ -37,7 +38,7 @@ const styles = {
     popLabel: {
       padding: "20px"
     },
-    popinput: {
+    /*popinput: {
       border: "none",
       color: "#F2E7DC",
       backgroundColor: "#404040",
@@ -45,7 +46,7 @@ const styles = {
       width: "120px",
       fontSize: "1.25rem",
       textAlign: "center"
-    },
+    }*/
     popButtonsContainer: {
       display: "flex",
       justifyContent: "center",
@@ -86,7 +87,7 @@ export default function PopSwitchProj(props) {
     function handleCancelClick() {
         props.valueSetToggleSwitchProj(false)
     }
-    return(
+    return ReactDom.createPortal(
         <>
           <div style={overlayStyles} />
           <div style={styles.container}>
@@ -113,6 +114,7 @@ export default function PopSwitchProj(props) {
               </div>
             </div>
           </div>
-        </>
+        </>,
+        document.getElementById('portal')
       )
 }
