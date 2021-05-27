@@ -74,7 +74,7 @@ const overlayStyles = {
     zIndex: "100"
   };
 
-export default function PopEditProjectName(props) {
+export default function PopAddProject(props) {
 
     const [newProjectName, setNewProjectName] = React.useState('')
 

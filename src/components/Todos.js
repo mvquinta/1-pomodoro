@@ -4,7 +4,7 @@ import { IoPencil, IoTrash, IoSettings, IoMenu, IoSwapHorizontal,
 } from 'react-icons/io5' 
 import { IconContext } from 'react-icons'
 import Hovertip from './Hovertip'
-import PopEditProjectName from './PopEditProjectName'
+import PopAddProject from './PopAddProject'
 import PopSwitchProj from './PopSwitchProj'
 import PopEditTodoText from './PopEditTodoText'
 
@@ -96,7 +96,7 @@ export default function Todos() {
                 <div className='project-name-position'>
                     <h2 className='todo-project-name'>{activeProjectName}</h2>
                     <div>
-                        {toggleProjectName ? <PopEditProjectName
+                        {toggleProjectName ? <PopAddProject
                         valueSetPopProjectName={setToggleProjectName}
                         valueSetActiveProjectName ={setActiveProjectName} 
                         /> : null}
