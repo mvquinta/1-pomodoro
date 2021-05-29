@@ -167,43 +167,37 @@ Todos.js
 .wrapper-project-todo {
   /*border: 3px dashed blue;*/
 
-  height: 100%;
+  height: 95%;
 
   max-width: 700px;
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(30, 1fr);
   margin: auto;
+  filter: drop-shadow(-10px 10px 20px rgba(0,0,0, 0.25));
+  /*border-radius: 100px;
+  box-shadow: 10px 10px 20px rgba(0,0,0, 0.5);*/
 }
 
 .div-project-name {
   background-color: var(--primary-red);
   border-radius: 80px 80px 0 0;
-  grid-column: 1 / span 6;
+  grid-column: 1 / span 30;
   grid-row: 1 / span 1;
-
-  /*border: 3px dashed red;*/
 }
 
 .div-project-separator {
   background-color: var(--primary-bg-color-light);
   border-radius: 80px 80px 0 0;
-  grid-column: 1 / span 6;
+  grid-column: 2 / span 28;
   grid-row: 1 / span 1;
-
-  transform: translateY(30px);
-
-  /*border: 3px dashed yellowgreen;*/
 }
 
 .div-project-todos {
   background-color: var(--secondary-bg-color-dark);
   border-radius: 80px 80px 0 0;
-  grid-column: 1 / span 6;
+  grid-column: 3 / span 26;
   grid-row: 1 / span 1;
-
-  transform: translateY(40px);
   height: 100%;
-  /*border: 3px dashed yellowgreen;*/
 }
 
 /*Styles of elements inside overlayed boxes*/
