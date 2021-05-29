@@ -3,6 +3,20 @@ import { IoPlay, IoStop, IoRefresh, IoSettings } from 'react-icons/io5'
 import Hovertip from './Hovertip'
 import PopEditTime from './PopEditTime'
 import { IconContext } from 'react-icons'
+import { motion } from 'framer-motion'
+
+
+//Animation Variants
+
+const buttonVariants = {
+    hover: {
+        scale: 1.1,
+        //boxShadow: "0px 0px 5px rgba(0,0,0, 0.25)",
+        //borderRadius: 10,
+    }
+}
+
+
 
 export default function ClockTimer(props) {
 
@@ -101,9 +115,24 @@ export default function ClockTimer(props) {
             </div>
             <IconContext.Provider value={{ color: "#F25C5C", size:"1.75em", className: "global-class-name" }}>
                 <div className='circle-buttons'>
-                    <button onClick={playTrue}><IoPlay /></button>
-                    <button onClick={pauseTrue}><IoStop /></button>
-                    <button onClick={restartTimer}><IoRefresh /></button>
+                    <motion.button 
+                    onClick={playTrue}
+                    variants={buttonVariants}
+                    whileHover='hover'>
+                        <IoPlay />
+                    </motion.button>
+                    <motion.button
+                    onClick={pauseTrue}
+                    variants={buttonVariants}
+                    whileHover='hover'>
+                        <IoStop />
+                    </motion.button>
+                    <motion.button
+                    onClick={restartTimer}
+                    variants={buttonVariants}
+                    whileHover='hover'>
+                        <IoRefresh />
+                    </motion.button>
                 </div>
             </IconContext.Provider>
           </div>

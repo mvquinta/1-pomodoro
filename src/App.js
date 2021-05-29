@@ -3,6 +3,7 @@ import "./App.css";
 import Nav from "./components/Nav";
 import ClockTimer from "./components/ClockTimer";
 import Todos from "./components/Todos";
+import { motion } from 'framer-motion'
 
 
 function App() {
@@ -13,8 +14,18 @@ function App() {
   return (
     <div className="App">
       <div className="main-wrapper">
-        <h1 className="h1-title">1+Pomodoro</h1>
-        <div className="features-wrapper">
+        <motion.h1 
+        className="h1-title"
+        initial={{opacity:0, y: -250}}
+        animate={{opacity:1, y: 0}}
+        ttransition={{delay: 0.2, duration: 1.5,type: 'spring'}}      
+        >1+Pomodoro</motion.h1>
+        <motion.div
+        className="features-wrapper"
+        initial={{opacity:0}}
+        animate={{opacity:1}}
+        transition={{delay: 0.1, duration: 1}}
+        >
           <div className="wrapper-clock-timer">
             <Nav valueType={sessionType} valueSetType={setSessionType} />
             <ClockTimer valueType={sessionType} />
@@ -22,7 +33,7 @@ function App() {
           <div className="wrapper-todos">
             <Todos />
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );
