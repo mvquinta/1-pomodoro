@@ -4,9 +4,22 @@ import { IoPencil, IoTrash, IoSettings, IoMenu, IoSwapHorizontal,
 } from 'react-icons/io5' 
 import { IconContext } from 'react-icons'
 import Hovertip from './Hovertip'
-import PopEditProjectName from './PopEditProjectName'
+import PopAddProject from './PopAddProject'
 import PopSwitchProj from './PopSwitchProj'
 import PopEditTodoText from './PopEditTodoText'
+import { motion } from 'framer-motion'
+
+
+//Animation Variants
+
+const buttonVariants = {
+    hover: {
+        scale: 1.02,
+        originX: 0,
+        backgroundColor: 'rgba(64,64,64,0.5)'
+    }
+}
+
 
 export default function Todos() {
 
@@ -96,7 +109,7 @@ export default function Todos() {
                 <div className='project-name-position'>
                     <h2 className='todo-project-name'>{activeProjectName}</h2>
                     <div>
-                        {toggleProjectName ? <PopEditProjectName
+                        {toggleProjectName ? <PopAddProject
                         valueSetPopProjectName={setToggleProjectName}
                         valueSetActiveProjectName ={setActiveProjectName} 
                         /> : null}
@@ -125,7 +138,10 @@ export default function Todos() {
                                 /> : null}
                 <ul className='todos-list'>
                     {todos.filter((todo) => todo.project === activeProjectName).map(({ text, id, active }) => (
-                        <li key={id} id={id}>
+                        <motion.li
+                        key={id} id={id}
+                        variants={buttonVariants}
+                        whileHover='hover'>
                             <div>
                                 <button onClick={() => activeTodo(id)}> {active ? <IoSquareOutline /> : <IoCheckbox /> }</button>
                                 {active ? <span>{text}</span> : <span style={{textDecorationLine: 'line-through', opacity:'0.5'}}>{text}</span>}
@@ -134,7 +150,7 @@ export default function Todos() {
                                 <button onClick={funsForEditTask}><IoPencil /> </button>
                                 <button onClick={() => removeTodo(id)}> <IoTrash /></button>                                
                             </div>
-                        </li>
+                        </motion.li>
                     ))}
                 </ul>
                 <div className='todos-addTask'>
