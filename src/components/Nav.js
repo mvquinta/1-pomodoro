@@ -11,7 +11,7 @@ export default function Nav(props) {
         <nav>
             <ul>
                 <li><button className='btn-pos' onClick={getSessionType}>Short Break</button></li>
-                <li><button onClick={getSessionType}>Pomodoro</button></li>
+                <li><button id='btn-pomodoro' onClick={getSessionType}>Pomodoro</button></li>
                 <li><button className='btn-pos' onClick={getSessionType}>Long Break</button></li>
             </ul>
       </nav>

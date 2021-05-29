@@ -24,8 +24,6 @@ body {
 body {
   height: 100vh;
   width: 100vw;
-
-  background-color: var(--primary-bg-color-dark);
   /*border: 3px solid yellow;*/
 }
 
@@ -42,7 +40,6 @@ body {
   height: 100%;
   width: 100%;
   font-family: 'Roboto', sans-serif;
-  background-color: var(--primary-bg-color-light);
 }
 
 .main-wrapper {
@@ -57,23 +54,44 @@ body {
   align-items: center;
 }
 
-.h1-title {
-  /*border: 3px solid orange;*/
+.top-div-info-bar {
+  width: 100%;
+  height: 85px;
+  background-color: var(--primary-red);
+  color: var(--primary-bg-color-light);
+  text-align: center;
 
-  margin: 30px 0;
-  font-size: 2.5em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.info-name {
+  margin-left: 50px;
+}
+
+.top-div-info-bar h1 {
+  font-size: 2rem;
+}
+
+.top-div-info-bar a {
+  text-decoration: none;
+  color: var(--primary-bg-color-light);
+  padding: 0 5px;
+}
+
+.social-media {
+  margin-right: 50px;
+  font-size: 1.75rem;
 }
 
 .features-wrapper {
-  /*border: 3px solid saddlebrown;*/
-
   height: 100%;
   width: 100%;
   background-color: var(--primary-bg-color-dark);
-  border-radius: 80px 80px 0 0;
 
   display: flex;
-  flex-direction: column;
+  flex-direction: row-reverse;
   justify-content: flex-start;
   align-items: center;
 }
@@ -85,15 +103,18 @@ Nav.js & ClockTImer.js
 /*Nav*/
 
 .wrapper-clock-timer {
-  /*border: 3px solid lightgreen;*/
+  width: 70%;
+  height: 100%;
+  background-color: var(--secondary-bg-color-dark);
 
   display: flex;
   flex-flow: column;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .wrapper-clock-timer nav ul {
   display: flex;
+  flex-flow: row;
   justify-content: center;
   flex-wrap: wrap;
   align-items: center;
@@ -101,19 +122,23 @@ Nav.js & ClockTImer.js
 }
 
 .wrapper-clock-timer nav li {
-  padding: 1em;
+  padding: 4rem 1rem 2rem 1rem;
 }
 
 .wrapper-clock-timer button {
   background: none;
   border: none;
   color: var(--primary-bg-color-light);
-  font-size: 1.45rem;
+  font-size: 1.4rem;
   cursor: pointer;
 }
 
 .wrapper-clock-timer button:hover {
   color: var(--primary-red);
+}
+
+#btn-pomodoro {
+  font-size: 2rem;;
 }
 
 /*In Nav.js
@@ -158,46 +183,23 @@ Todos.js
 ******/
 
 .wrapper-todos {
-  /*border: 3px solid mediumslateblue;*/
-
   height: 100%;
-  width: 100%;
+  width: 30%;
 }
 
 .wrapper-project-todo {
-  /*border: 3px dashed blue;*/
+  color: var(--primary-bg-color-light)
 
-  height: 95%;
-
-  max-width: 700px;
-  display: grid;
-  grid-template-columns: repeat(30, 1fr);
-  margin: auto;
-  filter: drop-shadow(-10px 10px 20px rgba(0,0,0, 0.25));
-  /*border-radius: 100px;
-  box-shadow: 10px 10px 20px rgba(0,0,0, 0.5);*/
+  
 }
 
 .div-project-name {
-  background-color: var(--primary-red);
-  border-radius: 80px 80px 0 0;
-  grid-column: 1 / span 30;
-  grid-row: 1 / span 1;
+
 }
 
-.div-project-separator {
-  background-color: var(--primary-bg-color-light);
-  border-radius: 80px 80px 0 0;
-  grid-column: 2 / span 28;
-  grid-row: 1 / span 1;
-}
 
 .div-project-todos {
-  background-color: var(--secondary-bg-color-dark);
-  border-radius: 80px 80px 0 0;
-  grid-column: 3 / span 26;
-  grid-row: 1 / span 1;
-  height: 100%;
+
 }
 
 /*Styles of elements inside overlayed boxes*/
@@ -206,8 +208,6 @@ Todos.js
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
-  padding: 0 70px 0 70px;
   font-size: 1.25rem;
 }
 
@@ -218,6 +218,7 @@ Todos.js
   cursor: pointer;
   margin-top: 5px;
   padding-left: 10px;
+  color: var(--primary-bg-color-light)
 }
 
 .project-todos-title-position {
@@ -226,23 +227,24 @@ Todos.js
   align-items: center;
   padding: 15px 60px 0 70px;
   font-size: 1.25rem;
-  color: var(--primary-bg-color-light);
+  
 }
 
 .todos-addTask {
   margin-top: 10px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   padding: 15px 60px 0 70px;
 }
 
 .todos-addTask input {
   border: none;
   border-radius: 10px;
-  background-color: var(--primary-bg-color-dark);
+  background-color: var(--secondary-bg-color-dark);
   color: var(--primary-bg-color-light);
   padding: 10px;
   font-size: 1.115rem;
+  width: 100%;
 }
 
 .todos-addTask button {
@@ -250,7 +252,7 @@ Todos.js
   border: none;
   font-size: 1.125rem;
   cursor: pointer;
-  color: var(--primary-bg-color-light);
+  color: var(--primary-bg-color-light);;
 }
 
 .todos-list {
@@ -289,12 +291,22 @@ media queries
 
 @media only screen and (min-width: 550px) {
   .btn-pos {
-    transform: translateY(20px);
+    transform: translateY(40px);
+    padding: 0 50px;
   }
 }
 
-@media only screen and (max-width: 420px) {
-  .todos-addTask {
-    flex-direction: column;
+@media only screen and (max-width: 980px) {
+  .wrapper-clock-timer nav ul {
+    flex-flow: column;
   }
+
+  .wrapper-clock-timer nav li {
+    padding: 1rem 0 0.5rem 0;
+  }
+
+  .btn-pos {
+    transform: translateY(0px);
+  }
+
 }

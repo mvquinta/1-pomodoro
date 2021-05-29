@@ -26,8 +26,8 @@ export default function Todos() {
     const [todos, setTodos] = useState([]) //state of todos
     const [input, setInput] = useState('') //state of input in the form-input to add new todo. Input will then become text in the todo object created
     //const [updateTodoText, setUpdateTodoText] = useState('')
-    const [activeProjectName, setActiveProjectName] = useState('1+Pomodoro Project') //state used to tell the UI to only render the todos that belong to the active project
-    const [mergedProjectNames, setMergedProjectNames] = useState(['1+Pomodoro Project']) //state of merged projects. Since I put all my todos on the same list. Many of them belong to a repeated project name. This merges and a creates an array with only one element, one proj name
+    const [activeProjectName, setActiveProjectName] = useState('1+Project') //state used to tell the UI to only render the todos that belong to the active project
+    const [mergedProjectNames, setMergedProjectNames] = useState(['1+Project']) //state of merged projects. Since I put all my todos on the same list. Many of them belong to a repeated project name. This merges and a creates an array with only one element, one proj name
     
     const [toggleProjectName, setToggleProjectName] = useState(false) //state of toggles to popwindow or close it
     const [toggleSwitchProj, setToggleSwitchProj] = useState(false) //state of toggles to popwindow or close it
@@ -124,7 +124,7 @@ export default function Todos() {
 
                 </div>                
             </div>
-            <div className='div-project-separator'></div>
+            
             <IconContext.Provider value={{ color: "#F2E7DC", size:"1.3em", className: "global-class-name" }}>
             <div className='div-project-todos'>
                 <div className='project-todos-title-position'>
