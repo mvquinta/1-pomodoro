@@ -111,7 +111,7 @@ Nav.js & ClockTImer.js
 /*Nav*/
 
 .wrapper-clock-timer {
-  width: 70%;
+  width: 65%;
   height: 100%;
   background-color: var(--secondary-bg-color-dark);
 
@@ -209,7 +209,7 @@ Todos.js
 
 .wrapper-todos {
   height: 100%;
-  width: 30%;  
+  width: 35%;  
 }
 
 .wrapper-project-todo {
@@ -248,25 +248,41 @@ Todos.js
   color: var(--primary-bg-color-light)
 }
 
-/*.project-todos-title-position {
+.todos-list {
+  display: flex;
+  flex-flow: column;
+  align-items: space-between;
+  padding: 0 20px 0 20px;
+
+  border: 1px solid white;
+}
+
+.todos-list li {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 15px 60px 0 70px;
-  font-size: 1.25rem;
-  
-}*/
+  color: var(--primary-bg-color-light);
+  padding: 8px 0;
+  border-bottom: 1px solid var(--primary-bg-color-dark);  
+}
+
+.todos-list button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0 5px;
+  transform: translateY(5px);
+}
 
 .todos-addTask {
-  margin-top: 10px;
   display: flex;
   justify-content: center;
-  padding: 15px 60px 0 70px;
+  padding: 20px;
+
+  border: 1px solid orange;
 }
 
 .todos-addTask input {
   border: none;
-  border-radius: 10px;
   background-color: var(--secondary-bg-color-dark);
   color: var(--primary-bg-color-light);
   padding: 10px;
@@ -280,36 +296,6 @@ Todos.js
   font-size: 1.125rem;
   cursor: pointer;
   color: var(--primary-bg-color-light);;
-}
-
-.todos-list {
-  margin-top: 10px;
-  display: flex;
-  flex-flow: column;
-  align-items: space-between;
-  padding: 15px 60px 0 70px;
-}
-
-.todos-list li {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 1.2rem;
-  color: var(--primary-bg-color-light);
-  padding: 8px 0;
-  border-bottom: 1px solid var(--primary-bg-color-dark);
-}
-
-.todos-list button {
-  background: none;
-  border: none;
-  font-size: 1.125rem;
-  cursor: pointer;
-  margin: 0 5px;
-}
-
-.todos-list span {
-  margin: 0 5px;
 }
 
 /*
@@ -335,6 +321,18 @@ media queries
 
   .btn-pos {
     transform: translateY(0px);
+  }
+
+  .project-name-position {
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .project-name-position button {
+    margin-top: 10px;
+    margin-right: 0px;
+    padding-left: 10px;
+    
   }
 }
 
