@@ -75,7 +75,7 @@ TittleBar.js
 }
 
 .top-div-info-bar h1 {
-  font-size: 2rem;
+  font-size: 2.8rem;
 }
 
 .top-div-info-bar a {
@@ -118,6 +118,8 @@ Nav.js & ClockTImer.js
   display: flex;
   flex-flow: column;
   justify-content: flex-start;
+
+  /*padding-top: 5%;*/
 }
 
 .wrapper-clock-timer nav ul {
@@ -126,7 +128,7 @@ Nav.js & ClockTImer.js
   justify-content: center;
   flex-wrap: wrap;
   align-items: center;
-  list-style-type: none;
+  list-style-type: none;  
 }
 
 .wrapper-clock-timer nav li {
@@ -152,33 +154,53 @@ Nav.js & ClockTImer.js
 /*ClockTimer*/
 .div-clock-timer {
   display: flex;
-  justify-content: center;
-  margin: 30px 0 30px 0;
+  flex-direction: column;  
+  align-items: center;
+}
+
+.circle-ext {
+  width: 300px;
+  height: 300px;
+  background: transparent;
+  border-color: var(--primary-red);
+  border-style: solid;
+  border-width: 4px;
+  border-radius: 100%;
+  filter: drop-shadow(5px 5px 5px rgb(0,0,0));
 }
 
 .circle {
   width: 250px;
   height: 250px;
-  background: transparent;
+  background: var(--primary-bg-color-dark);
   border-color: var(--secondary-red);
   border-style: solid;
   border-width: 4px;
   border-radius: 100%;
+  margin: 20px 20px;
+  filter: drop-shadow(5px 5px 5px rgb(0,0,0));
 }
 
 .circle-content {
-  margin: 45px;
-}
-
-.timer-session {
+  text-align: center;
+  margin-top: 80px;
   font-size: 4rem;
   color: var(--primary-bg-color-light);
+}
+
+.circle-settings-icon {
+  padding-left: 200px;
 }
 
 .circle-buttons {
   display: flex;
   justify-content: center;
-  margin-top: 60px;
+  margin-top: 10px;
+  filter: drop-shadow(5px 5px 5px rgb(0,0,0));
+}
+
+.circle-buttons button {
+  padding: 0 10px;
 }
 
 /*****
@@ -187,23 +209,21 @@ Todos.js
 
 .wrapper-todos {
   height: 100%;
-  width: 30%;
+  width: 30%;  
 }
 
 .wrapper-project-todo {
-  color: var(--primary-bg-color-light)
+  margin-top: 50px;
+  color: var(--primary-bg-color-light);
+  background-color: var(--primary-bg-color-dark);
 
-  
+  border: 1px solid red;  
 }
 
-.div-project-name {
-
-}
-
-
-.div-project-todos {
-
-}
+/*.todo-project-name {
+  margin-left: 20px;
+  font-size: 1.5rem;
+}*/
 
 /*Styles of elements inside overlayed boxes*/
 
@@ -211,7 +231,11 @@ Todos.js
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 1.25rem;
+  font-size: 1.5rem;
+}
+
+.project-name-position h2 {
+  margin-left: 20px;
 }
 
 .project-name-position button {
@@ -220,18 +244,18 @@ Todos.js
   font-size: 1.25rem;
   cursor: pointer;
   margin-top: 5px;
-  padding-left: 10px;
+  margin-right: 20px;
   color: var(--primary-bg-color-light)
 }
 
-.project-todos-title-position {
+/*.project-todos-title-position {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 15px 60px 0 70px;
   font-size: 1.25rem;
   
-}
+}*/
 
 .todos-addTask {
   margin-top: 10px;
@@ -302,6 +326,7 @@ media queries
 @media only screen and (max-width: 980px) {
   .wrapper-clock-timer nav ul {
     flex-flow: column;
+    padding-bottom: 15px;
   }
 
   .wrapper-clock-timer nav li {
@@ -343,6 +368,40 @@ TittleBar.js
   .social-media {
     margin-right: 0px;
     font-size: 1.5rem;
+  }
+
+}
+
+@media only screen and (max-width: 600px) {
+  .features-wrapper {
+    flex-direction: column;
+  }
+
+  .wrapper-clock-timer {
+    width: 100%;
+  }
+
+  .wrapper-todos {
+    width: 100%;
+  }
+
+  .circle-ext {
+    width: 250px;
+    height: 250px;;
+  }
+
+  .circle {
+    width: 200px;
+    height: 200px;
+  }
+
+  .circle-content {
+    margin-top: 60px;
+    font-size: 3.5rem;
+  }
+
+  .circle-buttons { 
+    padding-bottom: 20px;
   }
 
 }

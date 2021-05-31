@@ -105,15 +105,22 @@ export default function ClockTimer(props) {
 
     return(
         <div className='div-clock-timer'>
-        <div className='circle'>
-          <div className='circle-content'>
-            <div>
-                <Hovertip text='Click To Edit'>
-                    {popEditTime ? <PopEditTime valueSetSession={setSession} valueSetPopEditTime={setPopEditTime}/> : null}
-                    <span className='timer-session' onClick={togglePopEditTime}>{convertTime(session)}</span>
-                </Hovertip>
+            <div className='circle-ext'>
+                <div className='circle'>
+                    <div className='circle-content'>
+                        <div>
+                            <Hovertip text='Click To Edit'>
+                                {popEditTime ? <PopEditTime valueSetSession={setSession} valueSetPopEditTime={setPopEditTime}/> : null}
+                                <span className='timer-session' onClick={togglePopEditTime}>{convertTime(session)}</span>
+                            </Hovertip>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <IconContext.Provider value={{ color: "#F25C5C", size:"1.75em", className: "global-class-name" }}>
+            <div className='circle-settings-icon'>
+                <button><IoSettings /></button>
+            </div>
+            <IconContext.Provider value={{ color: "#F25C5C", size:"1.8em", className: "global-class-name" }}>
                 <div className='circle-buttons'>
                     <motion.button 
                     onClick={playTrue}
@@ -135,8 +142,6 @@ export default function ClockTimer(props) {
                     </motion.button>
                 </div>
             </IconContext.Provider>
-          </div>
-        </div>
       </div>
     )
 }

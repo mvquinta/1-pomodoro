@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { IoPencil, IoTrash, IoSettings, IoMenu, IoSwapHorizontal,
-    IoSquareOutline, IoCheckbox, IoAdd
-} from 'react-icons/io5' 
+import { IoPencil, IoTrash, IoSwapHorizontal, IoSquareOutline, IoCheckbox, IoAdd} from 'react-icons/io5' 
 import { IconContext } from 'react-icons'
 import Hovertip from './Hovertip'
 import PopAddProject from './PopAddProject'
@@ -121,15 +119,11 @@ export default function Todos() {
                         <button><Hovertip text='Add New Project'><IoAdd onClick={togglePopProjectName} /></Hovertip></button>
                         <button><Hovertip text='Switch Project'><IoSwapHorizontal onClick={togglePopSwitchProj} /></Hovertip></button>
                     </div>
-
                 </div>                
             </div>
             
             <IconContext.Provider value={{ color: "#F2E7DC", size:"1.3em", className: "global-class-name" }}>
             <div className='div-project-todos'>
-                <div className='project-todos-title-position'>
-                    <h3>Todo List</h3>
-                </div>
                 {toggleEditTodo ? <PopEditTodoText
                                 valueTodos={todos}
                                 valueSetTodos={setTodos}
