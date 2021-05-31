@@ -54,6 +54,10 @@ body {
   align-items: center;
 }
 
+/*****
+TittleBar.js
+******/
+
 .top-div-info-bar {
   width: 100%;
   height: 85px;
@@ -84,6 +88,10 @@ body {
   margin-right: 50px;
   font-size: 1.75rem;
 }
+
+/*****
+Features Wrapper
+******/
 
 .features-wrapper {
   height: 100%;
@@ -140,11 +148,6 @@ Nav.js & ClockTImer.js
 #btn-pomodoro {
   font-size: 2rem;;
 }
-
-/*In Nav.js
-.btn-pos {
-  transform: translateY(15px);
-}*/
 
 /*ClockTimer*/
 .div-clock-timer {
@@ -308,5 +311,39 @@ media queries
   .btn-pos {
     transform: translateY(0px);
   }
+}
+
+@media only screen and (max-width: 700px) {
+
+/*****
+TittleBar.js
+******/
+
+  .top-div-info-bar {
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .info-name {
+    margin: 2px 0 0 0;
+    padding: 2px 0;
+    font-size: 0.95rem;
+  }
+  
+  .top-div-info-bar h1 {
+    margin: 0;
+    padding: 4px 0;
+    font-size: 1.75rem;
+  }
+  
+  .top-div-info-bar a {
+    margin: 0;
+  }
+
+  .social-media {
+    margin-right: 0px;
+    font-size: 1.5rem;
+  }
 
 }
+
