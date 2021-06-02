@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDom from 'react-dom'
-import './styles/ModalEditTodo.css'
+import './styles/ModalPop.css'
 
 export default function PopEditTodoText(props) {
 
@@ -39,22 +39,22 @@ export default function PopEditTodoText(props) {
     return ReactDom.createPortal(
         <>
             <div className='overlayStyles' />
-            <div className='container-EditTodo'>
-                <div className='popupEdit-EditTodo'>
+            <div className='container-EditAddTodo'>
+                <div className='popupEdit-EditAddTodo'>
                     <h2>Edit Todo</h2>
                         <div>
                             <input
                             type="text"
                             placeholder='Edit Task'
                             onChange={(e) => setNewTodoText(e.target.value)}
-                            className='popInput-EditTodo'
+                            className='popInput-EditAddTodo'
                             />
                         </div>
-                    <div className='popButtonsContainer-EditTodo'>
-                        <button className='popbuttons-EditTodo' onClick={() => handleOkClick(props.valueId)}>
+                    <div className='popButtonsContainer-EditAddTodo'>
+                        <button className='popbuttons-EditAddTodo' onClick={() => handleOkClick(props.valueId)}>
                         OK
                         </button>
-                        <button className='popbuttons-EditTodo' onClick={handleCancelClick}>
+                        <button className='popbuttons-EditAddTodo' onClick={handleCancelClick}>
                         Cancel
                         </button>
                     </div>

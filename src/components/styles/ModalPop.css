@@ -1,0 +1,301 @@
+/***
+PopEditTime.js Styles
+***/
+
+.container-EditTime {
+  position: fixed;
+  z-index: 100;
+  top: 45%;
+  left: 68%;
+  transform: translate(-52.4%, -50%);
+} 
+
+.popup-EditTime {
+  color: var(--primary-bg-color-light);
+  box-sizing: border-box;
+  width: 310px;
+  height: 100%;
+  background-color: rgba(217, 217, 217, 0.25);
+  border: 1px solid rgba(242, 242, 242, 0.1);
+  text-align: center;
+  filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.5));
+}
+
+.popInputContainer-EditTime h2 {
+  font-size: 1.75rem;
+  text-align: center;
+  padding-top: 20px;
+}
+
+.popInputContainer-EditTime h3 {
+  font-size: 1.4rem;
+  text-align: left;
+  padding-top: 5px;
+  padding-left: 10px;
+  padding-bottom: 2px;
+}
+
+.timersContainer-flex {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding-top: 10px;
+}
+
+.timersContainer-box {
+  width: 210px;
+  height: 120px;
+  background-color: rgba(217, 217, 217, 0.25);
+  border: 1px solid rgba(242, 242, 242, 0.1);
+  filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.5));
+}
+
+.timersContainer-innerBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 5px 10px 0 10px;
+  font-size: 1.25rem;
+}
+
+.popInput-EditTime {
+  border: none;
+  color: var(--primary-bg-color-light);
+  background-color: var(--primary-bg-color-dark);
+  width: 45px;
+  height: 45px;
+  text-align: center;
+}
+
+.popButtonsContainer-EditTime {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 5px;
+  
+}
+
+.popbuttons-EditTime {
+  background: rgba(217, 217, 217, 0.25);
+  width: 70px;
+  height: 50px;
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+  color: var(--primary-bg-color-light);
+  margin: 15px;
+  filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.5));
+}
+
+@media only screen and (max-height: 700px) {
+  .container-EditTime {
+    top: 50%;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .container-EditTime {
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+/***
+Todo Features Styles
+****/
+
+/***
+PopSwitchProj.js
+***/
+
+.container-SwitchProj {
+  position: fixed;
+  z-index: 100;
+  top: 40%;
+  left: 18%;
+  transform: translate(-50%, -50%);
+} 
+
+.popupEdit-SwitchProj {
+  color: var(--primary-bg-color-light);
+  box-sizing: border-box;
+  width: 250px;
+  height: 100%;
+  background-color: rgba(217, 217, 217, 0.25);
+  border: 1px solid rgba(242, 242, 242, 0.1);
+  text-align: center;
+  filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.5));
+}
+
+.popupEdit-SwitchProj h2 {
+  font-size: 1.75rem;
+  text-align: center;
+  padding-top: 20px;
+}
+
+.buttonProj-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 10px;
+}
+
+.buttonProj-container li {
+  padding-top: 10px;
+}
+
+.buttonProj-box {    
+    width: 155px;
+    height: 35px;
+    background-color: rgba(217, 217, 217, 0.25);
+    border: 1px solid rgba(242, 242, 242, 0.1);
+    filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.5));
+    padding: 5px 0 5px 5px;
+    font-size: 1.2rem;
+    text-align: left;
+  }
+
+  .buttonProj-box button {
+    border: none;
+    background: transparent;
+    color: var(--primary-bg-color-light);
+  }
+
+  .popbuttons-SwitchProj {
+    background: rgba(217, 217, 217, 0.25);
+    width: 70px;
+    height: 50px;
+    border: none;
+    font-size: 1.1rem;
+    cursor: pointer;
+    color: var(--primary-bg-color-light);
+    margin: 15px;
+    filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.5));
+  }
+
+@media only screen and (max-width: 800px) {
+  .popupEdit-SwitchProj {
+    width: 200px;
+  }
+  .popupEdit-SwitchProj h2 {
+    font-size: 1.5rem;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 15px;
+  }
+
+  .popupEdit-SwitchProj input {
+    width: 150px;
+    height: 45px;
+    text-align: center;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .container-SwitchProj {
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+/***
+PopAddProjec.js
+PopEditTodoText.js
+Both have same styles
+***/
+
+.container-EditAddTodo {
+  position: fixed;
+  z-index: 100;
+  top: 40%;
+  left: 18%;
+  transform: translate(-50%, -50%);
+}
+
+.popupEdit-EditAddTodo {
+  color: var(--primary-bg-color-light);
+  box-sizing: border-box;
+  width: 250px;
+  height: 100%;
+  background-color: rgba(217, 217, 217, 0.25);
+  border: 1px solid rgba(242, 242, 242, 0.1);
+  text-align: center;
+  filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.5));
+}
+
+.popupEdit-EditAddTodo h2 {
+  font-size: 1.75rem;
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 30px;
+}
+
+.popupEdit-EditAddTodo input {
+  border: none;
+  color: var(--primary-bg-color-light);
+  background-color: var(--secondary-bg-color-dark);
+  width: 200px;
+  height: 45px;
+  text-align: center;
+}
+
+.popButtonsContainer-EditAddTodo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;    
+}
+
+.popbuttons-EditAddTodo {
+  background: rgba(217, 217, 217, 0.25);
+  width: 70px;
+  height: 50px;
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+  color: var(--primary-bg-color-light);
+  margin: 15px;
+  filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.5));
+}
+
+@media only screen and (max-width: 800px) {
+  .popupEdit-EditAddTodo {
+    width: 200px;
+  }
+  .popupEdit-EditAddTodo h2 {
+    font-size: 1.5rem;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 15px;
+  }
+
+  .popupEdit-EditAddTodo input {
+    width: 150px;
+    height: 45px;
+    text-align: center;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .container-EditAddTodo {
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+/***
+General Styles
+***/
+
+.overlayStyles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  z-index: 100;
+}

@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDom from 'react-dom'
-import './styles/ModalEditTime.css'
+import './styles/ModalPop.css'
 
 export default function PopEditTime(props) {
   const [editTime, setEditTime] = React.useState(0);

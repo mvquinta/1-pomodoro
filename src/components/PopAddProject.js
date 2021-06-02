@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDom from 'react-dom'
-import './styles/ModalAddProject.css'
+import './styles/ModalPop.css'
 
 export default function PopAddProject(props) {
 
@@ -22,22 +22,22 @@ export default function PopAddProject(props) {
     return ReactDom.createPortal(
         <>
             <div className='overlayStyles' />
-            <div className='container-AddProj'>
-                <div className='popupEdit-AddProj'>
+            <div className='container-EditAddTodo'>
+                <div className='popupEdit-EditAddTodo'>
                     <h2>Add Project</h2>
                      <div>
                         <input
                         type="text"
                         placeholder='New Project Name'
                         onChange={(e) => setNewProjectName(e.target.value)}
-                        className='popInput-AddProj'
+                        className='popInput-EditAddTodo'
                         />
                     </div>
-                    <div className='popButtonsContainer-AddProj'>
-                        <button className='popbuttons-AddProj' onClick={handleOkClick}>
+                    <div className='popButtonsContainer-EditAddTodo'>
+                        <button className='popbuttons-EditAddTodo' onClick={handleOkClick}>
                         OK
                         </button>
-                        <button className='popbuttons-AddProj' onClick={handleCancelClick}>
+                        <button className='popbuttons-EditAddTodo' onClick={handleCancelClick}>
                         Cancel
                         </button>
                     </div>

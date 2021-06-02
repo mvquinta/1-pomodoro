@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDom from 'react-dom'
-import './styles/ModalSwitchProj.css'
+import './styles/ModalPop.css'
 
 
 export default function PopSwitchProj(props) {
