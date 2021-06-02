@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDom from 'react-dom'
-import './ModalPop.css'
+import './styles/ModalEditTodo.css'
 
 export default function PopEditTodoText(props) {
 
@@ -39,28 +39,22 @@ export default function PopEditTodoText(props) {
     return ReactDom.createPortal(
         <>
             <div className='overlayStyles' />
-            <div className='container'>
-                <div className='popupEdit'>
-                    <div className='editContainer'>
-                        <h2 className='poph2'>Edit Todo</h2>
-                        <div className='popInputContainer'>
-                            <div>
-                                <label className='popLabel'>Edit Todo Task</label>
-                                <input
-                                type="text"
-                                placeholder='Edit Task'
-                                onChange={(e) => setNewTodoText(e.target.value)}
-                                className='popInput'
-                                />
-                            </div>
+            <div className='container-EditTodo'>
+                <div className='popupEdit-EditTodo'>
+                    <h2>Edit Todo</h2>
+                        <div>
+                            <input
+                            type="text"
+                            placeholder='Edit Task'
+                            onChange={(e) => setNewTodoText(e.target.value)}
+                            className='popInput-EditTodo'
+                            />
                         </div>
-                    </div>
-                    <div className='popButtonsContainer'>
-                        <button className='popbuttons' onClick={() => handleOkClick(props.valueId)}>
+                    <div className='popButtonsContainer-EditTodo'>
+                        <button className='popbuttons-EditTodo' onClick={() => handleOkClick(props.valueId)}>
                         OK
                         </button>
-                        <div>|</div>
-                        <button className='popbuttons' onClick={handleCancelClick}>
+                        <button className='popbuttons-EditTodo' onClick={handleCancelClick}>
                         Cancel
                         </button>
                     </div>

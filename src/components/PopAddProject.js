@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDom from 'react-dom'
-import './ModalPop.css'
+import './styles/ModalAddProject.css'
 
 export default function PopAddProject(props) {
 
@@ -22,28 +22,22 @@ export default function PopAddProject(props) {
     return ReactDom.createPortal(
         <>
             <div className='overlayStyles' />
-            <div className='container'>
-                <div className='popupEdit'>
-                    <div className='editContainer'>
-                        <h2 className='poph2'>Add Project</h2>
-                        <div className='popInputContainer'>
-                            <div>
-                                <label className='popLabel'>Project Name</label>
-                                <input
-                                type="text"
-                                placeholder='New Project Name'
-                                onChange={(e) => setNewProjectName(e.target.value)}
-                                className='popInput'
-                                />
-                            </div>
-                        </div>
+            <div className='container-AddProj'>
+                <div className='popupEdit-AddProj'>
+                    <h2>Add Project</h2>
+                     <div>
+                        <input
+                        type="text"
+                        placeholder='New Project Name'
+                        onChange={(e) => setNewProjectName(e.target.value)}
+                        className='popInput-AddProj'
+                        />
                     </div>
-                    <div className='popButtonsContainer'>
-                        <button className='popbuttons' onClick={handleOkClick}>
+                    <div className='popButtonsContainer-AddProj'>
+                        <button className='popbuttons-AddProj' onClick={handleOkClick}>
                         OK
                         </button>
-                        <div>|</div>
-                        <button className='popbuttons' onClick={handleCancelClick}>
+                        <button className='popbuttons-AddProj' onClick={handleCancelClick}>
                         Cancel
                         </button>
                     </div>

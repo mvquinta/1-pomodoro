@@ -259,7 +259,7 @@ Todos.js
   justify-content: space-between;
   color: var(--primary-bg-color-light);
   padding: 8px 0;
-  border-bottom: 1px solid var(--primary-bg-color-light);  
+  border-bottom: 1px solid rgba(242, 231, 220, 0.1);  
 }
 
 .todos-list button {
