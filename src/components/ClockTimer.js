@@ -16,11 +16,18 @@ const buttonVariants = {
     }
 }
 
-
-
 export default function ClockTimer(props) {
 
     const [session, setSession] = useState(25 * 60) //converts session from minutes to seconds.
+
+    const [sessionID, setSessionID] = useState(0)
+
+    const [pomodoroSession, setPomodoroSession] = useState(24 * 60)
+    const [shortSession, setShortSession] = useState(4 * 60)
+    const [longSession, setLongSession] = useState(14 * 60)
+
+    //const [clockSession, setClockSession] = useState(1300)
+
     const [play, setPlay] = useState(false) //state to toggle play timer
     const [pause, setPause] = useState(true) //state to toggle pause timer
     const [popEditTime, setPopEditTime] = useState(false) //state to toggle edit time popup window
@@ -36,39 +43,49 @@ export default function ClockTimer(props) {
     function playAudioWaterDroplet() {audioWaterDroplet.play()}
     //function pauseAudioBell() { audioBell.pause() }
 
-    //depending on selected session, that is sent as a prop from App.js, different default session times are set
-    //they are all converted from minutes to seconds
+    //update this comment
     useEffect(() => {
         if (props.valueType === 'Pomodoro') {
-            setSession(25 * 60)
+            setSessionID(0)
         } else if ( props.valueType === 'Short Break') {
-            setSession(5 * 60)
+            setSessionID(1)
         } else if (props.valueType === 'Long Break') {
-            setSession(15 * 60)
+            setSessionID(2)
         }
     }, [props.valueType])
 
-
     //setInterval for when play is active to count the timer down 1 second each second XD
     //when pause is clicked, set to true, clearInterval method stops setInterval
+
     useEffect(() => {
         if (play) {
             id.current = window.setInterval(() => {
-                setSession((second) => second - 1)
+                sessionID === 0
+                ? setPomodoroSession((second) => second - 1)
+                : sessionID === 1
+                ? setShortSession((second) => second - 1)
+                : sessionID === 2
+                ? setLongSession((second) => second - 1)
+                : console.log('cool')
             }, 1000)
         } else if (pause){
             window.clearInterval(id.current)
         }
     }, [play, pause])
 
+
     //when session timer gets to 0 we stop timer by changing state of pause and play. If not it would go to negative values
     //than we reset session to pomodoro defaul time (this might be changed...)
-    if(session === 0) {
-        playAudioBell()
-        setPause(true)
-        setPlay(false)
-        setSession(25 * 60)
-    }
+    useEffect(() => {
+        if(pomodoroSession === 0 || shortSession === 0 || longSession === 0) {
+            playAudioBell()
+            setPause(true)
+            setPlay(false)
+            setSession(25 * 60)
+        }
+    },[pomodoroSession, shortSession, longSession])
+
+
 
     //math conversion of time to be rendered 
     function convertTime(updateSession) {
@@ -109,16 +126,25 @@ export default function ClockTimer(props) {
                 <div className='circle'>
                     <div className='circle-content'>
                         <div>
-                            <Hovertip text='Click To Edit'>
-                                {popEditTime ? <PopEditTime valueSetSession={setSession} valueSetPopEditTime={setPopEditTime}/> : null}
-                                <span className='timer-session' onClick={togglePopEditTime}>{convertTime(session)}</span>
-                            </Hovertip>
+                            {sessionID === 0 
+                            ? <span className='timer-session'>{convertTime(pomodoroSession)}</span>
+                            : sessionID === 1
+                            ? <span className='timer-session'>{convertTime(shortSession)}</span>
+                            : sessionID === 2 
+                            ? <span className='timer-session'>{convertTime(longSession)}</span>
+                            : null}
                         </div>
                     </div>
                 </div>
             </div>
             <div className='circle-settings-icon'>
-                <button><IoSettings /></button>
+                {popEditTime ? <PopEditTime
+                valueSetPopEditTime={setPopEditTime}
+                valueSetPomodoroSession={setPomodoroSession}
+                valueSetShortSession={setShortSession}
+                valueSetLongSession={setLongSession}
+                /> : null}
+                <button onClick={togglePopEditTime}><IoSettings /></button>
             </div>
             <IconContext.Provider value={{ color: "#F25C5C", size:"1.8em", className: "global-class-name" }}>
                 <div className='circle-buttons'>

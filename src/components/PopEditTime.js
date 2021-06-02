@@ -3,13 +3,21 @@ import ReactDom from 'react-dom'
 import './styles/ModalPop.css'
 
 export default function PopEditTime(props) {
-  const [editTime, setEditTime] = React.useState(0);
-  const [secondsEditTime, setSecondsEdiTime] = React.useState(0);
+  const [editPomodoroMin, setEditPomodoroMin] = React.useState(0)
+  const [editPomodoroSec, setEditPomodoroSec] = React.useState(0)
+  const [editShortMin, setEditShortMin] = React.useState(0)
+  const [editShortSec, setEditShortSec] = React.useState(0)
+  const [editLongMin, setEditLongMin] = React.useState(0)
+  const [editLongSec, setEditLongSec] = React.useState(0)
 
   //reads the input fields and converts it to seconds. This value is than used to update the setSession time back in ClockTimer.js
   function handleOkClick() {
-    const convertedTime = parseInt(editTime) * 60 + parseInt(secondsEditTime);
-    props.valueSetSession(convertedTime);
+    const convertedPomodorTime = parseInt(editPomodoroMin) * 60 + parseInt(editPomodoroSec);
+    const convertedShortTime = parseInt(editShortMin) * 60 + parseInt(editShortSec);
+    const convertedLongTime = parseInt(editLongMin) * 60 + parseInt(editLongSec);
+    props.valueSetPomodoroSession(convertedPomodorTime);
+    props.valueSetShortSession(convertedShortTime);
+    props.valueSetLongSession(convertedLongTime);
     props.valueSetPopEditTime(false);
   }
 
@@ -39,7 +47,7 @@ export default function PopEditTime(props) {
                     <div>
                       <input
                       type="number"
-                      onChange={(e) => setEditTime(e.target.value)}
+                      onChange={(e) => setEditPomodoroMin(e.target.value)}
                       placeholder="25"
                       className='popInput-EditTime'
                       />
@@ -47,8 +55,8 @@ export default function PopEditTime(props) {
                     <div>
                       <input
                       type="number"
-                      onChange={(e) => setEditTime(e.target.value)}
-                      placeholder="25"
+                      onChange={(e) => setEditPomodoroSec(e.target.value)}
+                      placeholder="10"
                       className='popInput-EditTime'
                       />
                     </div>
@@ -68,7 +76,7 @@ export default function PopEditTime(props) {
                     <div>
                       <input
                       type="number"
-                      onChange={(e) => setEditTime(e.target.value)}
+                      onChange={(e) => setEditShortMin(e.target.value)}
                       placeholder="25"
                       className='popInput-EditTime'
                       />
@@ -76,7 +84,7 @@ export default function PopEditTime(props) {
                     <div>
                       <input
                       type="number"
-                      onChange={(e) => setEditTime(e.target.value)}
+                      onChange={(e) => setEditShortSec(e.target.value)}
                       placeholder="25"
                       className='popInput-EditTime'
                       />
@@ -97,7 +105,7 @@ export default function PopEditTime(props) {
                     <div>
                       <input
                       type="number"
-                      onChange={(e) => setEditTime(e.target.value)}
+                      onChange={(e) => setEditLongMin(e.target.value)}
                       placeholder="25"
                       className='popInput-EditTime'
                       />
@@ -105,7 +113,7 @@ export default function PopEditTime(props) {
                     <div>
                       <input
                       type="number"
-                      onChange={(e) => setEditTime(e.target.value)}
+                      onChange={(e) => setEditLongSec(e.target.value)}
                       placeholder="25"
                       className='popInput-EditTime'
                       />
