@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDom from 'react-dom'
-import './ModalPop.css'
+import './styles/ModalEditTime.css'
 
 export default function PopEditTime(props) {
   const [editTime, setEditTime] = React.useState(0);
@@ -20,38 +20,105 @@ export default function PopEditTime(props) {
   return ReactDom.createPortal(
     <>
       <div className='overlayStyles' />
-      <div className='container'>
-        <div className='popupEdit'>
-          <div className='editContainer'>
-            <h2 className='poph2'>Edit Time</h2>
-            <div className='popInputContainer'>
-              <div>
-                <label className='popLabel'>Minutes</label>
-                <input
-                  type="number"
-                  onChange={(e) => setEditTime(e.target.value)}
-                  placeholder="25"
-                  className='popInput'
-                />
-              </div>
-              <div>
-                <label className='popLabel'>Seconds</label>
-                <input
-                  type="number"
-                  min="0"
-                  onChange={(e) => setSecondsEdiTime(e.target.value)}
-                  placeholder="0"
-                  className='popInput'
-                />
+      <div className='container-EditTime'>
+        <div className='popup-EditTime'>           
+            <div className='popInputContainer-EditTime'>
+              <h2 className='poph2-EditTime'>Edit Time</h2>            
+              <div className='timersContainer-flex'>
+                <div className='timersContainer-box'>
+                  <h3>Pomodoro</h3>
+                  <div className='timersContainer-innerBox'>
+                    <div>
+                      <label className='popLabel-EditTime'>min</label>
+                    </div>  
+                    <div>
+                      <label className='popLabel-EditTime'>sec</label>
+                    </div>
+                  </div>
+                  <div className='timersContainer-innerBox'>
+                    <div>
+                      <input
+                      type="number"
+                      onChange={(e) => setEditTime(e.target.value)}
+                      placeholder="25"
+                      className='popInput-EditTime'
+                      />
+                    </div>
+                    <div>
+                      <input
+                      type="number"
+                      onChange={(e) => setEditTime(e.target.value)}
+                      placeholder="25"
+                      className='popInput-EditTime'
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className='timersContainer-box'>
+                  <h3>Short Break</h3>
+                  <div className='timersContainer-innerBox'>
+                    <div>
+                      <label className='popLabel-EditTime'>min</label>
+                    </div>  
+                    <div>
+                      <label className='popLabel-EditTime'>sec</label>
+                    </div>
+                  </div>
+                  <div className='timersContainer-innerBox'>
+                    <div>
+                      <input
+                      type="number"
+                      onChange={(e) => setEditTime(e.target.value)}
+                      placeholder="25"
+                      className='popInput-EditTime'
+                      />
+                    </div>
+                    <div>
+                      <input
+                      type="number"
+                      onChange={(e) => setEditTime(e.target.value)}
+                      placeholder="25"
+                      className='popInput-EditTime'
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className='timersContainer-box'>
+                  <h3>Long Break</h3>
+                  <div className='timersContainer-innerBox'>
+                    <div>
+                      <label className='popLabel-EditTime'>min</label>
+                    </div>  
+                    <div>
+                      <label className='popLabel-EditTime'>sec</label>
+                    </div>
+                  </div>
+                  <div className='timersContainer-innerBox'>
+                    <div>
+                      <input
+                      type="number"
+                      onChange={(e) => setEditTime(e.target.value)}
+                      placeholder="25"
+                      className='popInput-EditTime'
+                      />
+                    </div>
+                    <div>
+                      <input
+                      type="number"
+                      onChange={(e) => setEditTime(e.target.value)}
+                      placeholder="25"
+                      className='popInput-EditTime'
+                      />
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-          <div className='popButtonsContainer'>
-            <button className='popbuttons' onClick={handleOkClick}>
+          <div className='popButtonsContainer-EditTime'>
+            <button className='popbuttons-EditTime' onClick={handleOkClick}>
               OK
             </button>
-            <div>|</div>
-            <button className='popbuttons' onClick={handleCancelClick}>
+            <button className='popbuttons-EditTime' onClick={handleCancelClick}>
               Cancel
             </button>
           </div>

@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDom from 'react-dom'
-import './ModalPop.css'
+import './styles/ModalSwitchProj.css'
 
 
 export default function PopSwitchProj(props) {
@@ -19,17 +19,16 @@ export default function PopSwitchProj(props) {
     return ReactDom.createPortal(
         <>
           <div className='overlayStyles' />
-          <div className='container'>
-            <div className='popupEdit'>
-              <div className='editContainer'>
-                <h2 className='poph2'>Select Project</h2>
-                <div className='popInputContainer'>
+          <div className='container-SwitchProj'>
+            <div className='popupEdit-SwitchProj'>
+              <h2>Select Project</h2>
+              <div className='editContainer-SwitchProj'>                
+                <div className='popInputContainer-SwitchProj'>
                   <div>
-                    {/*<label style={styles.popLabel}>Select Project</label>*/}
                     <ul>
                         {props.valueMergedProjs.map((item) => (
                         <li key={item}>
-                            <button className='popButtonsContainer' onClick={handleOkClick}>{item}</button>
+                            <button className='popButtonsContainer-SwitchProj' onClick={handleOkClick}>{item}</button>
                         </li>
                         ))} 
                     </ul>
@@ -37,7 +36,7 @@ export default function PopSwitchProj(props) {
                 </div>
               </div>
               <div>
-                <button className='popbuttons' onClick={handleCancelClick}>
+                <button className='popbuttons-SwitchProj' onClick={handleCancelClick}>
                   Cancel
                 </button>
               </div>

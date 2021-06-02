@@ -8,6 +8,7 @@ App Colors
   --primary-red: #f25c5c;
   --secondary-red: #f2636f;
   --secondary-bg-color-dark: #2d2d2d;
+  --secondary-bg-color-light: #f2f2f2;
 }
 
 *,
@@ -243,14 +244,14 @@ Todos.js
   cursor: pointer;
   margin-top: 5px;
   margin-right: 20px;
-  color: var(--primary-bg-color-light)
+  color: var(--primary-bg-color-light);
 }
 
 .todos-list {
   display: flex;
   flex-flow: column;
   align-items: space-between;
-  padding: 0 20px 0 20px;
+  padding: 15px 20px 0 20px;
 }
 
 .todos-list li {
