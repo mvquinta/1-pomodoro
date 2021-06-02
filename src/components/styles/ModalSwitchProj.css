@@ -1,7 +1,7 @@
 .container-SwitchProj {
     position: fixed;
     z-index: 100;
-    top: 45%;
+    top: 40%;
     left: 18%;
     transform: translate(-50%, -50%);
   } 
@@ -9,8 +9,8 @@
   .popupEdit-SwitchProj {
     color: var(--primary-bg-color-light);
     box-sizing: border-box;
-    width: 310px;
-    height: 530px;
+    width: 250px;
+    height: 100%;
     background-color: rgba(217, 217, 217, 0.25);
     border: 1px solid rgba(242, 242, 242, 0.1);
     text-align: center;
@@ -22,6 +22,47 @@
     text-align: center;
     padding-top: 20px;
   }
+
+  .buttonProj-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10px;
+  }
+
+  .buttonProj-container li {
+    padding-top: 10px;
+  }
+
+  .buttonProj-box {    
+      width: 155px;
+      height: 35px;
+      background-color: rgba(217, 217, 217, 0.25);
+      border: 1px solid rgba(242, 242, 242, 0.1);
+      filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.5));
+      padding: 5px 0 5px 5px;
+      font-size: 1.2rem;
+      text-align: left;
+    }
+
+    .buttonProj-box button {
+      border: none;
+      background: transparent;
+      color: var(--primary-bg-color-light);
+    }
+
+    .popbuttons-SwitchProj {
+      background: rgba(217, 217, 217, 0.25);
+      width: 70px;
+      height: 50px;
+      border: none;
+      font-size: 1.1rem;
+      cursor: pointer;
+      color: var(--primary-bg-color-light);
+      margin: 15px;
+      filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.5));
+    }
 
 
   @media only screen and (max-width: 900px) {

@@ -22,19 +22,17 @@ export default function PopSwitchProj(props) {
           <div className='container-SwitchProj'>
             <div className='popupEdit-SwitchProj'>
               <h2>Select Project</h2>
-              <div className='editContainer-SwitchProj'>                
-                <div className='popInputContainer-SwitchProj'>
-                  <div>
+                  <div className="buttonProj-container">
                     <ul>
                         {props.valueMergedProjs.map((item) => (
                         <li key={item}>
-                            <button className='popButtonsContainer-SwitchProj' onClick={handleOkClick}>{item}</button>
+                            <div className="buttonProj-box">
+                              <button className='popButtonsContainer-SwitchProj' onClick={handleOkClick}>{item}</button>
+                            </div>
                         </li>
                         ))} 
                     </ul>
-                  </div>    
-                </div>
-              </div>
+                  </div>
               <div>
                 <button className='popbuttons-SwitchProj' onClick={handleCancelClick}>
                   Cancel
