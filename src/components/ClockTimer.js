@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { IoPlay, IoStop, IoRefresh, IoSettings } from 'react-icons/io5'
-import Hovertip from './Hovertip'
 import PopEditTime from './PopEditTime'
 import { IconContext } from 'react-icons'
 import { motion } from 'framer-motion'
@@ -17,21 +16,21 @@ const buttonVariants = {
 }
 
 export default function ClockTimer(props) {
-
-    const [session, setSession] = useState(25 * 60) //converts session from minutes to seconds.
-
+    //This state will be used in the app to interpret and to know what's the session that user as clicked.
+    //I could use props.valueType directly but I translated it this way for a cleaner code
     const [sessionID, setSessionID] = useState(0)
-
-    const [pomodoroSession, setPomodoroSession] = useState(24 * 60)
-    const [shortSession, setShortSession] = useState(4 * 60)
-    const [longSession, setLongSession] = useState(14 * 60)
-
-    //const [clockSession, setClockSession] = useState(1300)
+    //this state will change and receive whatever are the values stored in pomodoroSession, shortSession or longSession
+    //I'll use this state to render and implement all other features (play, stop, etc) instead of dealing with 3 states at the same time
+    const [activeSession, setActiveSession] = useState(25 * 60) 
+ 
+    const [pomodoroSession, setPomodoroSession] = useState(25 * 60) //initialized with default values
+    const [shortSession, setShortSession] = useState(5 * 60) //initialized with default values
+    const [longSession, setLongSession] = useState(15 * 60) //initialized with default values
 
     const [play, setPlay] = useState(false) //state to toggle play timer
     const [pause, setPause] = useState(true) //state to toggle pause timer
     const [popEditTime, setPopEditTime] = useState(false) //state to toggle edit time popup window
-    const id = useRef(null)
+    const id = useRef(null) //state to be used in window.setInterval
 
     //Audio const and functions to be used when time is up and play, stop and restart are clicked
     const audioBell = new Audio('http://soundbible.com/grab.php?id=2218&type=mp3') //2044 - tick 2218 - service bell 
@@ -43,49 +42,49 @@ export default function ClockTimer(props) {
     function playAudioWaterDroplet() {audioWaterDroplet.play()}
     //function pauseAudioBell() { audioBell.pause() }
 
-    //update this comment
+    //sent by Nav.js -> App.js, we get what session was clicked by the user and change the state of sessionID and activeSession accordingly
     useEffect(() => {
         if (props.valueType === 'Pomodoro') {
             setSessionID(0)
+            setActiveSession(pomodoroSession)
         } else if ( props.valueType === 'Short Break') {
             setSessionID(1)
+            setActiveSession(shortSession)
         } else if (props.valueType === 'Long Break') {
             setSessionID(2)
+            setActiveSession(longSession)
         }
     }, [props.valueType])
 
-    //setInterval for when play is active to count the timer down 1 second each second XD
-    //when pause is clicked, set to true, clearInterval method stops setInterval
 
+    //setInterval for when play is active to count the timer down 1 second each second
+    //when pause is clicked set it to true. clearInterval method stops setInterval
     useEffect(() => {
         if (play) {
             id.current = window.setInterval(() => {
-                sessionID === 0
-                ? setPomodoroSession((second) => second - 1)
-                : sessionID === 1
-                ? setShortSession((second) => second - 1)
-                : sessionID === 2
-                ? setLongSession((second) => second - 1)
-                : console.log('cool')
+                setActiveSession((second) => second - 1)
             }, 1000)
         } else if (pause){
             window.clearInterval(id.current)
         }
     }, [play, pause])
 
-
     //when session timer gets to 0 we stop timer by changing state of pause and play. If not it would go to negative values
-    //than we reset session to pomodoro defaul time (this might be changed...)
+    //then we reset activeSession based on the sessionID
     useEffect(() => {
-        if(pomodoroSession === 0 || shortSession === 0 || longSession === 0) {
+        if(activeSession === 0) {
             playAudioBell()
             setPause(true)
             setPlay(false)
-            setSession(25 * 60)
+            sessionID === 0 
+            ? setActiveSession(pomodoroSession)
+            : sessionID === 1
+            ? setActiveSession(shortSession)
+            : sessionID === 2
+            ? setActiveSession(longSession)
+            : setActiveSession(25 * 60)
         }
-    },[pomodoroSession, shortSession, longSession])
-
-
+    },[activeSession])
 
     //math conversion of time to be rendered 
     function convertTime(updateSession) {
@@ -113,7 +112,13 @@ export default function ClockTimer(props) {
         playAudioWaterDroplet()
         setPlay(false)
         setPause(true)
-        setSession(25 * 60)
+        sessionID === 0 
+        ? setActiveSession(pomodoroSession)
+        : sessionID === 1
+        ? setActiveSession(shortSession)
+        : sessionID === 2
+        ? setActiveSession(longSession)
+        : setActiveSession(25 * 60) //if by any chance sessionID is not found, we reset activeSession to defaul value
     }
 
     function togglePopEditTime() {
@@ -125,14 +130,8 @@ export default function ClockTimer(props) {
             <div className='circle-ext'>
                 <div className='circle'>
                     <div className='circle-content'>
-                        <div>
-                            {sessionID === 0 
-                            ? <span className='timer-session'>{convertTime(pomodoroSession)}</span>
-                            : sessionID === 1
-                            ? <span className='timer-session'>{convertTime(shortSession)}</span>
-                            : sessionID === 2 
-                            ? <span className='timer-session'>{convertTime(longSession)}</span>
-                            : null}
+                        <div className='timer-session'>
+                            {convertTime(activeSession)}
                         </div>
                     </div>
                 </div>
@@ -143,6 +142,7 @@ export default function ClockTimer(props) {
                 valueSetPomodoroSession={setPomodoroSession}
                 valueSetShortSession={setShortSession}
                 valueSetLongSession={setLongSession}
+                valueSetActiveSession={setActiveSession}
                 /> : null}
                 <button onClick={togglePopEditTime}><IoSettings /></button>
             </div>
