@@ -22,7 +22,7 @@ const buttonVariants = {
 export default function Todos() {
 
     //state of todos
-    //As my useState inital value, instead of using an emptr array [], I call an arrow function that checks if there's some localStorage data.
+    //As my useState inital value, instead of using an empty array [], I call an arrow function that checks if there's some localStorage data.
     //If this is true, load localStorage data, if not, load an empty []
     const [todos, setTodos] = useState(() => {
         const localTodos = localStorage.getItem('pomodoroTodos')

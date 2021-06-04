@@ -4,7 +4,6 @@ import PopEditTime from './PopEditTime'
 import { IconContext } from 'react-icons'
 import { motion } from 'framer-motion'
 
-
 //Animation Variants
 
 const buttonVariants = {
@@ -23,9 +22,20 @@ export default function ClockTimer(props) {
     //I'll use this state to render and implement all other features (play, stop, etc) instead of dealing with 3 states at the same time
     const [activeSession, setActiveSession] = useState(25 * 60) 
  
-    const [pomodoroSession, setPomodoroSession] = useState(25 * 60) //initialized with default values
-    const [shortSession, setShortSession] = useState(5 * 60) //initialized with default values
-    const [longSession, setLongSession] = useState(15 * 60) //initialized with default values
+    //As my useState inital values, I call an arrow function that checks if there's some localStorage data.
+    //If this is true, load localStorage data, if not, load default time values
+    const [pomodoroSession, setPomodoroSession] = useState(() => {
+        const localPomodoroTime = localStorage.getItem('pomodoroTime')
+        return localPomodoroTime ? JSON.parse(localPomodoroTime) : (25 * 60)
+    }) //initialized with default values
+    const [shortSession, setShortSession] = useState(() => {
+        const localShortTime = localStorage.getItem('shortTime')
+        return localShortTime ? JSON.parse(localShortTime) : (5 * 60)
+    }) //initialized with default values
+    const [longSession, setLongSession] = useState(() => {
+        const localLongTime = localStorage.getItem('longTime')
+        return localLongTime ? JSON.parse(localLongTime) : (15 * 60)
+    }) //initialized with default values
 
     const [play, setPlay] = useState(false) //state to toggle play timer
     const [pause, setPause] = useState(true) //state to toggle pause timer
@@ -41,6 +51,18 @@ export default function ClockTimer(props) {
     function playAudioTick() { audioTick.play() }
     function playAudioWaterDroplet() {audioWaterDroplet.play()}
     //function pauseAudioBell() { audioBell.pause() }
+
+    //save time session to localStorage
+    useEffect(() => {
+        localStorage.setItem('pomodoroTime', JSON.stringify(pomodoroSession))
+    },[pomodoroSession])
+    useEffect(() => {
+        localStorage.setItem('shortTime', JSON.stringify(shortSession))
+    },[shortSession])
+    useEffect(() => {
+        localStorage.setItem('longTime', JSON.stringify(longSession))
+    },[longSession])
+
 
     //sent by Nav.js -> App.js, we get what session was clicked by the user and change the state of sessionID and activeSession accordingly
     useEffect(() => {
