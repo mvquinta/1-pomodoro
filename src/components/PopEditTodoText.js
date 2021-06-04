@@ -6,17 +6,6 @@ export default function PopEditTodoText(props) {
 
     const [newTodoText, setNewTodoText] = React.useState('')
 
-    /*function editTodo(id) {
-        const updateTodos = [...props.valueTodos].map((todo) => {
-            if(todo.id === id) {
-                todo.text = newTodoText
-            }
-            return todo
-        })
-        props.valueSetTodos(updateTodos)
-        //add a setTodoEdit state to false?
-    }*/
-
     function handleOkClick (id) {
         //based on the passed id, spread all todos that exist and to the one matching the id add the new input from current state        
         const updateTodos = [...props.valueTodos].map((todo) => {

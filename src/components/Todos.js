@@ -21,7 +21,14 @@ const buttonVariants = {
 
 export default function Todos() {
 
-    const [todos, setTodos] = useState([]) //state of todos
+    //state of todos
+    //As my useState inital value, instead of using an emptr array [], I call an arrow function that checks if there's some localStorage data.
+    //If this is true, load localStorage data, if not, load an empty []
+    const [todos, setTodos] = useState(() => {
+        const localTodos = localStorage.getItem('pomodoroTodos')
+        return localTodos ? JSON.parse(localTodos) : []
+    })
+
     const [input, setInput] = useState('') //state of input in the form-input to add new todo. Input will then become text in the todo object created
     //const [updateTodoText, setUpdateTodoText] = useState('')
     const [activeProjectName, setActiveProjectName] = useState('1+Project') //state used to tell the UI to only render the todos that belong to the active project
@@ -33,6 +40,11 @@ export default function Todos() {
 
     const [stateId, setStateId] = useState('')
 
+
+    //save todos to local storage. Each time a todo is added, edited or deleted, this useEffects hook is called and updates localStorage
+    useEffect(() => {
+        localStorage.setItem('pomodoroTodos', JSON.stringify(todos))
+    }, [todos])
 
     //generateId is a "wild" function to create a random id. Mainly used to add an id to every todo created.
     function generateId() {
@@ -91,7 +103,6 @@ export default function Todos() {
     //I need to travell all those parentElements until I reach the <li> tag that holds the id I need
     function getIdFromTodoToEdit(event) {
         const id = event.target.parentElement.parentElement.parentElement.id
-        console.log(id)
         setStateId(id)
     }
 

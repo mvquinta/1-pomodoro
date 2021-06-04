@@ -17,13 +17,13 @@ export default function PopEditTime(props) {
     const convertedShortTime = parseInt(editShortMin) * 60 + parseInt(editShortSec);
     const convertedLongTime = parseInt(editLongMin) * 60 + parseInt(editLongSec);
     convertedPomodorTime === 0 
-    ? props.valueSetPomodoroSession(22 * 60)
+    ? props.valueSetPomodoroSession(25 * 60)
     : props.valueSetPomodoroSession(convertedPomodorTime);
     convertedShortTime === 0 
-    ? props.valueSetShortSession(4 * 60)
+    ? props.valueSetShortSession(5 * 60)
     : props.valueSetShortSession(convertedShortTime);
     convertedLongTime === 0 
-    ? props.valueSetLongSession(14 * 60)
+    ? props.valueSetLongSession(15 * 60)
     : props.valueSetLongSession(convertedLongTime);
     props.valueSetActiveSession(convertedPomodorTime)
     props.valueSetPopEditTime(false);
