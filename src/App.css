@@ -152,7 +152,6 @@ Nav.js & ClockTImer.js
 }
 
 .btn-pos-active {
-  transform: translateY(110px);
   padding: 0 0px;
   color: var(--primary-red);
 }
@@ -324,24 +323,22 @@ media queries
 
 @media only screen and (min-width: 550px) {
   .btn-pos {
-    transform: translateY(40px);
     padding: 0 50px;
   }
 
   .btn-pos-active {
-    transform: translateY(40px);
     padding: 0 50px;
   }
 }
 
 @media only screen and (max-width: 1055px) {
+
+  /*Padding to 0 because there's a glitch in this size where buttons get all messed up*/
   .btn-pos {
-    transform: translateY(40px);
     padding: 0 0px;
   }
 
   .btn-pos-active {
-    transform: translateY(40px);
     padding: 0 0px;
   }
 
@@ -374,11 +371,11 @@ media queries
   }
 
   .btn-pos {
-    transform: translateY(0px);
+    padding: 0px 50px;
   }
 
   .btn-pos-active {
-    transform: translateY(0px);
+    padding: 0px 50px;
   }
 
   .project-name-position {

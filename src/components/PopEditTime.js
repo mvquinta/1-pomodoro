@@ -1,6 +1,29 @@
 import React from "react";
 import ReactDom from 'react-dom'
 import './styles/ModalPop.css'
+import { motion } from 'framer-motion'
+
+//Animation Variants
+
+const buttonVariants = {
+    hover: {
+        scale: 1.1,
+        //boxShadow: "0px 0px 5px rgba(0,0,0, 0.25)",
+        //borderRadius: 10,
+    },
+    tap: {
+        scale: 0.9,
+    }
+}
+
+const divVariants = {
+  hover: {
+      scale: 1.02,
+      originX: -2,
+      border: '1px solid rgba(242,92,92, 0.75)'
+  }
+}
+
 
 export default function PopEditTime(props) {
   const [editPomodoroMin, setEditPomodoroMin] = React.useState(0)
@@ -36,12 +59,21 @@ export default function PopEditTime(props) {
   return ReactDom.createPortal(
     <>
       <div className='overlayStyles' />
-      <div className='container-EditTime'>
+      <motion.div
+      className='container-EditTime'
+      initial={{ scale: 0, opacity: 0, x: '-52.4%', y: '-50%' }}
+      animate={{ scale: 1, opacity: 1}}
+      transition={{ type: 'spring', duration: 0.4}}
+      >
         <div className='popup-EditTime'>           
             <div className='popInputContainer-EditTime'>
               <h2 className='poph2-EditTime'>Edit Time</h2>            
               <div className='timersContainer-flex'>
-                <div className='timersContainer-box'>
+                <motion.div 
+                className='timersContainer-box'
+                variants={divVariants}
+                whileHover='hover'
+                >
                   <h3>Pomodoro</h3>
                   <div className='timersContainer-innerBox'>
                     <div>
@@ -69,8 +101,11 @@ export default function PopEditTime(props) {
                       />
                     </div>
                   </div>
-                </div>
-                <div className='timersContainer-box'>
+                </motion.div>
+                <motion.div 
+                className='timersContainer-box'
+                variants={divVariants}
+                whileHover='hover'>
                   <h3>Short Break</h3>
                   <div className='timersContainer-innerBox'>
                     <div>
@@ -98,8 +133,11 @@ export default function PopEditTime(props) {
                       />
                     </div>
                   </div>
-                </div>
-                <div className='timersContainer-box'>
+                </motion.div>
+                <motion.div 
+                className='timersContainer-box'
+                variants={divVariants}
+                whileHover='hover'>
                   <h3>Long Break</h3>
                   <div className='timersContainer-innerBox'>
                     <div>
@@ -127,19 +165,31 @@ export default function PopEditTime(props) {
                       />
                     </div>
                   </div>
-                </div>
+                </motion.div>
               </div>
             </div>
           <div className='popButtonsContainer-EditTime'>
-            <button className='popbuttons-EditTime' onClick={handleOkClick}>
+            <motion.button
+            className='popbuttons-EditTime'
+            onClick={handleOkClick}
+            variants={buttonVariants}
+            whileHover='hover'
+            whileTap='tap'
+            >
               OK
-            </button>
-            <button className='popbuttons-EditTime' onClick={handleCancelClick}>
+            </motion.button>
+            <motion.button
+            className='popbuttons-EditTime'
+            onClick={handleCancelClick}
+            variants={buttonVariants}
+            whileHover='hover'
+            whileTap='tap'
+            >
               Cancel
-            </button>
+            </motion.button>
           </div>
         </div>
-      </div>
+      </motion.div>
     </>,
     document.getElementById('portal')
   )

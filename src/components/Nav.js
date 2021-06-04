@@ -1,4 +1,29 @@
 import React from 'react'
+import { motion } from 'framer-motion'
+
+const buttonVariants = {
+    initial: {
+        y: 40,
+    },
+    hover: {
+        scale: 1.1,
+    },
+    tap: {
+        scale: 0.9,
+    }
+}
+
+const buttonPomoVariants = {
+    initial: {
+        y: 0,
+    },
+    hover: {
+        scale: 1.1,
+    },
+    tap: {
+        scale: 0.9,
+    }
+}
 
 export default function Nav(props) {
 
@@ -47,21 +72,33 @@ export default function Nav(props) {
     return(
         <nav>
             <ul>
-                <li><button                
+                <li><motion.button                
                 onClick={handleShortOnClick}
-                className={activeShort ? 'btn-pos-active' : 'btn-pos'}>
+                className={activeShort ? 'btn-pos-active' : 'btn-pos'}
+                variants={buttonVariants}
+                whileHover='hover'
+                whileTap='tap'
+                >
                     Short Break
-                </button></li>
-                <li><button                 
+                </motion.button></li>
+                <li><motion.button                 
                  onClick={handlePomodoroOnClick}
-                 id={activePomodoro ? 'btn-pomodoro-active' : 'btn-pomodoro'}>
+                 id={activePomodoro ? 'btn-pomodoro-active' : 'btn-pomodoro'}
+                 variants={buttonPomoVariants}
+                 whileHover='hover'
+                 whileTap='tap'
+                 >
                      Pomodoro
-                </button></li>
-                <li><button                
+                </motion.button></li>
+                <li><motion.button                
                 onClick={handleLongOnClick}
-                className={activeLong ? 'btn-pos-active' : 'btn-pos'}>
+                className={activeLong ? 'btn-pos-active' : 'btn-pos'}
+                variants={buttonVariants}
+                whileHover='hover'
+                whileTap='tap'
+                >
                     Long Break
-                </button></li>
+                </motion.button></li>
             </ul>
       </nav>
     )

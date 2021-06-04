@@ -11,6 +11,9 @@ const buttonVariants = {
         scale: 1.1,
         //boxShadow: "0px 0px 5px rgba(0,0,0, 0.25)",
         //borderRadius: 10,
+    },
+    tap: {
+        scale: 0.9,
     }
 }
 
@@ -166,26 +169,36 @@ export default function ClockTimer(props) {
                 valueSetLongSession={setLongSession}
                 valueSetActiveSession={setActiveSession}
                 /> : null}
-                <button className='btn-clock-settings' onClick={togglePopEditTime}><IoSettings /></button>
+                <motion.button
+                className='btn-clock-settings'
+                onClick={togglePopEditTime}
+                variants={buttonVariants}
+                whileHover='hover'
+                whileTap='tap'>
+                    <IoSettings />
+                </motion.button>
             </div>
             <IconContext.Provider value={{ color: "#F25C5C", size:"1.8em", className: "global-class-name" }}>
                 <div className='circle-buttons'>
                     <motion.button 
                     onClick={playTrue}
                     variants={buttonVariants}
-                    whileHover='hover'>
+                    whileHover='hover'
+                    whileTap='tap'>
                         <IoPlay />
                     </motion.button>
                     <motion.button
                     onClick={pauseTrue}
                     variants={buttonVariants}
-                    whileHover='hover'>
+                    whileHover='hover'
+                    whileTap='tap'>
                         <IoStop />
                     </motion.button>
                     <motion.button
                     onClick={restartTimer}
                     variants={buttonVariants}
-                    whileHover='hover'>
+                    whileHover='hover'
+                    whileTap='tap'>
                         <IoRefresh />
                     </motion.button>
                 </div>
