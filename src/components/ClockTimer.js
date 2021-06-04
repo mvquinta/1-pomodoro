@@ -166,7 +166,7 @@ export default function ClockTimer(props) {
                 valueSetLongSession={setLongSession}
                 valueSetActiveSession={setActiveSession}
                 /> : null}
-                <button onClick={togglePopEditTime}><IoSettings /></button>
+                <button className='btn-clock-settings' onClick={togglePopEditTime}><IoSettings /></button>
             </div>
             <IconContext.Provider value={{ color: "#F25C5C", size:"1.8em", className: "global-class-name" }}>
                 <div className='circle-buttons'>

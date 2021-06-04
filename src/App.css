@@ -138,19 +138,36 @@ Nav.js & ClockTImer.js
 
 .wrapper-clock-timer button {
   background: none;
-  border: none;
-  color: var(--primary-bg-color-light);
+  border: none;  
   font-size: 1.4rem;
   cursor: pointer;
 }
 
-.wrapper-clock-timer button:hover {
+/*.wrapper-clock-timer button:hover {
+  color: var(--primary-red);
+}*/
+
+.btn-pos {
+  color: var(--primary-bg-color-light);
+}
+
+.btn-pos-active {
+  transform: translateY(110px);
+  padding: 0 0px;
   color: var(--primary-red);
 }
 
 #btn-pomodoro {
-  font-size: 2rem;;
+  font-size: 2rem;
+  color: var(--primary-bg-color-light);
 }
+
+#btn-pomodoro-active {
+  font-size: 2rem;
+  color: var(--primary-red);
+}
+
+
 
 /*ClockTimer*/
 .div-clock-timer {
@@ -204,6 +221,14 @@ Nav.js & ClockTImer.js
   padding: 0 10px;
 }
 
+.btn-clock-settings {
+  color: var(--primary-bg-color-light);
+}
+
+
+.btn-clock-settings:hover {
+  color: var(--primary-red);
+}
 /*****
 Todos.js
 ******/
@@ -302,10 +327,20 @@ media queries
     transform: translateY(40px);
     padding: 0 50px;
   }
+
+  .btn-pos-active {
+    transform: translateY(40px);
+    padding: 0 50px;
+  }
 }
 
 @media only screen and (max-width: 1055px) {
   .btn-pos {
+    transform: translateY(40px);
+    padding: 0 0px;
+  }
+
+  .btn-pos-active {
     transform: translateY(40px);
     padding: 0 0px;
   }
@@ -339,6 +374,10 @@ media queries
   }
 
   .btn-pos {
+    transform: translateY(0px);
+  }
+
+  .btn-pos-active {
     transform: translateY(0px);
   }
 
