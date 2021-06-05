@@ -9,8 +9,6 @@ import { motion } from 'framer-motion'
 const buttonVariants = {
     hover: {
         scale: 1.1,
-        //boxShadow: "0px 0px 5px rgba(0,0,0, 0.25)",
-        //borderRadius: 10,
     },
     tap: {
         scale: 0.9,

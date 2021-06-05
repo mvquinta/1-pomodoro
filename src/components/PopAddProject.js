@@ -1,6 +1,35 @@
 import React from 'react'
 import ReactDom from 'react-dom'
 import './styles/ModalPop.css'
+import { motion } from 'framer-motion'
+
+//Animation Variants
+
+const editAddContainer = {
+    initial: {
+      scale: 0,
+      opacity: 0,
+      x: '-50%',
+      y: '-50%',
+    },
+    animate: {
+      scale: 1,
+      opacity: 1,
+      transition: {
+        type: 'spring',
+        duration: 0.4,
+      }
+    }
+  }
+
+  const buttonVariants = {
+    hover: {
+        scale: 1.1,
+    },
+    tap: {
+        scale: 0.9,
+    }
+}
 
 export default function PopAddProject(props) {
 
@@ -22,7 +51,12 @@ export default function PopAddProject(props) {
     return ReactDom.createPortal(
         <>
             <div className='overlayStyles' />
-            <div className='container-EditAddTodo'>
+            <motion.div 
+            className='container-EditAddTodo'
+            variants={editAddContainer}
+            initial='initial'
+            animate='animate'
+            >
                 <div className='popupEdit-EditAddTodo'>
                     <h2>Add Project</h2>
                      <div>
@@ -34,15 +68,25 @@ export default function PopAddProject(props) {
                         />
                     </div>
                     <div className='popButtonsContainer-EditAddTodo'>
-                        <button className='popbuttons-EditAddTodo' onClick={handleOkClick}>
+                        <motion.button 
+                        className='popbuttons-EditAddTodo' 
+                        onClick={handleOkClick}
+                        variants={buttonVariants}
+                        whileHover='hover'
+                        whileTap='tap'>
                         OK
-                        </button>
-                        <button className='popbuttons-EditAddTodo' onClick={handleCancelClick}>
+                        </motion.button>
+                        <motion.button
+                        className='popbuttons-EditAddTodo'
+                        onClick={handleCancelClick}
+                        variants={buttonVariants}
+                        whileHover='hover'
+                        whileTap='tap'>
                         Cancel
-                        </button>
+                        </motion.button>
                     </div>
                 </div>
-            </div>
+            </motion.div>
         </>,
         document.getElementById('portal')
     )

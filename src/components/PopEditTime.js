@@ -3,20 +3,37 @@ import ReactDom from 'react-dom'
 import './styles/ModalPop.css'
 import { motion } from 'framer-motion'
 
+
+
 //Animation Variants
+
+const editTimeContainer = {
+  initial: {
+    scale: 0,
+    opacity: 0,
+    x: '-52.4%',
+    y: '-50%',
+  },
+  animate: {
+    scale: 1,
+    opacity: 1,
+    transition: {
+      type: 'spring',
+      duration: 0.4,
+    }
+  }
+}
 
 const buttonVariants = {
     hover: {
         scale: 1.1,
-        //boxShadow: "0px 0px 5px rgba(0,0,0, 0.25)",
-        //borderRadius: 10,
     },
     tap: {
         scale: 0.9,
     }
 }
 
-const divVariants = {
+const timersContainerVariants = {
   hover: {
       scale: 1.02,
       originX: -2,
@@ -61,9 +78,9 @@ export default function PopEditTime(props) {
       <div className='overlayStyles' />
       <motion.div
       className='container-EditTime'
-      initial={{ scale: 0, opacity: 0, x: '-52.4%', y: '-50%' }}
-      animate={{ scale: 1, opacity: 1}}
-      transition={{ type: 'spring', duration: 0.4}}
+      variants={editTimeContainer}
+      initial='initial'
+      animate='animate'
       >
         <div className='popup-EditTime'>           
             <div className='popInputContainer-EditTime'>
@@ -71,7 +88,7 @@ export default function PopEditTime(props) {
               <div className='timersContainer-flex'>
                 <motion.div 
                 className='timersContainer-box'
-                variants={divVariants}
+                variants={timersContainerVariants}
                 whileHover='hover'
                 >
                   <h3>Pomodoro</h3>
@@ -104,7 +121,7 @@ export default function PopEditTime(props) {
                 </motion.div>
                 <motion.div 
                 className='timersContainer-box'
-                variants={divVariants}
+                variants={timersContainerVariants}
                 whileHover='hover'>
                   <h3>Short Break</h3>
                   <div className='timersContainer-innerBox'>
@@ -136,7 +153,7 @@ export default function PopEditTime(props) {
                 </motion.div>
                 <motion.div 
                 className='timersContainer-box'
-                variants={divVariants}
+                variants={timersContainerVariants}
                 whileHover='hover'>
                   <h3>Long Break</h3>
                   <div className='timersContainer-innerBox'>
