@@ -23,7 +23,7 @@ const styles = {
 
 //this Hover component can be used everywhere I want to have a small popup window with some hint for the user.
 //when called, I just have to pass in the text I want to show
-//is being used in ClockTimer.js
+//NOT BEING USED AT THE MOMENT
 
 export default function Hovertip(props) {
     const [hovering, setHovering] = React.useState(false)

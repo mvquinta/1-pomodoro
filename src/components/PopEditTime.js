@@ -50,8 +50,8 @@ export default function PopEditTime(props) {
   const [editLongMin, setEditLongMin] = React.useState(0)
   const [editLongSec, setEditLongSec] = React.useState(0)
 
-  //reads the input fields and converts it to seconds. These values are then used to update setStates of sessions.
-  //I also set activeSession for new pomodoroTime as default and to render-update the ui
+  //reads the input fields and converts it to seconds. Values are then used to update setStates of sessions.
+  //Set activeSession for new pomodoroTime as default and also to render-update the ui
   function handleOkClick() {
     const convertedPomodorTime = parseInt(editPomodoroMin) * 60 + parseInt(editPomodoroSec);
     const convertedShortTime = parseInt(editShortMin) * 60 + parseInt(editShortSec);

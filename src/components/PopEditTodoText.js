@@ -36,7 +36,7 @@ export default function PopEditTodoText(props) {
     const [newTodoText, setNewTodoText] = React.useState('')
 
     function handleOkClick (id) {
-        //based on the passed id, spread all todos that exist and to the one matching the id add the new input from current state        
+        //based on the passed id, spread all todos that exist. To the one matching the id, add a new input to current state        
         const updateTodos = [...props.valueTodos].map((todo) => {
             if(todo.id === id) {
                 todo.text = newTodoText
@@ -45,11 +45,11 @@ export default function PopEditTodoText(props) {
         })
         //then, setTodos state for this new create array of objects "todos"
         props.valueSetTodos(updateTodos)
-        //sets toggle to false closing the window
+        //Toggle to false to close window
         props.valueSetToggleEditTodo(false)
     }
 
-    //sets toggle to false closing the window
+    //Toggle to false to close window
     function handleCancelClick() {
         props.valueSetToggleEditTodo(false)
     }

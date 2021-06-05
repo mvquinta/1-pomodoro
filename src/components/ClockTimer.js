@@ -16,42 +16,41 @@ const buttonVariants = {
 }
 
 export default function ClockTimer(props) {
-    //This state will be used in the app to interpret and to know what's the session that user as clicked.
+    //State that identifies what session user has clicked.
     //I could use props.valueType directly but I translated it this way for a cleaner code
     const [sessionID, setSessionID] = useState(0)
-    //this state will change and receive whatever are the values stored in pomodoroSession, shortSession or longSession
-    //I'll use this state to render and implement all other features (play, stop, etc) instead of dealing with 3 states at the same time
+    
+    //State used to render and implement all other features (play, stop, etc)
     const [activeSession, setActiveSession] = useState(25 * 60) 
  
-    //As my useState inital values, I call an arrow function that checks if there's some localStorage data.
-    //If this is true, load localStorage data, if not, load default time values
+    //For useState inital values: function that checks if there's some localStorage data.
+    //If true, load localStorage data, if not, load default time values
     const [pomodoroSession, setPomodoroSession] = useState(() => {
         const localPomodoroTime = localStorage.getItem('pomodoroTime')
         return localPomodoroTime ? JSON.parse(localPomodoroTime) : (25 * 60)
-    }) //initialized with default values
+    }) 
     const [shortSession, setShortSession] = useState(() => {
         const localShortTime = localStorage.getItem('shortTime')
         return localShortTime ? JSON.parse(localShortTime) : (5 * 60)
-    }) //initialized with default values
+    }) 
     const [longSession, setLongSession] = useState(() => {
         const localLongTime = localStorage.getItem('longTime')
         return localLongTime ? JSON.parse(localLongTime) : (15 * 60)
-    }) //initialized with default values
+    }) 
 
     const [play, setPlay] = useState(false) //state to toggle play timer
     const [pause, setPause] = useState(true) //state to toggle pause timer
     const [popEditTime, setPopEditTime] = useState(false) //state to toggle edit time popup window
     const id = useRef(null) //state to be used in window.setInterval
 
-    //Audio const and functions to be used when time is up and play, stop and restart are clicked
-    const audioBell = new Audio('http://soundbible.com/grab.php?id=2218&type=mp3') //2044 - tick 2218 - service bell 
-    const audioTick = new Audio('http://soundbible.com/grab.php?id=2044&type=mp3') //2044 - tick 2218 - service bell 
-    const audioWaterDroplet = new Audio('http://soundbible.com/grab.php?id=378&type=mp3') //2044 - tick 2218 - service bell - 378 - waterr droplet
+    //Audios for when time is up, play, stop and restart are clicked
+    const audioBell = new Audio('http://soundbible.com/grab.php?id=2218&type=mp3')
+    const audioTick = new Audio('http://soundbible.com/grab.php?id=2044&type=mp3')
+    const audioWaterDroplet = new Audio('http://soundbible.com/grab.php?id=378&type=mp3')
 
     function playAudioBell() { audioBell.play() }
     function playAudioTick() { audioTick.play() }
-    function playAudioWaterDroplet() {audioWaterDroplet.play()}
-    //function pauseAudioBell() { audioBell.pause() }
+    function playAudioWaterDroplet() {audioWaterDroplet.play()}   
 
     //save time session to localStorage
     useEffect(() => {
@@ -80,8 +79,7 @@ export default function ClockTimer(props) {
     }, [props.valueType])
 
 
-    //setInterval for when play is active to count the timer down 1 second each second
-    //when pause is clicked set it to true. clearInterval method stops setInterval
+    //setInterval, counter for when play is true, clearInterval when pause is true
     useEffect(() => {
         if (play) {
             id.current = window.setInterval(() => {
@@ -92,7 +90,7 @@ export default function ClockTimer(props) {
         }
     }, [play, pause])
 
-    //when session timer gets to 0 we stop timer by changing state of pause and play. If not it would go to negative values
+    //when session timer gets to 0 timer is stopped by changing state of pause and play. If not it would go to negative values
     //then we reset activeSession based on the sessionID
     useEffect(() => {
         if(activeSession === 0) {

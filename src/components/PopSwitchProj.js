@@ -43,7 +43,7 @@ const projBoxVariants = {
 export default function PopSwitchProj(props) {
 
     //switches projects by reading the innertext of the clicked button and making it the active project
-    //then sets toggle to false closing the window
+    //Sets toggle to false closing the window
     function handleOkClick(event) {
         props.valueSetActiveProjectName(event.target.innerText)
         props.valueSetToggleSwitchProj(false)

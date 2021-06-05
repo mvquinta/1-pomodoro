@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { IoPencil, IoTrash, IoSwapHorizontal, IoSquareOutline, IoCheckbox, IoAdd} from 'react-icons/io5' 
-import { IconContext } from 'react-icons'
-import Hovertip from './Hovertip'
+import { IoPencil, IoTrash, IoSwapHorizontal, IoSquareOutline, IoCheckbox, IoAdd} from 'react-icons/io5'
 import PopAddProject from './PopAddProject'
 import PopSwitchProj from './PopSwitchProj'
 import PopEditTodoText from './PopEditTodoText'
