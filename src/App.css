@@ -292,6 +292,8 @@ Todos.js
   cursor: pointer;
   padding: 0 5px;
   transform: translateY(5px);
+  color: var(--primary-bg-color-light);
+  font-size: 1.1rem;
 }
 
 .todos-addTask {

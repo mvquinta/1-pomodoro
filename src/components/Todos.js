@@ -10,11 +10,21 @@ import { motion } from 'framer-motion'
 
 //Animation Variants
 
-const buttonVariants = {
+const liTodosVariants = {
     hover: {
         scale: 1.02,
         originX: 0,
         backgroundColor: 'rgba(64,64,64,0.5)'
+    }
+}
+
+const buttonVariants = {
+    hover: {
+        scale: 1.1,
+        color: 'rgb(242, 92, 92)',
+    },
+    tap: {
+        scale: 0.9,
     }
 }
 
@@ -127,13 +137,23 @@ export default function Todos() {
                         valueSetActiveProjectName={setActiveProjectName}
                         valueSetToggleSwitchProj={setToggleSwitchProj}
                          /> : null}
-                        <button><Hovertip text='Add New Project'><IoAdd onClick={togglePopProjectName} /></Hovertip></button>
-                        <button><Hovertip text='Switch Project'><IoSwapHorizontal onClick={togglePopSwitchProj} /></Hovertip></button>
+                        <motion.button
+                        variants={buttonVariants}
+                        whileHover='hover'
+                        whileTap='tap'>
+                            <IoAdd onClick={togglePopProjectName} />
+                        </motion.button>
+                        <motion.button
+                        variants={buttonVariants}
+                        whileHover='hover'
+                        whileTap='tap'>
+                            <IoSwapHorizontal onClick={togglePopSwitchProj} />
+                        </motion.button>
                     </div>
                 </div>                
             </div>
             
-            <IconContext.Provider value={{ color: "#F2E7DC", size:"1.3em", className: "global-class-name" }}>
+            
             <div className='div-project-todos'>
                 {toggleEditTodo ? <PopEditTodoText
                                 valueTodos={todos}
@@ -145,15 +165,33 @@ export default function Todos() {
                     {todos.filter((todo) => todo.project === activeProjectName).map(({ text, id, active }) => (
                         <motion.li
                         key={id} id={id}
-                        variants={buttonVariants}
+                        variants={liTodosVariants}
                         whileHover='hover'>
                             <div>
-                                <button onClick={() => activeTodo(id)}> {active ? <IoSquareOutline /> : <IoCheckbox /> }</button>
+                                <motion.button 
+                                onClick={() => activeTodo(id)}                                
+                                variants={buttonVariants}
+                                whileHover='hover'
+                                whileTap='tap'> 
+                                    {active ? <IoSquareOutline /> : <IoCheckbox /> }
+                                </motion.button>
                                 {active ? <span>{text}</span> : <span style={{textDecorationLine: 'line-through', opacity:'0.5'}}>{text}</span>}
                             </div>
                             <div>
-                                <button onClick={funsForEditTask}><IoPencil /> </button>
-                                <button onClick={() => removeTodo(id)}> <IoTrash /></button>                                
+                                <motion.button 
+                                onClick={funsForEditTask}                                
+                                variants={buttonVariants}
+                                whileHover='hover'
+                                whileTap='tap'>
+                                    <IoPencil />
+                                </motion.button>
+                                <motion.button 
+                                onClick={() => removeTodo(id)}
+                                variants={buttonVariants}                               
+                                whileHover='hover'
+                                whileTap='tap'>
+                                    <IoTrash />
+                                </motion.button>                                
                             </div>
                         </motion.li>
                     ))}
@@ -165,11 +203,14 @@ export default function Todos() {
                     onChange={(e) => setInput(e.target.value)}
                     placeholder='New todo'
                     />
-                    <button onClick={handleSubmit}>Add task</button>
+                    <motion.button 
+                    onClick={handleSubmit}                        
+                    variants={buttonVariants}
+                    whileHover='hover'
+                    whileTap='tap'>Add task</motion.button>
                 </div>
 
             </div>
-            </IconContext.Provider>
       </div>
     )
 }
