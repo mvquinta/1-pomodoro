@@ -9,9 +9,11 @@ import { motion } from 'framer-motion'
 
 const editTimeContainer = {
   initial: {
+    origin: 0,
+    origin: 0,
     scale: 0,
     opacity: 0,
-    x: '-52.4%',
+    x: '-50%',
     y: '-50%',
   },
   animate: {
@@ -26,6 +28,8 @@ const editTimeContainer = {
 
 const buttonVariants = {
     hover: {
+        origin: 0,
+        origin: 0,
         scale: 1.1,
     },
     tap: {
@@ -35,9 +39,7 @@ const buttonVariants = {
 
 const timersContainerVariants = {
   hover: {
-      scale: 1.02,
-      originX: -2,
-      border: '1px solid rgba(242,92,92, 0.75)'
+    backgroundColor: 'rgba(217, 217, 217, 0.5)',    
   }
 }
 
@@ -188,21 +190,21 @@ export default function PopEditTime(props) {
           <div className='popButtonsContainer-EditTime'>
             <motion.button
             className='popbuttons-EditTime'
-            onClick={handleOkClick}
-            variants={buttonVariants}
-            whileHover='hover'
-            whileTap='tap'
-            >
-              OK
-            </motion.button>
-            <motion.button
-            className='popbuttons-EditTime'
             onClick={handleCancelClick}
             variants={buttonVariants}
             whileHover='hover'
             whileTap='tap'
             >
               Cancel
+            </motion.button>
+            <motion.button
+            className='popbuttons-EditTime'
+            onClick={handleOkClick}
+            variants={buttonVariants}
+            whileHover='hover'
+            whileTap='tap'
+            >
+              OK
             </motion.button>
           </div>
         </div>

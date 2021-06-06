@@ -5,9 +5,9 @@ PopEditTime.js Styles
 .container-EditTime {
   position: fixed;
   z-index: 100;
-  top: 45%;
-  left: 68%;
-  transform: translate(-52.4%, -50%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 } 
 
 .popup-EditTime {
@@ -113,8 +113,8 @@ PopSwitchProj.js
 .container-SwitchProj {
   position: fixed;
   z-index: 100;
-  top: 40%;
-  left: 18%;
+  top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%);
 } 
 
@@ -156,12 +156,13 @@ PopSwitchProj.js
     padding: 5px 0 5px 5px;
     font-size: 1.2rem;
     text-align: left;
+    cursor: pointer; 
   }
 
   .buttonProj-box button {
     border: none;
     background: transparent;
-    color: var(--primary-bg-color-light);
+    color: var(--primary-bg-color-light);    
   }
 
   .popbuttons-SwitchProj {
@@ -210,8 +211,8 @@ Both have same styles
 .container-EditAddTodo {
   position: fixed;
   z-index: 100;
-  top: 40%;
-  left: 18%;
+  top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%);
 }
 

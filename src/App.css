@@ -334,35 +334,6 @@ media queries
 }
 
 @media only screen and (max-width: 1055px) {
-
-  /*Padding to 0 because there's a glitch in this size where buttons get all messed up*/
-  .btn-pos {
-    padding: 0 0px;
-  }
-
-  .btn-pos-active {
-    padding: 0 0px;
-  }
-
-  .todos-list li {
-    flex-direction: column;
-    font-size: 0.9rem;
-  }
-
-  .todos-list button {
-    padding: 5px 5px 0 0;
-  }
-
-  .todos-addTask {
-    flex-direction: column;
-  }
-
-  .todos-addTask button {
-    padding-top: 15px;
-  }
-}
-
-@media only screen and (max-width: 980px) {
   .wrapper-clock-timer nav ul {
     flex-flow: column;
     padding-bottom: 15px;
@@ -372,28 +343,29 @@ media queries
     padding: 1rem 0 0.5rem 0;
   }
 
+  .features-wrapper {
+    flex-direction: column;
+  }
+
+  .wrapper-clock-timer {
+    width: 100%;
+  }
+
+  .wrapper-todos {
+    width: 100%;
+  }
+
+  /*Padding to 0 because there's a glitch in this size where buttons get all messed up*/
   .btn-pos {
-    padding: 0px 50px;
+    padding: 0 0px;
   }
 
   .btn-pos-active {
-    padding: 0px 50px;
-  }
-
-  .project-name-position {
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  .project-name-position button {
-    margin-top: 10px;
-    margin-right: 0px;
-    padding-left: 10px;
-    
+    padding: 0 0px;
   }
 }
 
-@media only screen and (max-width: 735px) {
+@media only screen and (max-width: 745px) {
 
 /*****
 TittleBar.js
@@ -428,18 +400,6 @@ TittleBar.js
 }
 
 @media only screen and (max-width: 600px) {
-  .features-wrapper {
-    flex-direction: column;
-  }
-
-  .wrapper-clock-timer {
-    width: 100%;
-  }
-
-  .wrapper-todos {
-    width: 100%;
-  }
-
   .circle-ext {
     width: 250px;
     height: 250px;;

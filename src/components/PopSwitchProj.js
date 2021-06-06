@@ -33,9 +33,7 @@ const buttonVariants = {
 
 const projBoxVariants = {
   hover: {
-      scale: 1.02,
-      originX: -2,
-      border: '1px solid rgba(242,92,92, 0.75)'
+    backgroundColor: 'rgba(217, 217, 217, 0.5)',
   }
 }
 
@@ -73,8 +71,9 @@ export default function PopSwitchProj(props) {
                             variants={projBoxVariants}
                             whileHover='hover'
                             whileTap='tap'
+                            onClick={handleOkClick}
                             >
-                              <button className='popButtonsContainer-SwitchProj' onClick={handleOkClick}>{item}</button>
+                              <button>{item}</button>
                             </motion.div>
                         </li>
                         ))} 

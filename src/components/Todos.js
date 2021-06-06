@@ -10,8 +10,6 @@ import { motion } from 'framer-motion'
 
 const liTodosVariants = {
     hover: {
-        scale: 1.02,
-        originX: 0,
         backgroundColor: 'rgba(64,64,64,0.5)'
     }
 }

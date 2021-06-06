@@ -97,13 +97,19 @@ export default function ClockTimer(props) {
             playAudioBell()
             setPause(true)
             setPlay(false)
-            sessionID === 0 
-            ? setActiveSession(pomodoroSession)
-            : sessionID === 1
-            ? setActiveSession(shortSession)
-            : sessionID === 2
-            ? setActiveSession(longSession)
-            : setActiveSession(25 * 60)
+            switch(sessionID) {
+                case 0:
+                    setActiveSession(pomodoroSession)
+                    break
+                case 1:
+                    setActiveSession(shortSession)
+                    break
+                case 2:
+                    setActiveSession(longSession)
+                    break
+                default:
+                    setActiveSession(25 * 60)
+            }
         }
     },[activeSession])
 
@@ -133,13 +139,19 @@ export default function ClockTimer(props) {
         playAudioWaterDroplet()
         setPlay(false)
         setPause(true)
-        sessionID === 0 
-        ? setActiveSession(pomodoroSession)
-        : sessionID === 1
-        ? setActiveSession(shortSession)
-        : sessionID === 2
-        ? setActiveSession(longSession)
-        : setActiveSession(25 * 60) //if by any chance sessionID is not found, we reset activeSession to defaul value
+        switch(sessionID) {
+            case 0:
+                setActiveSession(pomodoroSession)
+                break
+            case 1:
+                setActiveSession(shortSession)
+                break
+            case 2:
+                setActiveSession(longSession)
+                break
+            default:
+                setActiveSession(25 * 60)
+        }
     }
 
     function togglePopEditTime() {
@@ -176,7 +188,8 @@ export default function ClockTimer(props) {
             </div>
             <IconContext.Provider value={{ color: "#F25C5C", size:"1.8em", className: "global-class-name" }}>
                 <div className='circle-buttons'>
-                    <motion.button 
+                    <motion.button
+                    disabled={play}
                     onClick={playTrue}
                     variants={buttonVariants}
                     whileHover='hover'
@@ -184,6 +197,7 @@ export default function ClockTimer(props) {
                         <IoPlay />
                     </motion.button>
                     <motion.button
+                    disabled={pause}
                     onClick={pauseTrue}
                     variants={buttonVariants}
                     whileHover='hover'

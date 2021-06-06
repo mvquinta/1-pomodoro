@@ -68,14 +68,6 @@ export default function PopAddProject(props) {
                         />
                     </div>
                     <div className='popButtonsContainer-EditAddTodo'>
-                        <motion.button 
-                        className='popbuttons-EditAddTodo' 
-                        onClick={handleOkClick}
-                        variants={buttonVariants}
-                        whileHover='hover'
-                        whileTap='tap'>
-                        OK
-                        </motion.button>
                         <motion.button
                         className='popbuttons-EditAddTodo'
                         onClick={handleCancelClick}
@@ -83,6 +75,14 @@ export default function PopAddProject(props) {
                         whileHover='hover'
                         whileTap='tap'>
                         Cancel
+                        </motion.button>
+                        <motion.button 
+                        className='popbuttons-EditAddTodo' 
+                        onClick={handleOkClick}
+                        variants={buttonVariants}
+                        whileHover='hover'
+                        whileTap='tap'>
+                        OK
                         </motion.button>
                     </div>
                 </div>
