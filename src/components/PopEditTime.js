@@ -39,7 +39,7 @@ const buttonVariants = {
 
 const timersContainerVariants = {
   hover: {
-    backgroundColor: 'rgba(217, 217, 217, 0.5)',    
+       
   }
 }
 
@@ -71,9 +71,18 @@ export default function PopEditTime(props) {
     props.valueSetPopEditTime(false);
   }
 
+    //if press enter add project
+    function handleKeyPress(event) {
+      if (event.charCode === 13) { //could also be code === "Enter"
+          handleOkClick()
+      }
+  } 
+
   function handleCancelClick() {
     props.valueSetPopEditTime(false);
   }
+
+ 
 
   return ReactDom.createPortal(
     <>
@@ -105,9 +114,11 @@ export default function PopEditTime(props) {
                   <div className='timersContainer-innerBox'>
                     <div>
                       <input
+                      autoFocus={true}
                       type="number"
                       placeholder="25"
                       onChange={(e) => setEditPomodoroMin(e.target.value)}
+                      onKeyPress={(e) => handleKeyPress(e)}
                       className='popInput-EditTime'
                       />
                     </div>
@@ -115,6 +126,7 @@ export default function PopEditTime(props) {
                       <input
                       type="number"
                       onChange={(e) => setEditPomodoroSec(e.target.value)}
+                      onKeyPress={(e) => handleKeyPress(e)}
                       placeholder="00"
                       className='popInput-EditTime'
                       />
@@ -139,6 +151,7 @@ export default function PopEditTime(props) {
                       <input
                       type="number"
                       onChange={(e) => setEditShortMin(e.target.value)}
+                      onKeyPress={(e) => handleKeyPress(e)}
                       placeholder="5"
                       className='popInput-EditTime'
                       />
@@ -147,6 +160,7 @@ export default function PopEditTime(props) {
                       <input
                       type="number"
                       onChange={(e) => setEditShortSec(e.target.value)}
+                      onKeyPress={(e) => handleKeyPress(e)}
                       placeholder="00"
                       className='popInput-EditTime'
                       />
@@ -171,6 +185,7 @@ export default function PopEditTime(props) {
                       <input
                       type="number"
                       onChange={(e) => setEditLongMin(e.target.value)}
+                      onKeyPress={(e) => handleKeyPress(e)}
                       placeholder="15"
                       className='popInput-EditTime'
                       />
@@ -179,6 +194,7 @@ export default function PopEditTime(props) {
                       <input
                       type="number"
                       onChange={(e) => setEditLongSec(e.target.value)}
+                      onKeyPress={(e) => handleKeyPress(e)}
                       placeholder="00"
                       className='popInput-EditTime'
                       />

@@ -43,6 +43,13 @@ export default function PopAddProject(props) {
         props.valueSetPopProjectName(false)
     }
 
+    //if press enter add project
+    function handleKeyPress(event) {
+        if (event.charCode === 13) { //could also be code === "Enter"
+            handleOkClick()
+        }
+    }
+
     //sets toggle to false closing the window
     function handleCancelClick() {
         props.valueSetPopProjectName(false)
@@ -61,9 +68,11 @@ export default function PopAddProject(props) {
                     <h2>Add Project</h2>
                      <div>
                         <input
+                        autoFocus={true}
                         type="text"
                         placeholder='New Project Name'
                         onChange={(e) => setNewProjectName(e.target.value)}
+                        onKeyPress={(e) => handleKeyPress(e)}
                         className='popInput-EditAddTodo'
                         />
                     </div>

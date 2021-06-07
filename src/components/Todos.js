@@ -61,13 +61,25 @@ export default function Todos() {
     //concat() method merges existing arrays into a new one.
     //setInput('') resets/clears the form
     const handleSubmit = () => {
-        setTodos((todos) => todos.concat({
-            project: activeProjectName,
-            text: input,
-            id: generateId(),
-            active: true,
-        }))
-        setInput('')
+        if(input !== '') {
+            setTodos((todos) => todos.concat({
+                project: activeProjectName,
+                text: input,
+                id: generateId(),
+                active: true,
+            }))
+            setInput('')
+        } else {
+            alert('No New Todo was found. Please review your form.')
+        }
+
+    }
+
+    //if press enter submit new todo
+    function handleKeyPress(event) {
+        if (event.charCode === 13) { //could also be code === "Enter"
+            handleSubmit()
+        }
     }
 
     //removeTodo, filters all todos by id and creates a new array with all todos that DO NOT match the passed id
@@ -112,9 +124,24 @@ export default function Todos() {
         setStateId(id)
     }
 
+    function getTextFromTodoToEdit(stateId) {
+        console.log(stateId)
+        let todoTextValue = ''
+        todos.map((todo) => {
+            if(todo.id === stateId) {
+                todoTextValue = todo.text
+            }            
+        })
+        console.log(todoTextValue)
+        console.log('cool')
+        //setTodoTextValue(todoTextValue)
+    }
+
+
     //Since both these functions are meant to be executed, instead of having them inline, I grouped them both in one function
     function funsForEditTask(event) {
         getIdFromTodoToEdit(event)
+        getTextFromTodoToEdit(stateId)
         togglePopEditTodo()
     }
 
@@ -197,6 +224,7 @@ export default function Todos() {
                     type='text'
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
+                    onKeyPress={(e) => handleKeyPress(e)}
                     placeholder='New todo'
                     />
                     <motion.button 

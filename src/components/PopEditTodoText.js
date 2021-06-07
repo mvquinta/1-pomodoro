@@ -34,6 +34,7 @@ const editAddContainer = {
 export default function PopEditTodoText(props) {
 
     const [newTodoText, setNewTodoText] = React.useState('')
+    const [todoTextValue, setTodoTextValue] = React.useState('temp')
 
     function handleOkClick (id) {
         //based on the passed id, spread all todos that exist. To the one matching the id, add a new input to current state        
@@ -47,6 +48,23 @@ export default function PopEditTodoText(props) {
         props.valueSetTodos(updateTodos)
         //Toggle to false to close window
         props.valueSetToggleEditTodo(false)
+    }
+
+    /*function getTodoTextValue(id) {
+        const todoTextValue = [...props.valueTodos].map((todo) => {
+            if(todo.id === id) {
+                return todo.text
+            }            
+        })
+        console.log(todoTextValue)
+        setTodoTextValue(todoTextValue)
+    }*/
+
+    //if press enter submit todo edition
+    function handleKeyPress(event) {
+        if (event.charCode === 13) { //could also be code === "Enter"
+            handleOkClick(props.valueId)
+        }
     }
 
     //Toggle to false to close window
@@ -67,9 +85,11 @@ export default function PopEditTodoText(props) {
                     <h2>Edit Todo</h2>
                         <div>
                             <input
+                            autoFocus={true}
                             type="text"
-                            placeholder='Edit Task'
+                            placeholder={todoTextValue}
                             onChange={(e) => setNewTodoText(e.target.value)}
+                            onKeyPress={(e) => handleKeyPress(e)}
                             className='popInput-EditAddTodo'
                             />
                         </div>
@@ -83,7 +103,7 @@ export default function PopEditTodoText(props) {
                         Cancel
                         </motion.button>
                         <motion.button 
-                        className='popbuttons-EditAddTodo' 
+                        className='popbuttons-EditAddTodo'
                         onClick={() => handleOkClick(props.valueId)}                        
                         variants={buttonVariants}
                         whileHover='hover'
