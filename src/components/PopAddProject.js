@@ -31,7 +31,7 @@ const editAddContainer = {
     }
 }
 
-export default function PopAddProject(props) {
+export default function PopAddProject({ valueSetActiveProjectName, valueSetPopProjectName }) {
 
     const [newProjectName, setNewProjectName] = React.useState('')
 
@@ -39,8 +39,8 @@ export default function PopAddProject(props) {
     //Used as an argument to make it the new active project and, in consequence, creating a new project.
     //toggle to false to close window
     function handleOkClick () {
-        props.valueSetActiveProjectName(newProjectName)
-        props.valueSetPopProjectName(false)
+        valueSetActiveProjectName(newProjectName)
+        valueSetPopProjectName(false)
     }
 
     //if press enter add project
@@ -52,7 +52,7 @@ export default function PopAddProject(props) {
 
     //sets toggle to false closing the window
     function handleCancelClick() {
-        props.valueSetPopProjectName(false)
+        valueSetPopProjectName(false)
     }
     
     return ReactDom.createPortal(

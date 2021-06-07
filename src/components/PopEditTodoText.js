@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState }from 'react'
 import ReactDom from 'react-dom'
 import './styles/ModalPop.css'
 import { motion } from 'framer-motion'
@@ -31,44 +31,34 @@ const editAddContainer = {
     }
 }
 
-export default function PopEditTodoText(props) {
+export default function PopEditTodoText({ valueTodos, valueSetTodos, valueSetToggleEditTodo, valueId, valueTodoText }) {
 
-    const [newTodoText, setNewTodoText] = React.useState('')
+    const [newTodoText, setNewTodoText] = useState(valueTodoText)
 
     function handleOkClick (id) {
         //based on the passed id, spread all todos that exist. To the one matching the id, add a new input to current state        
-        const updateTodos = [...props.valueTodos].map((todo) => {
+        const updateTodos = [...valueTodos].map((todo) => {
             if(todo.id === id) {
                 todo.text = newTodoText
             }
             return todo
         })
         //then, setTodos state for this new create array of objects "todos"
-        props.valueSetTodos(updateTodos)
+        valueSetTodos(updateTodos)
         //Toggle to false to close window
-        props.valueSetToggleEditTodo(false)
+        valueSetToggleEditTodo(false)
     }
-
-    /*function getTodoTextValue(id) {
-        const todoTextValue = [...props.valueTodos].map((todo) => {
-            if(todo.id === id) {
-                return todo.text
-            }            
-        })
-        console.log(todoTextValue)
-        setTodoTextValue(todoTextValue)
-    }*/
-
+    
     //if press enter submit todo edition
     function handleKeyPress(event) {
         if (event.charCode === 13) { //could also be code === "Enter"
-            handleOkClick(props.valueId)
+            handleOkClick(valueId)
         }
     }
 
     //Toggle to false to close window
     function handleCancelClick() {
-        props.valueSetToggleEditTodo(false)
+        valueSetToggleEditTodo(false)
     }
 
     return ReactDom.createPortal(
@@ -86,7 +76,7 @@ export default function PopEditTodoText(props) {
                             <input
                             autoFocus={true}
                             type="text"
-                            placeholder={props.valueTodoText}
+                            value={newTodoText}
                             onChange={(e) => setNewTodoText(e.target.value)}
                             onKeyPress={(e) => handleKeyPress(e)}
                             className='popInput-EditAddTodo'
@@ -103,7 +93,7 @@ export default function PopEditTodoText(props) {
                         </motion.button>
                         <motion.button 
                         className='popbuttons-EditAddTodo'
-                        onClick={() => handleOkClick(props.valueId)}                        
+                        onClick={() => handleOkClick(valueId)}                        
                         variants={buttonVariants}
                         whileHover='hover'
                         whileTap='tap'>

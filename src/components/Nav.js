@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 
 const buttonVariants = {
@@ -25,11 +25,11 @@ const buttonPomoVariants = {
     }
 }
 
-export default function Nav(props) {
+export default function Nav({ valueSetType }) {
 
-    const [activePomodoro, setActivePomodoro] = React.useState(true)
-    const [activeShort, setActiveShort] = React.useState(false)
-    const [activeLong, setActiveLong] = React.useState(false)
+    const [activePomodoro, setActivePomodoro] = useState(true)
+    const [activeShort, setActiveShort] = useState(false)
+    const [activeLong, setActiveLong] = useState(false)
 
     const toggleActivePomodoro = () => {
         setActivePomodoro(true)
@@ -51,7 +51,7 @@ export default function Nav(props) {
 
     //reads the button innerText that is used to change the state of sessionType in App.js
     function getSessionType(event) {
-        props.valueSetType(event.target.innerText)
+        valueSetType(event.target.innerText)
   }
 
   function handlePomodoroOnClick(event) {

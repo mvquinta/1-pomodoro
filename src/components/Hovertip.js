@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 const styles = {
     container: {
@@ -25,8 +25,8 @@ const styles = {
 //when called, I just have to pass in the text I want to show
 //NOT BEING USED AT THE MOMENT
 
-export default function Hovertip(props) {
-    const [hovering, setHovering] = React.useState(false)
+export default function Hovertip({ text, children}) {
+    const [hovering, setHovering] = useState(false)
 
 
     function handleMouseOver() {
@@ -42,8 +42,8 @@ export default function Hovertip(props) {
         onMouseOver={handleMouseOver}
         onMouseOut={handleMouseOut}
         style={styles.container}>
-            {hovering ? <div style={styles.hovertip}>{props.text}</div> : null}
-            {props.children}
+            {hovering ? <div style={styles.hovertip}>{text}</div> : null}
+            {children}
         </div>
     )
 }

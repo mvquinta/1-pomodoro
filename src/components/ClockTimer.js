@@ -15,7 +15,10 @@ const buttonVariants = {
     }
 }
 
-export default function ClockTimer(props) {
+export default function ClockTimer({ valueType }) {
+
+
+
     //State that identifies what session user has clicked.
     //I could use props.valueType directly but I translated it this way for a cleaner code
     const [sessionID, setSessionID] = useState(0)
@@ -66,17 +69,17 @@ export default function ClockTimer(props) {
 
     //sent by Nav.js -> App.js, we get what session was clicked by the user and change the state of sessionID and activeSession accordingly
     useEffect(() => {
-        if (props.valueType === 'Pomodoro') {
+        if (valueType === 'Pomodoro') {
             setSessionID(0)
             setActiveSession(pomodoroSession)
-        } else if ( props.valueType === 'Short Break') {
+        } else if ( valueType === 'Short Break') {
             setSessionID(1)
             setActiveSession(shortSession)
-        } else if (props.valueType === 'Long Break') {
+        } else if (valueType === 'Long Break') {
             setSessionID(2)
             setActiveSession(longSession)
         }
-    }, [props.valueType])
+    }, [valueType])
 
 
     //setInterval, counter for when play is true, clearInterval when pause is true

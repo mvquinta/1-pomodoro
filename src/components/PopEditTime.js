@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState} from "react";
 import ReactDom from 'react-dom'
 import './styles/ModalPop.css'
 import { motion } from 'framer-motion'
@@ -44,13 +44,13 @@ const timersContainerVariants = {
 }
 
 
-export default function PopEditTime(props) {
-  const [editPomodoroMin, setEditPomodoroMin] = React.useState(0)
-  const [editPomodoroSec, setEditPomodoroSec] = React.useState(0)
-  const [editShortMin, setEditShortMin] = React.useState(0)
-  const [editShortSec, setEditShortSec] = React.useState(0)
-  const [editLongMin, setEditLongMin] = React.useState(0)
-  const [editLongSec, setEditLongSec] = React.useState(0)
+export default function PopEditTime({ valueSetPomodoroSession, valueSetShortSession, valueSetLongSession, valueSetActiveSession, valueSetPopEditTime }) {
+  const [editPomodoroMin, setEditPomodoroMin] = useState(0)
+  const [editPomodoroSec, setEditPomodoroSec] = useState(0)
+  const [editShortMin, setEditShortMin] = useState(0)
+  const [editShortSec, setEditShortSec] = useState(0)
+  const [editLongMin, setEditLongMin] = useState(0)
+  const [editLongSec, setEditLongSec] = useState(0)
 
   //reads the input fields and converts it to seconds. Values are then used to update setStates of sessions.
   //Set activeSession for new pomodoroTime as default and also to render-update the ui
@@ -58,28 +58,34 @@ export default function PopEditTime(props) {
     const convertedPomodorTime = parseInt(editPomodoroMin) * 60 + parseInt(editPomodoroSec);
     const convertedShortTime = parseInt(editShortMin) * 60 + parseInt(editShortSec);
     const convertedLongTime = parseInt(editLongMin) * 60 + parseInt(editLongSec);
-    convertedPomodorTime === 0 
-    ? props.valueSetPomodoroSession(25 * 60)
-    : props.valueSetPomodoroSession(convertedPomodorTime);
-    convertedShortTime === 0 
-    ? props.valueSetShortSession(5 * 60)
-    : props.valueSetShortSession(convertedShortTime);
-    convertedLongTime === 0 
-    ? props.valueSetLongSession(15 * 60)
-    : props.valueSetLongSession(convertedLongTime);
-    props.valueSetActiveSession(convertedPomodorTime)
-    props.valueSetPopEditTime(false);
+
+    /*if(isNaN(parseInt(editPomodoroMin)) || isNaN(parseInt(editPomodoroSec))) {
+      alert('Please insert only numbers') 
+    } else {
+      const convertedPomodorTime = parseInt(editPomodoroMin) * 60 + parseInt(editPomodoroSec);
+      convertedPomodorTime === 0 ? props.valueSetPomodoroSession(25 * 60) : props.valueSetPomodoroSession(convertedPomodorTime);
+      props.valueSetActiveSession(convertedPomodorTime)
+    }*/
+
+    convertedPomodorTime === 0 ? valueSetPomodoroSession(25 * 60) : valueSetPomodoroSession(convertedPomodorTime);
+
+    convertedShortTime === 0 ? valueSetShortSession(5 * 60) : valueSetShortSession(convertedShortTime);
+
+    convertedLongTime === 0 ? valueSetLongSession(15 * 60) : valueSetLongSession(convertedLongTime);
+
+    valueSetActiveSession(convertedPomodorTime)
+    valueSetPopEditTime(false);
   }
 
     //if press enter add project
     function handleKeyPress(event) {
       if (event.charCode === 13) { //could also be code === "Enter"
-          handleOkClick()
+        handleOkClick()
       }
   } 
 
   function handleCancelClick() {
-    props.valueSetPopEditTime(false);
+    valueSetPopEditTime(false);
   }
 
  

@@ -38,18 +38,18 @@ const projBoxVariants = {
 }
 
 
-export default function PopSwitchProj(props) {
+export default function PopSwitchProj({ valueSetActiveProjectName, valueSetToggleSwitchProj, valueMergedProjs }) { 
 
     //switches projects by reading the innertext of the clicked button and making it the active project
     //Sets toggle to false closing the window
     function handleOkClick(event) {
-        props.valueSetActiveProjectName(event.target.innerText)
-        props.valueSetToggleSwitchProj(false)
+        valueSetActiveProjectName(event.target.innerText)
+        valueSetToggleSwitchProj(false)
     }
 
     //sets toggle to false closing the window
     function handleCancelClick() {
-        props.valueSetToggleSwitchProj(false)
+        valueSetToggleSwitchProj(false)
     }
     return ReactDom.createPortal(
         <>
@@ -64,7 +64,7 @@ export default function PopSwitchProj(props) {
               <h2>Select Project</h2>
                   <div className="buttonProj-container">
                     <ul>
-                        {props.valueMergedProjs.map((item) => (
+                        {valueMergedProjs.map((item) => (
                         <li key={item}>
                             <motion.div 
                             className="buttonProj-box"
