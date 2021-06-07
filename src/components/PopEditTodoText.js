@@ -34,7 +34,6 @@ const editAddContainer = {
 export default function PopEditTodoText(props) {
 
     const [newTodoText, setNewTodoText] = React.useState('')
-    const [todoTextValue, setTodoTextValue] = React.useState('temp')
 
     function handleOkClick (id) {
         //based on the passed id, spread all todos that exist. To the one matching the id, add a new input to current state        
@@ -87,7 +86,7 @@ export default function PopEditTodoText(props) {
                             <input
                             autoFocus={true}
                             type="text"
-                            placeholder={todoTextValue}
+                            placeholder={props.valueTodoText}
                             onChange={(e) => setNewTodoText(e.target.value)}
                             onKeyPress={(e) => handleKeyPress(e)}
                             className='popInput-EditAddTodo'

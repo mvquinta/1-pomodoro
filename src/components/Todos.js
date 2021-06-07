@@ -45,6 +45,7 @@ export default function Todos() {
     const [toggleEditTodo, setToggleEditTodo] = useState(false) //state of toggles to popwindow or close it
 
     const [stateId, setStateId] = useState('')
+    const [todoText, setTodoText] = useState('')
 
 
     //save todos to local storage. Each time a todo is added, edited or deleted, this useEffects hook is called and updates localStorage
@@ -124,24 +125,23 @@ export default function Todos() {
         setStateId(id)
     }
 
-    function getTextFromTodoToEdit(stateId) {
-        console.log(stateId)
+    function getTextFromTodoToEdit(event) {
+        const id = event.target.parentElement.parentElement.parentElement.id
         let todoTextValue = ''
         todos.map((todo) => {
-            if(todo.id === stateId) {
+            if(todo.id === id) {
                 todoTextValue = todo.text
             }            
         })
         console.log(todoTextValue)
-        console.log('cool')
-        //setTodoTextValue(todoTextValue)
+        setTodoText(todoTextValue)
     }
 
 
     //Since both these functions are meant to be executed, instead of having them inline, I grouped them both in one function
     function funsForEditTask(event) {
         getIdFromTodoToEdit(event)
-        getTextFromTodoToEdit(stateId)
+        getTextFromTodoToEdit(event)
         togglePopEditTodo()
     }
 
@@ -183,6 +183,7 @@ export default function Todos() {
                                 valueSetTodos={setTodos}
                                 valueSetToggleEditTodo={setToggleEditTodo}
                                 valueId={stateId}
+                                valueTodoText={todoText}
                                 /> : null}
                 <ul className='todos-list'>
                     {todos.filter((todo) => todo.project === activeProjectName).map(({ text, id, active }) => (
