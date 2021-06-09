@@ -3,6 +3,7 @@ import { IoPlay, IoStop, IoRefresh, IoSettings } from 'react-icons/io5'
 import PopEditTime from './PopEditTime'
 import { IconContext } from 'react-icons'
 import { motion } from 'framer-motion'
+import Hovertip from './Hovertip'
 
 //Animation Variants
 
@@ -16,8 +17,6 @@ const buttonVariants = {
 }
 
 export default function ClockTimer({ valueType }) {
-
-
 
     //State that identifies what session user has clicked.
     //I could use props.valueType directly but I translated it this way for a cleaner code
@@ -139,7 +138,7 @@ export default function ClockTimer({ valueType }) {
     }
 
     function restartTimer() {
-        playAudioWaterDroplet()
+        playAudioTick()
         setPlay(false)
         setPause(true)
         switch(sessionID) {
@@ -186,7 +185,9 @@ export default function ClockTimer({ valueType }) {
                 variants={buttonVariants}
                 whileHover='hover'
                 whileTap='tap'>
-                    <IoSettings />
+                    <Hovertip text='Edit Times'>
+                        <IoSettings />
+                    </Hovertip>
                 </motion.button>
             </div>
             <IconContext.Provider value={{ color: "#F25C5C", size:"1.8em", className: "global-class-name" }}>

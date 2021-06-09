@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { IoPencil, IoTrash, IoSwapHorizontal, IoSquareOutline, IoCheckbox, IoAdd} from 'react-icons/io5'
+import { IoPencil, IoTrash, IoSwapHorizontal, IoSquareOutline, IoCheckbox, IoAdd, IoRemove} from 'react-icons/io5'
 import PopAddProject from './PopAddProject'
 import PopSwitchProj from './PopSwitchProj'
 import PopEditTodoText from './PopEditTodoText'
 import { motion } from 'framer-motion'
+import Hovertip from './Hovertip'
 
 
 //Animation Variants
@@ -83,8 +84,23 @@ export default function Todos() {
         }
     }
 
-    //removeTodo, filters all todos by id and creates a new array with all todos that DO NOT match the passed id
-    const removeTodo = (id) => setTodos((todos) => todos.filter((t) => t.id !== id))    
+    //removeTodo, filters all todos by id and creates a new array with all todos that DO NOT match the passed id    
+    const removeTodo = (id) => setTodos((todos) => todos.filter((t) => t.id !== id))
+
+    //remove project
+    function removeProject() {
+        console.log(mergedProjectNames.length)
+        if(mergedProjectNames.length <= 1) {
+            alert('This is your only project')
+            return false
+        } else {
+            //If active project is the first index of the array set it for index 1. If not, set it as index 0 (when removing project, by default, app will display the first project from the array)
+            activeProjectName === mergedProjectNames[0] ? setActiveProjectName(mergedProjectNames[1]) : setActiveProjectName(mergedProjectNames[0])
+            //remove all todos that have same project and, next, remove project from array of merged projetc names
+            setTodos(todos.filter((todo) => todo.project !== activeProjectName))
+            setMergedProjectNames(mergedProjectNames.filter((mergedProject) => mergedProject !== activeProjectName))
+        }      
+    }
 
     //based on the passed id, spread all todos that exist and to the one matching the id toggle todo active property 
     function activeTodo(id) {
@@ -110,8 +126,14 @@ export default function Todos() {
     function togglePopProjectName() {
         toggleProjectName ? setToggleProjectName(false) : setToggleProjectName(true)
     }
+    
     function togglePopSwitchProj() {
-        toggleSwitchProj ? setToggleSwitchProj(false) : setToggleSwitchProj(true)
+        if(mergedProjectNames.length <= 1) {
+            alert('This is your only project')
+            return false
+        } else {
+            toggleSwitchProj ? setToggleSwitchProj(false) : setToggleSwitchProj(true)
+        }       
     }
 
     function togglePopEditTodo() {
@@ -164,13 +186,25 @@ export default function Todos() {
                         variants={buttonVariants}
                         whileHover='hover'
                         whileTap='tap'>
-                            <IoAdd onClick={togglePopProjectName} />
+                            <Hovertip text='Add Project'>
+                                <IoAdd onClick={togglePopProjectName} />
+                            </Hovertip>
                         </motion.button>
                         <motion.button
                         variants={buttonVariants}
                         whileHover='hover'
                         whileTap='tap'>
-                            <IoSwapHorizontal onClick={togglePopSwitchProj} />
+                            <Hovertip text='Remove Project'>
+                                <IoRemove onClick={removeProject} />
+                            </Hovertip>
+                        </motion.button>
+                        <motion.button
+                        variants={buttonVariants}
+                        whileHover='hover'
+                        whileTap='tap'>
+                            <Hovertip text='Switch Project'>
+                                <IoSwapHorizontal onClick={togglePopSwitchProj} />
+                            </Hovertip>
                         </motion.button>
                     </div>
                 </div>                
@@ -196,8 +230,10 @@ export default function Todos() {
                                 onClick={() => activeTodo(id)}                                
                                 variants={buttonVariants}
                                 whileHover='hover'
-                                whileTap='tap'> 
-                                    {active ? <IoSquareOutline /> : <IoCheckbox /> }
+                                whileTap='tap'>
+                                     
+                                    {active ? <Hovertip text='Check Todo'><IoSquareOutline /></Hovertip> :  <Hovertip text='Uncheck Todo'><IoCheckbox /></Hovertip> }
+                                    
                                 </motion.button>
                                 {active ? <span>{text}</span> : <span style={{textDecorationLine: 'line-through', opacity:'0.5'}}>{text}</span>}
                             </div>
@@ -207,14 +243,18 @@ export default function Todos() {
                                 variants={buttonVariants}
                                 whileHover='hover'
                                 whileTap='tap'>
-                                    <IoPencil />
+                                    <Hovertip text='Edit Todo'>
+                                        <IoPencil />
+                                    </Hovertip>
                                 </motion.button>
                                 <motion.button 
                                 onClick={() => removeTodo(id)}
                                 variants={buttonVariants}                               
                                 whileHover='hover'
                                 whileTap='tap'>
-                                    <IoTrash />
+                                    <Hovertip text='Delete Todo'>
+                                        <IoTrash />
+                                    </Hovertip>
                                 </motion.button>                                
                             </div>
                         </motion.li>

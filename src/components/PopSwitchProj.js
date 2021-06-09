@@ -47,10 +47,19 @@ export default function PopSwitchProj({ valueSetActiveProjectName, valueSetToggl
         valueSetToggleSwitchProj(false)
     }
 
+    //if press enter add project
+    function handleKeyPress(event) {
+      if (event.charCode === 13) { //could also be code === "Enter"
+        handleOkClick()
+      }
+    } 
+    
     //sets toggle to false closing the window
     function handleCancelClick() {
         valueSetToggleSwitchProj(false)
     }
+
+
     return ReactDom.createPortal(
         <>
           <div className='overlayStyles' />
@@ -68,10 +77,12 @@ export default function PopSwitchProj({ valueSetActiveProjectName, valueSetToggl
                         <li key={item}>
                             <motion.div 
                             className="buttonProj-box"
+                            autoFocus={true}
                             variants={projBoxVariants}
                             whileHover='hover'
                             whileTap='tap'
                             onClick={handleOkClick}
+                            /*onKeyPress={(e) => handleKeyPress(e)}*/
                             >
                               <button>{item}</button>
                             </motion.div>

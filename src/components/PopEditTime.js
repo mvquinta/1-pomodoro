@@ -45,11 +45,11 @@ const timersContainerVariants = {
 
 
 export default function PopEditTime({ valueSetPomodoroSession, valueSetShortSession, valueSetLongSession, valueSetActiveSession, valueSetPopEditTime }) {
-  const [editPomodoroMin, setEditPomodoroMin] = useState(0)
+  const [editPomodoroMin, setEditPomodoroMin] = useState(25)
   const [editPomodoroSec, setEditPomodoroSec] = useState(0)
-  const [editShortMin, setEditShortMin] = useState(0)
+  const [editShortMin, setEditShortMin] = useState(5)
   const [editShortSec, setEditShortSec] = useState(0)
-  const [editLongMin, setEditLongMin] = useState(0)
+  const [editLongMin, setEditLongMin] = useState(15)
   const [editLongSec, setEditLongSec] = useState(0)
 
   //reads the input fields and converts it to seconds. Values are then used to update setStates of sessions.
@@ -122,7 +122,7 @@ export default function PopEditTime({ valueSetPomodoroSession, valueSetShortSess
                       <input
                       autoFocus={true}
                       type="number"
-                      placeholder="25"
+                      value={editPomodoroMin}
                       onChange={(e) => setEditPomodoroMin(e.target.value)}
                       onKeyPress={(e) => handleKeyPress(e)}
                       className='popInput-EditTime'
@@ -131,9 +131,9 @@ export default function PopEditTime({ valueSetPomodoroSession, valueSetShortSess
                     <div>
                       <input
                       type="number"
+                      value={editPomodoroSec}
                       onChange={(e) => setEditPomodoroSec(e.target.value)}
-                      onKeyPress={(e) => handleKeyPress(e)}
-                      placeholder="00"
+                      onKeyPress={(e) => handleKeyPress(e)}                      
                       className='popInput-EditTime'
                       />
                     </div>
@@ -156,18 +156,18 @@ export default function PopEditTime({ valueSetPomodoroSession, valueSetShortSess
                     <div>
                       <input
                       type="number"
+                      value={editShortMin}
                       onChange={(e) => setEditShortMin(e.target.value)}
                       onKeyPress={(e) => handleKeyPress(e)}
-                      placeholder="5"
                       className='popInput-EditTime'
                       />
                     </div>
                     <div>
                       <input
                       type="number"
+                      value={editShortSec}
                       onChange={(e) => setEditShortSec(e.target.value)}
                       onKeyPress={(e) => handleKeyPress(e)}
-                      placeholder="00"
                       className='popInput-EditTime'
                       />
                     </div>
@@ -190,18 +190,18 @@ export default function PopEditTime({ valueSetPomodoroSession, valueSetShortSess
                     <div>
                       <input
                       type="number"
+                      value={editLongMin}
                       onChange={(e) => setEditLongMin(e.target.value)}
                       onKeyPress={(e) => handleKeyPress(e)}
-                      placeholder="15"
                       className='popInput-EditTime'
                       />
                     </div>
                     <div>
                       <input
                       type="number"
+                      value={editLongSec}
                       onChange={(e) => setEditLongSec(e.target.value)}
                       onKeyPress={(e) => handleKeyPress(e)}
-                      placeholder="00"
                       className='popInput-EditTime'
                       />
                     </div>
