@@ -4,6 +4,7 @@ import TitleBar from './components/TitleBar'
 import Nav from "./components/Nav";
 import ClockTimer from "./components/ClockTimer";
 import Todos from "./components/Todos";
+import { motion } from 'framer-motion'
 
 
 function App() {
