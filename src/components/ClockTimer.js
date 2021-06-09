@@ -1,74 +1,119 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { IoPlay, IoStop, IoRefresh, IoSettings } from 'react-icons/io5'
-import Hovertip from './Hovertip'
 import PopEditTime from './PopEditTime'
 import { IconContext } from 'react-icons'
 import { motion } from 'framer-motion'
-
+import Hovertip from './Hovertip'
 
 //Animation Variants
 
 const buttonVariants = {
     hover: {
         scale: 1.1,
-        //boxShadow: "0px 0px 5px rgba(0,0,0, 0.25)",
-        //borderRadius: 10,
+    },
+    tap: {
+        scale: 0.9,
     }
 }
 
+export default function ClockTimer({ valueType }) {
 
+    //State that identifies what session user has clicked.
+    //I could use props.valueType directly but I translated it this way for a cleaner code
+    const [sessionID, setSessionID] = useState(0)
+    
+    //State used to render and implement all other features (play, stop, etc)
+    const [activeSession, setActiveSession] = useState(25 * 60) 
+ 
+    //For useState inital values: function that checks if there's some localStorage data.
+    //If true, load localStorage data, if not, load default time values
+    const [pomodoroSession, setPomodoroSession] = useState(() => {
+        const localPomodoroTime = localStorage.getItem('pomodoroTime')
+        return localPomodoroTime ? JSON.parse(localPomodoroTime) : (25 * 60)
+    }) 
+    const [shortSession, setShortSession] = useState(() => {
+        const localShortTime = localStorage.getItem('shortTime')
+        return localShortTime ? JSON.parse(localShortTime) : (5 * 60)
+    }) 
+    const [longSession, setLongSession] = useState(() => {
+        const localLongTime = localStorage.getItem('longTime')
+        return localLongTime ? JSON.parse(localLongTime) : (15 * 60)
+    }) 
 
-export default function ClockTimer(props) {
-
-    const [session, setSession] = useState(25 * 60) //converts session from minutes to seconds.
     const [play, setPlay] = useState(false) //state to toggle play timer
     const [pause, setPause] = useState(true) //state to toggle pause timer
     const [popEditTime, setPopEditTime] = useState(false) //state to toggle edit time popup window
-    const id = useRef(null)
+    const id = useRef(null) //state to be used in window.setInterval
 
-    //Audio const and functions to be used when time is up and play, stop and restart are clicked
-    const audioBell = new Audio('http://soundbible.com/grab.php?id=2218&type=mp3') //2044 - tick 2218 - service bell 
-    const audioTick = new Audio('http://soundbible.com/grab.php?id=2044&type=mp3') //2044 - tick 2218 - service bell 
-    const audioWaterDroplet = new Audio('http://soundbible.com/grab.php?id=378&type=mp3') //2044 - tick 2218 - service bell - 378 - waterr droplet
+    //Audios for when time is up, play, stop and restart are clicked
+    const audioBell = new Audio('http://soundbible.com/grab.php?id=2218&type=mp3')
+    const audioTick = new Audio('http://soundbible.com/grab.php?id=2044&type=mp3')
+    const audioWaterDroplet = new Audio('http://soundbible.com/grab.php?id=378&type=mp3')
 
     function playAudioBell() { audioBell.play() }
     function playAudioTick() { audioTick.play() }
-    function playAudioWaterDroplet() {audioWaterDroplet.play()}
-    //function pauseAudioBell() { audioBell.pause() }
+    function playAudioWaterDroplet() {audioWaterDroplet.play()}   
 
-    //depending on selected session, that is sent as a prop from App.js, different default session times are set
-    //they are all converted from minutes to seconds
+    //save time session to localStorage
     useEffect(() => {
-        if (props.valueType === 'Pomodoro') {
-            setSession(25 * 60)
-        } else if ( props.valueType === 'Short Break') {
-            setSession(5 * 60)
-        } else if (props.valueType === 'Long Break') {
-            setSession(15 * 60)
+        localStorage.setItem('pomodoroTime', JSON.stringify(pomodoroSession))
+    },[pomodoroSession])
+    useEffect(() => {
+        localStorage.setItem('shortTime', JSON.stringify(shortSession))
+    },[shortSession])
+    useEffect(() => {
+        localStorage.setItem('longTime', JSON.stringify(longSession))
+    },[longSession])
+
+
+    //sent by Nav.js -> App.js, we get what session was clicked by the user and change the state of sessionID and activeSession accordingly
+    useEffect(() => {
+        if (valueType === 'Pomodoro') {
+            setSessionID(0)
+            setActiveSession(pomodoroSession)
+        } else if ( valueType === 'Short Break') {
+            setSessionID(1)
+            setActiveSession(shortSession)
+        } else if (valueType === 'Long Break') {
+            setSessionID(2)
+            setActiveSession(longSession)
         }
-    }, [props.valueType])
+    }, [valueType])
 
 
-    //setInterval for when play is active to count the timer down 1 second each second XD
-    //when pause is clicked, set to true, clearInterval method stops setInterval
+    //setInterval, counter for when play is true, clearInterval when pause is true
     useEffect(() => {
         if (play) {
             id.current = window.setInterval(() => {
-                setSession((second) => second - 1)
+                setActiveSession((second) => second - 1)
             }, 1000)
         } else if (pause){
             window.clearInterval(id.current)
         }
     }, [play, pause])
 
-    //when session timer gets to 0 we stop timer by changing state of pause and play. If not it would go to negative values
-    //than we reset session to pomodoro defaul time (this might be changed...)
-    if(session === 0) {
-        playAudioBell()
-        setPause(true)
-        setPlay(false)
-        setSession(25 * 60)
-    }
+    //when session timer gets to 0 timer is stopped by changing state of pause and play. If not it would go to negative values
+    //then we reset activeSession based on the sessionID
+    useEffect(() => {
+        if(activeSession === 0) {
+            playAudioBell()
+            setPause(true)
+            setPlay(false)
+            switch(sessionID) {
+                case 0:
+                    setActiveSession(pomodoroSession)
+                    break
+                case 1:
+                    setActiveSession(shortSession)
+                    break
+                case 2:
+                    setActiveSession(longSession)
+                    break
+                default:
+                    setActiveSession(25 * 60)
+            }
+        }
+    },[activeSession])
 
     //math conversion of time to be rendered 
     function convertTime(updateSession) {
@@ -93,10 +138,22 @@ export default function ClockTimer(props) {
     }
 
     function restartTimer() {
-        playAudioWaterDroplet()
+        playAudioTick()
         setPlay(false)
         setPause(true)
-        setSession(25 * 60)
+        switch(sessionID) {
+            case 0:
+                setActiveSession(pomodoroSession)
+                break
+            case 1:
+                setActiveSession(shortSession)
+                break
+            case 2:
+                setActiveSession(longSession)
+                break
+            default:
+                setActiveSession(25 * 60)
+        }
     }
 
     function togglePopEditTime() {
@@ -105,38 +162,61 @@ export default function ClockTimer(props) {
 
     return(
         <div className='div-clock-timer'>
-        <div className='circle'>
-          <div className='circle-content'>
-            <div>
-                <Hovertip text='Click To Edit'>
-                    {popEditTime ? <PopEditTime valueSetSession={setSession} valueSetPopEditTime={setPopEditTime}/> : null}
-                    <span className='timer-session' onClick={togglePopEditTime}>{convertTime(session)}</span>
-                </Hovertip>
+            <div className='circle-ext'>
+                <div className='circle'>
+                    <div className='circle-content'>
+                        <div className='timer-session'>
+                            {convertTime(activeSession)}
+                        </div>
+                    </div>
+                </div>
             </div>
-            <IconContext.Provider value={{ color: "#F25C5C", size:"1.75em", className: "global-class-name" }}>
+            <div className='circle-settings-icon'>
+                {popEditTime ? <PopEditTime
+                valueSetPopEditTime={setPopEditTime}
+                valueSetPomodoroSession={setPomodoroSession}
+                valueSetShortSession={setShortSession}
+                valueSetLongSession={setLongSession}
+                valueSetActiveSession={setActiveSession}
+                /> : null}
+                <motion.button
+                className='btn-clock-settings'
+                onClick={togglePopEditTime}
+                variants={buttonVariants}
+                whileHover='hover'
+                whileTap='tap'>
+                    <Hovertip text='Edit Times'>
+                        <IoSettings />
+                    </Hovertip>
+                </motion.button>
+            </div>
+            <IconContext.Provider value={{ color: "#F25C5C", size:"1.8em", className: "global-class-name" }}>
                 <div className='circle-buttons'>
-                    <motion.button 
+                    <motion.button
+                    disabled={play}
                     onClick={playTrue}
                     variants={buttonVariants}
-                    whileHover='hover'>
+                    whileHover='hover'
+                    whileTap='tap'>
                         <IoPlay />
                     </motion.button>
                     <motion.button
+                    disabled={pause}
                     onClick={pauseTrue}
                     variants={buttonVariants}
-                    whileHover='hover'>
+                    whileHover='hover'
+                    whileTap='tap'>
                         <IoStop />
                     </motion.button>
                     <motion.button
                     onClick={restartTimer}
                     variants={buttonVariants}
-                    whileHover='hover'>
+                    whileHover='hover'
+                    whileTap='tap'>
                         <IoRefresh />
                     </motion.button>
                 </div>
             </IconContext.Provider>
-          </div>
-        </div>
       </div>
     )
 }

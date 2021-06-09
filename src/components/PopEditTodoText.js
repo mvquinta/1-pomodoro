@@ -1,71 +1,107 @@
-import React from 'react'
+import React, { useState }from 'react'
 import ReactDom from 'react-dom'
-import './ModalPop.css'
+import './styles/ModalPop.css'
+import { motion } from 'framer-motion'
 
-export default function PopEditTodoText(props) {
+//Animation Variants
 
-    const [newTodoText, setNewTodoText] = React.useState('')
+const editAddContainer = {
+    initial: {
+      scale: 0,
+      opacity: 0,
+      x: '-50%',
+      y: '-50%',
+    },
+    animate: {
+      scale: 1,
+      opacity: 1,
+      transition: {
+        type: 'spring',
+        duration: 0.4,
+      }
+    }
+  }
 
-    /*function editTodo(id) {
-        const updateTodos = [...props.valueTodos].map((todo) => {
-            if(todo.id === id) {
-                todo.text = newTodoText
-            }
-            return todo
-        })
-        props.valueSetTodos(updateTodos)
-        //add a setTodoEdit state to false?
-    }*/
+  const buttonVariants = {
+    hover: {
+        scale: 1.1,
+    },
+    tap: {
+        scale: 0.9,
+    }
+}
+
+export default function PopEditTodoText({ valueTodos, valueSetTodos, valueSetToggleEditTodo, valueId, valueTodoText }) {
+
+    const [newTodoText, setNewTodoText] = useState(valueTodoText)
 
     function handleOkClick (id) {
-        //based on the passed id, spread all todos that exist and to the one matching the id add the new input from current state        
-        const updateTodos = [...props.valueTodos].map((todo) => {
+        //based on the passed id, spread all todos that exist. To the one matching the id, add a new input to current state        
+        const updateTodos = [...valueTodos].map((todo) => {
             if(todo.id === id) {
                 todo.text = newTodoText
             }
             return todo
         })
         //then, setTodos state for this new create array of objects "todos"
-        props.valueSetTodos(updateTodos)
-        //sets toggle to false closing the window
-        props.valueSetToggleEditTodo(false)
+        valueSetTodos(updateTodos)
+        //Toggle to false to close window
+        valueSetToggleEditTodo(false)
+    }
+    
+    //if press enter submit todo edition
+    function handleKeyPress(event) {
+        if (event.charCode === 13) { //could also be code === "Enter"
+            handleOkClick(valueId)
+        }
     }
 
-    //sets toggle to false closing the window
+    //Toggle to false to close window
     function handleCancelClick() {
-        props.valueSetToggleEditTodo(false)
+        valueSetToggleEditTodo(false)
     }
 
     return ReactDom.createPortal(
         <>
             <div className='overlayStyles' />
-            <div className='container'>
-                <div className='popupEdit'>
-                    <div className='editContainer'>
-                        <h2 className='poph2'>Edit Todo</h2>
-                        <div className='popInputContainer'>
-                            <div>
-                                <label className='popLabel'>Edit Todo Task</label>
-                                <input
-                                type="text"
-                                placeholder='Edit Task'
-                                onChange={(e) => setNewTodoText(e.target.value)}
-                                className='popInput'
-                                />
-                            </div>
+            <motion.div 
+            className='container-EditAddTodo'
+            variants={editAddContainer}
+            initial='initial'
+            animate='animate'
+            >
+                <div className='popupEdit-EditAddTodo'>
+                    <h2>Edit Todo</h2>
+                        <div>
+                            <input
+                            autoFocus={true}
+                            type="text"
+                            value={newTodoText}
+                            onChange={(e) => setNewTodoText(e.target.value)}
+                            onKeyPress={(e) => handleKeyPress(e)}
+                            className='popInput-EditAddTodo'
+                            />
                         </div>
-                    </div>
-                    <div className='popButtonsContainer'>
-                        <button className='popbuttons' onClick={() => handleOkClick(props.valueId)}>
-                        OK
-                        </button>
-                        <div>|</div>
-                        <button className='popbuttons' onClick={handleCancelClick}>
+                    <div className='popButtonsContainer-EditAddTodo'>
+                    <motion.button 
+                        className='popbuttons-EditAddTodo' 
+                        onClick={handleCancelClick}
+                        variants={buttonVariants}
+                        whileHover='hover'
+                        whileTap='tap'>
                         Cancel
-                        </button>
+                        </motion.button>
+                        <motion.button 
+                        className='popbuttons-EditAddTodo'
+                        onClick={() => handleOkClick(valueId)}                        
+                        variants={buttonVariants}
+                        whileHover='hover'
+                        whileTap='tap'>
+                        OK
+                        </motion.button>
                     </div>
                 </div>
-            </div>
+            </motion.div>
         </>,
         document.getElementById('portal')
     )

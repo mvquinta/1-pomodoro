@@ -1,54 +1,101 @@
 import React from 'react'
 import ReactDom from 'react-dom'
-import './ModalPop.css'
+import './styles/ModalPop.css'
+import { motion } from 'framer-motion'
 
-export default function PopAddProject(props) {
+//Animation Variants
+
+const editAddContainer = {
+    initial: {
+      scale: 0,
+      opacity: 0,
+      x: '-50%',
+      y: '-50%',
+    },
+    animate: {
+      scale: 1,
+      opacity: 1,
+      transition: {
+        type: 'spring',
+        duration: 0.4,
+      }
+    }
+  }
+
+  const buttonVariants = {
+    hover: {
+        scale: 1.1,
+    },
+    tap: {
+        scale: 0.9,
+    }
+}
+
+export default function PopAddProject({ valueSetActiveProjectName, valueSetPopProjectName }) {
 
     const [newProjectName, setNewProjectName] = React.useState('')
 
-    //reads onChange what is being written in the input field changing newProjectName state
-    //than is used as an argument to make it the new active project and, in consequence, creating a new project.
-    //then sets toggle to false closing the window
+    //newModalState is updated because of onChange in input tag
+    //Used as an argument to make it the new active project and, in consequence, creating a new project.
+    //toggle to false to close window
     function handleOkClick () {
-        props.valueSetActiveProjectName(newProjectName)
-        props.valueSetPopProjectName(false)
+        valueSetActiveProjectName(newProjectName)
+        valueSetPopProjectName(false)
+    }
+
+    //if press enter add project
+    function handleKeyPress(event) {
+        if (event.charCode === 13) { //could also be code === "Enter"
+            handleOkClick()
+        }
     }
 
     //sets toggle to false closing the window
     function handleCancelClick() {
-        props.valueSetPopProjectName(false)
+        valueSetPopProjectName(false)
     }
     
     return ReactDom.createPortal(
         <>
             <div className='overlayStyles' />
-            <div className='container'>
-                <div className='popupEdit'>
-                    <div className='editContainer'>
-                        <h2 className='poph2'>Add Project</h2>
-                        <div className='popInputContainer'>
-                            <div>
-                                <label className='popLabel'>Project Name</label>
-                                <input
-                                type="text"
-                                placeholder='New Project Name'
-                                onChange={(e) => setNewProjectName(e.target.value)}
-                                className='popInput'
-                                />
-                            </div>
-                        </div>
+            <motion.div 
+            className='container-EditAddTodo'
+            variants={editAddContainer}
+            initial='initial'
+            animate='animate'
+            >
+                <div className='popupEdit-EditAddTodo'>
+                    <h2>Add Project</h2>
+                     <div>
+                        <input
+                        autoFocus={true}
+                        type="text"
+                        placeholder='New Project Name'
+                        onChange={(e) => setNewProjectName(e.target.value)}
+                        onKeyPress={(e) => handleKeyPress(e)}
+                        className='popInput-EditAddTodo'
+                        />
                     </div>
-                    <div className='popButtonsContainer'>
-                        <button className='popbuttons' onClick={handleOkClick}>
-                        OK
-                        </button>
-                        <div>|</div>
-                        <button className='popbuttons' onClick={handleCancelClick}>
+                    <div className='popButtonsContainer-EditAddTodo'>
+                        <motion.button
+                        className='popbuttons-EditAddTodo'
+                        onClick={handleCancelClick}
+                        variants={buttonVariants}
+                        whileHover='hover'
+                        whileTap='tap'>
                         Cancel
-                        </button>
+                        </motion.button>
+                        <motion.button 
+                        className='popbuttons-EditAddTodo' 
+                        onClick={handleOkClick}
+                        variants={buttonVariants}
+                        whileHover='hover'
+                        whileTap='tap'>
+                        OK
+                        </motion.button>
                     </div>
                 </div>
-            </div>
+            </motion.div>
         </>,
         document.getElementById('portal')
     )
