@@ -36,6 +36,7 @@ export default function PopEditTodoText({ valueTodos, valueSetTodos, valueSetTog
     const [newTodoText, setNewTodoText] = useState(valueTodoText)
 
     function handleOkClick (id) {
+        console.log(id)
         //based on the passed id, spread all todos that exist. To the one matching the id, add a new input to current state        
         const updateTodos = [...valueTodos].map((todo) => {
             if(todo.id === id) {

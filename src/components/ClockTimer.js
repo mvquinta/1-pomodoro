@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { IoPlay, IoStop, IoRefresh, IoSettings } from 'react-icons/io5'
+import { IoPlay, IoPause, IoRefresh, IoSettings } from 'react-icons/io5'
 import PopEditTime from './PopEditTime'
 import { IconContext } from 'react-icons'
 import { motion } from 'framer-motion'
@@ -189,10 +189,10 @@ export default function ClockTimer({ valueType }) {
                         <IoSettings />
                     </Hovertip>
                 </motion.button>
-            </div>
-            <IconContext.Provider value={{ color: "#F25C5C", size:"1.8em", className: "global-class-name" }}>
+            </div>            
                 <div className='circle-buttons'>
                     <motion.button
+                    className={play ? 'circle-button-disabled' : 'circle-button-active'}
                     disabled={play}
                     onClick={playTrue}
                     variants={buttonVariants}
@@ -201,14 +201,16 @@ export default function ClockTimer({ valueType }) {
                         <IoPlay />
                     </motion.button>
                     <motion.button
+                    className={pause ? 'circle-button-disabled' : 'circle-button-active'}
                     disabled={pause}
                     onClick={pauseTrue}
                     variants={buttonVariants}
                     whileHover='hover'
                     whileTap='tap'>
-                        <IoStop />
+                        <IoPause />
                     </motion.button>
                     <motion.button
+                    className='circle-button-active'
                     onClick={restartTimer}
                     variants={buttonVariants}
                     whileHover='hover'
@@ -216,7 +218,6 @@ export default function ClockTimer({ valueType }) {
                         <IoRefresh />
                     </motion.button>
                 </div>
-            </IconContext.Provider>
       </div>
     )
 }

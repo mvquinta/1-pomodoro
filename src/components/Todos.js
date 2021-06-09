@@ -141,21 +141,21 @@ export default function Todos() {
     }
 
     //Reads the id of the todo that I want to edit.
-    //I need to travell all those parentElements until I reach the <li> tag that holds the id I need
     function getIdFromTodoToEdit(event) {
-        const id = event.target.parentElement.parentElement.parentElement.id
+        const id = event.target.id
+        //console.log('cool', id)
+        //console.log('coolio', event.target.id)
         setStateId(id)
     }
 
     function getTextFromTodoToEdit(event) {
-        const id = event.target.parentElement.parentElement.parentElement.id
+        const id = event.target.id
         let todoTextValue = ''
         todos.map((todo) => {
             if(todo.id === id) {
                 todoTextValue = todo.text
             }            
         })
-        console.log(todoTextValue)
         setTodoText(todoTextValue)
     }
 
@@ -222,11 +222,11 @@ export default function Todos() {
                 <ul className='todos-list'>
                     {todos.filter((todo) => todo.project === activeProjectName).map(({ text, id, active }) => (
                         <motion.li
-                        key={id} id={id}
+                        key={id}
                         variants={liTodosVariants}
                         whileHover='hover'>
                             <div>
-                                <motion.button 
+                                <motion.button                                
                                 onClick={() => activeTodo(id)}                                
                                 variants={buttonVariants}
                                 whileHover='hover'
@@ -244,7 +244,7 @@ export default function Todos() {
                                 whileHover='hover'
                                 whileTap='tap'>
                                     <Hovertip text='Edit Todo'>
-                                        <IoPencil />
+                                        <IoPencil id={id}/>
                                     </Hovertip>
                                 </motion.button>
                                 <motion.button 
