@@ -40,7 +40,7 @@ body {
 
   height: 100%;
   width: 100%;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 .main-wrapper {
@@ -65,7 +65,6 @@ TittleBar.js
   background-color: var(--primary-red);
   color: var(--primary-bg-color-light);
   text-align: center;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -129,7 +128,7 @@ Nav.js & ClockTImer.js
   justify-content: center;
   flex-wrap: wrap;
   align-items: center;
-  list-style-type: none;  
+  list-style-type: none;
 }
 
 .wrapper-clock-timer nav li {
@@ -138,7 +137,7 @@ Nav.js & ClockTImer.js
 
 .wrapper-clock-timer button {
   background: none;
-  border: none;  
+  border: none;
   font-size: 1.4rem;
   cursor: pointer;
 }
@@ -166,12 +165,10 @@ Nav.js & ClockTImer.js
   color: var(--primary-red);
 }
 
-
-
 /*ClockTimer*/
 .div-clock-timer {
   display: flex;
-  flex-direction: column;  
+  flex-direction: column;
   align-items: center;
 }
 
@@ -214,7 +211,6 @@ Nav.js & ClockTImer.js
   justify-content: center;
   margin-top: 10px;
   filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.5));
-
 }
 
 .circle-buttons button {
@@ -223,17 +219,16 @@ Nav.js & ClockTImer.js
 }
 
 .circle-button-active {
-  color: rgba(242,92,92, 0.7);
+  color: rgba(242, 92, 92, 0.7);
 }
 
-.circle-button-disabled {  
+.circle-button-disabled {
   color: var(--primary-red);
 }
 
 .btn-clock-settings {
   color: var(--primary-bg-color-light);
 }
-
 
 .btn-clock-settings:hover {
   color: var(--primary-red);
@@ -244,13 +239,13 @@ Todos.js
 
 .wrapper-todos {
   height: 100%;
-  width: 35%;  
+  width: 35%;
 }
 
 .wrapper-project-todo {
   margin-top: 50px;
   color: var(--primary-bg-color-light);
-  background-color: var(--primary-bg-color-dark); 
+  background-color: var(--primary-bg-color-dark);
 }
 
 /*.todo-project-name {
@@ -278,7 +273,7 @@ Todos.js
   cursor: pointer;
   margin-top: 5px;
   margin-right: 20px;
-  color: var(--primary-bg-color-light); 
+  color: var(--primary-bg-color-light);
 }
 
 .proj-button-disable {
@@ -328,7 +323,7 @@ Todos.js
   justify-content: space-between;
   color: var(--primary-bg-color-light);
   padding: 8px 0;
-  border-bottom: 1px solid rgba(242, 231, 220, 0.1);  
+  border-bottom: 1px solid rgba(242, 231, 220, 0.1);
 }
 
 .todos-list button {
@@ -388,8 +383,7 @@ media queries
 }
 
 @media only screen and (max-width: 745px) {
-
-/*****
+  /*****
 TittleBar.js
 ******/
 
@@ -403,13 +397,13 @@ TittleBar.js
     padding: 2px 0;
     font-size: 0.95rem;
   }
-  
+
   .top-div-info-bar h1 {
     margin: 0;
     padding: 4px 0;
     font-size: 1.75rem;
   }
-  
+
   .top-div-info-bar a {
     margin: 0;
   }
@@ -418,13 +412,12 @@ TittleBar.js
     margin-right: 0px;
     font-size: 1.5rem;
   }
-
 }
 
 @media only screen and (max-width: 600px) {
   .circle-ext {
     width: 250px;
-    height: 250px;;
+    height: 250px;
   }
 
   .circle {
@@ -437,9 +430,7 @@ TittleBar.js
     font-size: 3.5rem;
   }
 
-  .circle-buttons { 
+  .circle-buttons {
     padding-bottom: 20px;
   }
-
 }
-
