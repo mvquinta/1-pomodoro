@@ -190,7 +190,6 @@ export default function Todos() {
                         valueSetToggleSwitchProj={setToggleSwitchProj}
                          /> : null}
                         <motion.button
-                        className='proj-button-enabled'
                         variants={buttonVariants}
                         whileHover='hover'
                         whileTap='tap'>
@@ -198,8 +197,8 @@ export default function Todos() {
                                 <IoAdd onClick={togglePopProjectName} />
                             </Hovertip>
                         </motion.button>
+                        { moreThanOneProj ?
                         <motion.button
-                        className={ moreThanOneProj ? 'proj-button-enabled' : 'proj-button-disable' }
                         disabled={!moreThanOneProj}
                         variants={buttonVariants}
                         whileHover='hover'
@@ -207,9 +206,10 @@ export default function Todos() {
                             <Hovertip text='Remove Project'>
                                 <IoRemove onClick={removeProject} />
                             </Hovertip>
-                        </motion.button>
+                        </motion.button> : null}
+
+                        { moreThanOneProj ? 
                         <motion.button
-                        className={ moreThanOneProj ? 'proj-button-enabled' : 'proj-button-disable' }
                         disabled={!moreThanOneProj}
                         variants={buttonVariants}
                         whileHover='hover'
@@ -217,7 +217,9 @@ export default function Todos() {
                             <Hovertip text='Switch Project'>
                                 <IoSwapHorizontal onClick={togglePopSwitchProj} />
                             </Hovertip>
-                        </motion.button>
+                        </motion.button> : null
+                        }
+
                     </div>
                 </div>                
             </div>
@@ -231,6 +233,20 @@ export default function Todos() {
                                 valueId={stateId}
                                 valueTodoText={todoText}
                                 /> : null}
+                                <div className='todos-addTask'>
+                    <input 
+                    type='text'
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                    onKeyPress={(e) => handleKeyPress(e)}
+                    placeholder='New todo'
+                    />
+                    <motion.button 
+                    onClick={handleSubmit}                        
+                    variants={buttonVariants}
+                    whileHover='hover'
+                    whileTap='tap'>Add task</motion.button>
+                </div>
                 <ul className='todos-list'>
                     {todos.filter((todo) => todo.project === activeProjectName).map(({ text, id, active }) => (
                         <motion.li
@@ -242,10 +258,8 @@ export default function Todos() {
                                 onClick={() => activeTodo(id)}                                
                                 variants={buttonVariants}
                                 whileHover='hover'
-                                whileTap='tap'>
-                                     
-                                    {active ? <Hovertip text='Check Todo'><IoSquareOutline /></Hovertip> :  <Hovertip text='Uncheck Todo'><IoCheckbox /></Hovertip> }
-                                    
+                                whileTap='tap'>                                     
+                                    {active ? <Hovertip text='Check Todo'><IoSquareOutline /></Hovertip> :  <Hovertip text='Uncheck Todo'><IoCheckbox /></Hovertip> }                                   
                                 </motion.button>
                                 {active ? <span>{text}</span> : <span style={{textDecorationLine: 'line-through', opacity:'0.5'}}>{text}</span>}
                             </div>
@@ -272,21 +286,6 @@ export default function Todos() {
                         </motion.li>
                     ))}
                 </ul>
-                <div className='todos-addTask'>
-                    <input 
-                    type='text'
-                    value={input}
-                    onChange={(e) => setInput(e.target.value)}
-                    onKeyPress={(e) => handleKeyPress(e)}
-                    placeholder='New todo'
-                    />
-                    <motion.button 
-                    onClick={handleSubmit}                        
-                    variants={buttonVariants}
-                    whileHover='hover'
-                    whileTap='tap'>Add task</motion.button>
-                </div>
-
             </div>
       </div>
     )

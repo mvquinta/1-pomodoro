@@ -277,7 +277,8 @@ Todos.js
   font-size: 1.25rem;
   cursor: pointer;
   margin-top: 5px;
-  margin-right: 20px;  
+  margin-right: 20px;
+  color: var(--primary-bg-color-light); 
 }
 
 .proj-button-disable {
@@ -288,29 +289,8 @@ Todos.js
   color: var(--primary-bg-color-light);
 }
 
-.todos-list {
-  display: flex;
-  flex-flow: column;
-  align-items: space-between;
-  padding: 15px 20px 0 20px;
-}
-
-.todos-list li {
-  display: flex;
-  justify-content: space-between;
-  color: var(--primary-bg-color-light);
-  padding: 8px 0;
-  border-bottom: 1px solid rgba(242, 231, 220, 0.1);  
-}
-
-.todos-list button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0 5px;
-  transform: translateY(5px);
-  color: var(--primary-bg-color-light);
-  font-size: 1.1rem;
+.div-project-todos {
+  padding-top: 5px;
 }
 
 .todos-addTask {
@@ -334,6 +314,31 @@ Todos.js
   font-size: 1.125rem;
   cursor: pointer;
   color: var(--primary-bg-color-light);
+}
+
+.todos-list {
+  display: flex;
+  flex-flow: column;
+  align-items: space-between;
+  padding: 0px 20px 0 20px;
+}
+
+.todos-list li {
+  display: flex;
+  justify-content: space-between;
+  color: var(--primary-bg-color-light);
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(242, 231, 220, 0.1);  
+}
+
+.todos-list button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0 5px;
+  transform: translateY(5px);
+  color: var(--primary-bg-color-light);
+  font-size: 1.1rem;
 }
 
 /*
