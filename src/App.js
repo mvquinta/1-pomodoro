@@ -1,11 +1,10 @@
 import React from "react";
 import "./App.css";
-import TitleBar from './components/TitleBar'
+import TitleBar from "./components/TitleBar";
 import Nav from "./components/Nav";
 import ClockTimer from "./components/ClockTimer";
 import Todos from "./components/Todos";
 import { motion } from 'framer-motion'
-
 
 function App() {
   //state of the session type. Default is Pomodoro. State comes from Nav.js
