@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { IoPlay, IoPause, IoRefresh, IoSettings } from 'react-icons/io5'
 import PopEditTime from './PopEditTime'
-import { IconContext } from 'react-icons'
 import { motion } from 'framer-motion'
 import Hovertip from './Hovertip'
 
@@ -48,11 +47,9 @@ export default function ClockTimer({ valueType }) {
     //Audios for when time is up, play, stop and restart are clicked
     const audioBell = new Audio('http://soundbible.com/grab.php?id=2218&type=mp3')
     const audioTick = new Audio('http://soundbible.com/grab.php?id=2044&type=mp3')
-    const audioWaterDroplet = new Audio('http://soundbible.com/grab.php?id=378&type=mp3')
 
     function playAudioBell() { audioBell.play() }
-    function playAudioTick() { audioTick.play() }
-    function playAudioWaterDroplet() {audioWaterDroplet.play()}   
+    function playAudioTick() { audioTick.play() }  
 
     //save time session to localStorage
     useEffect(() => {
@@ -69,12 +66,18 @@ export default function ClockTimer({ valueType }) {
     //sent by Nav.js -> App.js, we get what session was clicked by the user and change the state of sessionID and activeSession accordingly
     useEffect(() => {
         if (valueType === 'Pomodoro') {
+            setPause(true)
+            setPlay(false)
             setSessionID(0)
             setActiveSession(pomodoroSession)
         } else if ( valueType === 'Short Break') {
+            setPause(true)
+            setPlay(false)
             setSessionID(1)
             setActiveSession(shortSession)
         } else if (valueType === 'Long Break') {
+            setPause(true)
+            setPlay(false)
             setSessionID(2)
             setActiveSession(longSession)
         }

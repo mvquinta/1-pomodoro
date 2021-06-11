@@ -277,7 +277,14 @@ Todos.js
   font-size: 1.25rem;
   cursor: pointer;
   margin-top: 5px;
-  margin-right: 20px;
+  margin-right: 20px;  
+}
+
+.proj-button-disable {
+  color: rgba(241, 231, 220, 0.25);
+}
+
+.proj-button-enabled {
   color: var(--primary-bg-color-light);
 }
 

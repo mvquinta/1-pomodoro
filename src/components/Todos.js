@@ -47,12 +47,19 @@ export default function Todos() {
 
     const [stateId, setStateId] = useState('')
     const [todoText, setTodoText] = useState('')
-
+    //const [moreThanOneProj, setMoreThanOneProj] = useState(true) //state to enable/disable remove and switch project
+    const [moreThanOneProj, setMoreThanOneProj] = useState(() => {
+        const localNumProjsState = localStorage.getItem('moreThanOneProjState')
+        return localNumProjsState ? JSON.parse(localNumProjsState) : false
+    })
 
     //save todos to local storage. Each time a todo is added, edited or deleted, this useEffects hook is called and updates localStorage
     useEffect(() => {
         localStorage.setItem('pomodoroTodos', JSON.stringify(todos))
     }, [todos])
+    useEffect(() => {
+        localStorage.setItem('moreThanOneProjState', JSON.stringify(moreThanOneProj))
+    }, [moreThanOneProj])
 
     //generateId is a "wild" function to create a random id. Mainly used to add an id to every todo created.
     function generateId() {
@@ -74,7 +81,6 @@ export default function Todos() {
         } else {
             alert('No New Todo was found. Please review your form.')
         }
-
     }
 
     //if press enter submit new todo
@@ -89,11 +95,9 @@ export default function Todos() {
 
     //remove project
     function removeProject() {
-        console.log(mergedProjectNames.length)
-        if(mergedProjectNames.length <= 1) {
-            alert('This is your only project')
+        if(mergedProjectNames.length <= 1) {            
             return false
-        } else {
+        } else {            
             //If active project is the first index of the array set it for index 1. If not, set it as index 0 (when removing project, by default, app will display the first project from the array)
             activeProjectName === mergedProjectNames[0] ? setActiveProjectName(mergedProjectNames[1]) : setActiveProjectName(mergedProjectNames[0])
             //remove all todos that have same project and, next, remove project from array of merged projetc names
@@ -122,6 +126,11 @@ export default function Todos() {
         mergedProjectNames.includes(item.project) ? null : setMergedProjectNames(mergedProjectNames.concat(item.project)))
     },[todos,mergedProjectNames])
 
+    //
+    useEffect(() => {
+        mergedProjectNames.length === 1 ? setMoreThanOneProj(false) : setMoreThanOneProj(true)
+    }, [mergedProjectNames])
+
     //both these toggles are used to trigger popwindows
     function togglePopProjectName() {
         toggleProjectName ? setToggleProjectName(false) : setToggleProjectName(true)
@@ -129,7 +138,7 @@ export default function Todos() {
     
     function togglePopSwitchProj() {
         if(mergedProjectNames.length <= 1) {
-            alert('This is your only project')
+            setMoreThanOneProj(false)
             return false
         } else {
             toggleSwitchProj ? setToggleSwitchProj(false) : setToggleSwitchProj(true)
@@ -143,8 +152,6 @@ export default function Todos() {
     //Reads the id of the todo that I want to edit.
     function getIdFromTodoToEdit(event) {
         const id = event.target.id
-        //console.log('cool', id)
-        //console.log('coolio', event.target.id)
         setStateId(id)
     }
 
@@ -175,7 +182,7 @@ export default function Todos() {
                     <div>
                         {toggleProjectName ? <PopAddProject
                         valueSetPopProjectName={setToggleProjectName}
-                        valueSetActiveProjectName ={setActiveProjectName} 
+                        valueSetActiveProjectName={setActiveProjectName}
                         /> : null}
                         {toggleSwitchProj ? <PopSwitchProj
                         valueMergedProjs={mergedProjectNames}
@@ -183,6 +190,7 @@ export default function Todos() {
                         valueSetToggleSwitchProj={setToggleSwitchProj}
                          /> : null}
                         <motion.button
+                        className='proj-button-enabled'
                         variants={buttonVariants}
                         whileHover='hover'
                         whileTap='tap'>
@@ -191,6 +199,8 @@ export default function Todos() {
                             </Hovertip>
                         </motion.button>
                         <motion.button
+                        className={ moreThanOneProj ? 'proj-button-enabled' : 'proj-button-disable' }
+                        disabled={!moreThanOneProj}
                         variants={buttonVariants}
                         whileHover='hover'
                         whileTap='tap'>
@@ -199,6 +209,8 @@ export default function Todos() {
                             </Hovertip>
                         </motion.button>
                         <motion.button
+                        className={ moreThanOneProj ? 'proj-button-enabled' : 'proj-button-disable' }
+                        disabled={!moreThanOneProj}
                         variants={buttonVariants}
                         whileHover='hover'
                         whileTap='tap'>

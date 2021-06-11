@@ -40,7 +40,7 @@ export default function PopAddProject({ valueSetActiveProjectName, valueSetPopPr
     //toggle to false to close window
     function handleOkClick () {
         valueSetActiveProjectName(newProjectName)
-        valueSetPopProjectName(false)
+        valueSetPopProjectName(false)        
     }
 
     //if press enter add project
