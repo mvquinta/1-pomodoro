@@ -13,7 +13,6 @@
 * [Contact](#contact)
 * [License](#license)
 
-
 ## General Information
 I started using the pomodoro technique when I started learning how to code. This technique suited me perfectly to keep me productive and motivated and when thinking on what should be my first portfolio project, 1+Pomodoro came to my mind. 
 
@@ -70,3 +69,4 @@ Room for improvement:
 
 ## License
 This project is open source and available under the [MIT License](https://github.com/mvquinta/1-pomodoro/blob/main/LICENSE.md).
+
