@@ -1,6 +1,6 @@
 # 1+Pomodoro
-> Web Browser application to manage your Pomodoro times with an associated Todo List to help you stay focus and motivated.
 > Live demo [_here_](https://onemorepomodoro.netlify.app/).
+> Web Browser application to manage your Pomodoro times with an associated Todo List to help you stay focus and motivated.
 
 ## Table of Contents
 * [General Info](#general-information)
