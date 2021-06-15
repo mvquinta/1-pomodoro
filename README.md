@@ -47,7 +47,6 @@ Just clone the project and install dependencies
 Project is: _in progress_ 
 
 Issues:
-- "Time is Nan". While editing times, when inserted letters instead of only numbers we get NaN on the clock. Note: maybe use isNan() to filter form input
 - Sometimes edit task does not work. It's a bug that I'm not being able to reproduce constantly. I believe it haves something to do on how I'm dealing with state.
 
 To do:
