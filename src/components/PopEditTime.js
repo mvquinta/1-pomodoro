@@ -55,21 +55,29 @@ export default function PopEditTime({
 
   //reads the input fields and converts it to seconds. Values are then used to update setStates of sessions.
   //Set activeSession for new pomodoroTime as default and also to render-update the ui
+  //As safe measure, I first set times to their default and edit them if needed
   function handleOkClick() {
-    const convertedPomodorTime =
-      parseInt(editPomodoroMin) * 60 + parseInt(editPomodoroSec);
-    const convertedShortTime =
-      parseInt(editShortMin) * 60 + parseInt(editShortSec);
-    const convertedLongTime =
-      parseInt(editLongMin) * 60 + parseInt(editLongSec);
-
-    /*if(isNaN(parseInt(editPomodoroMin)) || isNaN(parseInt(editPomodoroSec))) {
-      alert('Please insert only numbers') 
+    let convertedPomodorTime = 25 * 60;
+    if (isNaN(parseInt(editPomodoroMin)) || isNaN(parseInt(editPomodoroSec))) {
+      return false;
     } else {
-      const convertedPomodorTime = parseInt(editPomodoroMin) * 60 + parseInt(editPomodoroSec);
-      convertedPomodorTime === 0 ? props.valueSetPomodoroSession(25 * 60) : props.valueSetPomodoroSession(convertedPomodorTime);
-      props.valueSetActiveSession(convertedPomodorTime)
-    }*/
+      convertedPomodorTime =
+        parseInt(editPomodoroMin) * 60 + parseInt(editPomodoroSec);
+    }
+
+    let convertedShortTime = 5 * 60;
+    if (isNaN(parseInt(editShortMin)) || isNaN(parseInt(editShortSec))) {
+      return false;
+    } else {
+      convertedShortTime = parseInt(editShortMin) * 60 + parseInt(editShortSec);
+    }
+
+    let convertedLongTime = 15 * 60;
+    if (isNaN(parseInt(editLongMin)) || isNaN(parseInt(editLongSec))) {
+      return false;
+    } else {
+      convertedLongTime = parseInt(editLongMin) * 60 + parseInt(editLongSec);
+    }
 
     convertedPomodorTime === 0
       ? valueSetPomodoroSession(25 * 60)
